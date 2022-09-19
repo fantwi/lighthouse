@@ -114,7 +114,7 @@ class Util {
             delete heading.text;
 
             // @ts-expect-error
-            const {itemType: subItemsItemType} = heading.subItemsHeading || {};
+            const subItemsItemType = heading.subItemsHeading?.itemType;
             if (heading.subItemsHeading && subItemsItemType !== undefined) {
               heading.subItemsHeading.valueType = subItemsItemType;
               // @ts-expect-error
