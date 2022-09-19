@@ -109,9 +109,16 @@ class Util {
             if (text !== undefined) heading.label = text;
 
             // @ts-expect-error
+            delete heading.itemType;
+            // @ts-expect-error
+            delete heading.text;
+
+            // @ts-expect-error
             const {itemType: subItemsItemType} = heading.subItemsHeading || {};
             if (heading.subItemsHeading && subItemsItemType !== undefined) {
               heading.subItemsHeading.valueType = subItemsItemType;
+              // @ts-expect-error
+              delete heading.subItemsHeading.itemType;
             }
           }
         }

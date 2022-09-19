@@ -176,6 +176,31 @@ describe('util helpers', () => {
         assert.deepStrictEqual(clonedPreparedResult.categories, preparedResult.categories);
         assert.deepStrictEqual(clonedPreparedResult.categoryGroups, preparedResult.categoryGroups);
       });
+
+      it('converts old opportunity table column headings to consolidated table headings', () => {
+        const clonedSampleResult = JSON.parse(JSON.stringify(sampleResult));
+
+        const auditsWithTableDetails = Object.values(clonedSampleResult.audits)
+          .filter(audit => audit.details?.type === 'table');
+        assert.notEqual(auditsWithTableDetails.length, 0);
+        for (const audit of auditsWithTableDetails) {
+          for (const heading of audit.details.headings) {
+            heading.itemType = heading.valueType;
+            heading.text = heading.label;
+            delete heading.valueType;
+            delete heading.label;
+
+            if (heading.subItemsHeading) {
+              heading.subItemsHeading.itemType = heading.subItemsHeading.valueType;
+              // @ts-expect-error
+              delete heading.subItemsHeading.valueType;
+            }
+          }
+        }
+
+        const preparedResult = Util.prepareReportResult(clonedSampleResult);
+        assert.deepStrictEqual(sampleResult.audits, preparedResult.audits);
+      });
     });
 
     it('appends stack pack descriptions to auditRefs', () => {
