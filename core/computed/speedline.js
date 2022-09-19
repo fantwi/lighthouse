@@ -3,12 +3,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
+
+import speedline from 'speedline-core';
 
 import {makeComputedArtifact} from './computed-artifact.js';
-import speedline from 'speedline-core';
 import {LighthouseError} from '../lib/lh-error.js';
-import ProcessedTrace from './processed-trace.js';
+import {ProcessedTrace} from './processed-trace.js';
 
 class Speedline {
   /**
@@ -51,4 +51,5 @@ class Speedline {
   }
 }
 
-export default makeComputedArtifact(Speedline, null);
+const SpeedlineComputed = makeComputedArtifact(Speedline, null);
+export {SpeedlineComputed as Speedline};

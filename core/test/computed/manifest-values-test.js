@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import ManifestValues from '../../computed/manifest-values.js';
+import {ManifestValues} from '../../computed/manifest-values.js';
 import {parseManifest} from '../../lib/manifest-parser.js';
 import {readJson} from '../test-utils.js';
 

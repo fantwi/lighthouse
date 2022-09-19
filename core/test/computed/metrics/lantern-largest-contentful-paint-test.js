@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import LanternLargestContentfulPaint from '../../../computed/metrics/lantern-largest-contentful-paint.js'; // eslint-disable-line max-len
+import {LanternLargestContentfulPaint} from '../../../computed/metrics/lantern-largest-contentful-paint.js';
 import {getURLArtifactFromDevtoolsLog, readJson} from '../../test-utils.js';
 
 const trace = readJson('../../fixtures/traces/lcp-m78.json', import.meta);

@@ -7,7 +7,7 @@
 import jestMock from 'jest-mock';
 
 import MetricsAudit from '../../audits/metrics.js';
-import TTIComputed from '../../computed/metrics/interactive.js';
+import {Interactive} from '../../computed/metrics/interactive.js';
 import {getURLArtifactFromDevtoolsLog, readJson} from '../test-utils.js';
 
 const pwaTrace = readJson('../fixtures/traces/progressive-app-m60.json', import.meta);
@@ -158,7 +158,7 @@ describe('Performance: metrics', () => {
       },
     };
 
-    const mockTTIFn = jestMock.spyOn(TTIComputed, 'request');
+    const mockTTIFn = jestMock.spyOn(Interactive, 'request');
     mockTTIFn.mockRejectedValueOnce(new Error('TTI failed'));
     const context = {settings: {throttlingMethod: 'simulate'}, computedCache: new Map()};
     const result = await MetricsAudit.audit(artifacts, context);

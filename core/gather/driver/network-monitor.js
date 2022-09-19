@@ -3,19 +3,19 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /**
  * @fileoverview This class wires up the procotol to a network recorder and provides overall
  * status inspection state.
  */
 
+import {EventEmitter} from 'events';
+
 import log from 'lighthouse-logger';
 
-import {EventEmitter} from 'events';
 import {NetworkRecorder} from '../../lib/network-recorder.js';
 import {NetworkRequest} from '../../lib/network-request.js';
-import URL from '../../lib/url-shim.js';
+import UrlUtils from '../../lib/url-utils.js';
 
 /** @typedef {import('../../lib/network-recorder.js').NetworkRecorderEventMap} NetworkRecorderEventMap */
 /** @typedef {'network-2-idle'|'network-critical-idle'|'networkidle'|'networkbusy'|'network-critical-busy'|'network-2-busy'} NetworkMonitorEvent_ */
@@ -214,7 +214,7 @@ class NetworkMonitor extends NetworkMonitorEventEmitter {
     /** @type {Array<{time: number, isStart: boolean}>} */
     let timeBoundaries = [];
     requests.forEach(request => {
-      if (URL.isNonNetworkProtocol(request.protocol)) return;
+      if (UrlUtils.isNonNetworkProtocol(request.protocol)) return;
       if (request.protocol === 'ws' || request.protocol === 'wss') return;
 
       // convert the network timestamp to ms

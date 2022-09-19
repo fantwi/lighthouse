@@ -6,7 +6,7 @@
 
 import {expect} from 'expect';
 
-import MainThreadTasks from '../../computed/main-thread-tasks.js';
+import {MainThreadTasks} from '../../computed/main-thread-tasks.js';
 import {readJson} from '../test-utils.js';
 
 const pwaTrace = readJson('../fixtures/traces/progressive-app-m60.json', import.meta);

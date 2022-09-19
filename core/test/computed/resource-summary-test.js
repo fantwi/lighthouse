@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import ComputedResourceSummary from '../../computed/resource-summary.js';
+import {ResourceSummary} from '../../computed/resource-summary.js';
 import {networkRecordsToDevtoolsLog} from '../network-records-to-devtools-log.js';
 
 function mockArtifacts(networkRecords) {
@@ -35,18 +35,18 @@ describe('Resource summary computed', () => {
   });
 
   it('includes all resource types, regardless of whether page contains them', async () => {
-    const result = await ComputedResourceSummary.request(artifacts, context);
+    const result = await ResourceSummary.request(artifacts, context);
     assert.equal(Object.keys(result).length, 9);
   });
 
   it('sets size and count correctly', async () => {
-    const result = await ComputedResourceSummary.request(artifacts, context);
+    const result = await ResourceSummary.request(artifacts, context);
     assert.equal(result.script.count, 2);
     assert.equal(result.script.transferSize, 10 + 50);
   });
 
   it('sets "total" resource metrics correctly', async () => {
-    const result = await ComputedResourceSummary.request(artifacts, context);
+    const result = await ResourceSummary.request(artifacts, context);
     assert.equal(result.total.count, 4);
     assert.equal(result.total.transferSize, 30 + 10 + 50 + 70);
   });
@@ -56,7 +56,7 @@ describe('Resource summary computed', () => {
       {url: 'http://example.com/file.html', resourceType: 'Document', transferSize: 30},
       {url: 'http://third-party.com/another-file.html', resourceType: 'Manifest', transferSize: 50},
     ]);
-    const result = await ComputedResourceSummary.request(artifacts, context);
+    const result = await ResourceSummary.request(artifacts, context);
 
     assert.equal(result.other.count, 1);
     assert.equal(result.other.transferSize, 50);
@@ -67,7 +67,7 @@ describe('Resource summary computed', () => {
       {url: 'http://example.com/file.html', resourceType: 'Document', transferSize: 30},
       {url: 'http://example.com/favicon.ico', resourceType: 'Other', transferSize: 10},
     ]);
-    const result = await ComputedResourceSummary.request(artifacts, context);
+    const result = await ResourceSummary.request(artifacts, context);
 
     assert.equal(result.total.count, 1);
     assert.equal(result.total.transferSize, 30);
@@ -91,7 +91,7 @@ describe('Resource summary computed', () => {
         protocol: 'intent'},
     ]);
 
-    const result = await ComputedResourceSummary.request(artifacts, context);
+    const result = await ResourceSummary.request(artifacts, context);
     assert.equal(result.total.count, 1);
     assert.equal(result.total.transferSize, 30);
   });
@@ -111,7 +111,7 @@ describe('Resource summary computed', () => {
     describe('when firstPartyHostnames is not set', () => {
       it('the root domain and all subdomains are considered first-party', async () => {
         artifacts.budgets = null;
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(25 + 50 + 70);
         expect(result['third-party'].count).toBe(3);
       });
@@ -123,7 +123,7 @@ describe('Resource summary computed', () => {
           {url: 'http://co.uk', resourceType: 'Script', transferSize: 10},
         ]);
         artifacts.budgets = null;
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(10);
         expect(result['third-party'].count).toBe(1);
       });
@@ -139,7 +139,7 @@ describe('Resource summary computed', () => {
             firstPartyHostnames: ['cdn.example.com'],
           },
         }];
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(allResourcesSize - 10);
         expect(result['third-party'].count).toBe(allResourcesCount - 1);
       });
@@ -152,7 +152,7 @@ describe('Resource summary computed', () => {
             firstPartyHostnames: ['*.example.com'],
           },
         }];
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(allResourcesSize - 30 - 10);
         expect(result['third-party'].count).toBe(allResourcesCount - 2);
       });
@@ -165,7 +165,7 @@ describe('Resource summary computed', () => {
             firstPartyHostnames: ['example.com'],
           },
         }];
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(allResourcesSize - 30);
         expect(result['third-party'].count).toBe(allResourcesCount - 1);
       });
@@ -177,7 +177,7 @@ describe('Resource summary computed', () => {
             firstPartyHostnames: ['example.com', 'my-cdn.com'],
           },
         }];
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(allResourcesSize - 30 - 25);
         expect(result['third-party'].count).toBe(allResourcesCount - 2);
       });
@@ -189,7 +189,7 @@ describe('Resource summary computed', () => {
             firstPartyHostnames: ['my-cdn.com', 'my-cdn.com', 'my-cdn.com'],
           },
         }];
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(allResourcesSize - 25);
         expect(result['third-party'].count).toBe(allResourcesCount - 1);
       });
@@ -201,7 +201,7 @@ describe('Resource summary computed', () => {
             firstPartyHostnames: ['example.com', '*.example.com', 'cdn.example.com'],
           },
         }];
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(allResourcesSize - 30 - 10);
         expect(result['third-party'].count).toBe(allResourcesCount - 2);
       });
@@ -213,7 +213,7 @@ describe('Resource summary computed', () => {
             firstPartyHostnames: ['*.com'],
           },
         }];
-        const result = await ComputedResourceSummary.request(artifacts, context);
+        const result = await ResourceSummary.request(artifacts, context);
         expect(result['third-party'].transferSize).toBe(0);
         expect(result['third-party'].count).toBe(0);
       });

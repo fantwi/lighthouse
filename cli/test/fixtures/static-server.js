@@ -22,6 +22,7 @@ import esMain from 'es-main';
 import {LH_ROOT} from '../../../root.js';
 
 const HEADER_SAFELIST = new Set(['x-robots-tag', 'link', 'content-security-policy']);
+const wasInvokedDirectly = esMain(import.meta);
 
 class Server {
   baseDir = `${LH_ROOT}/cli/test/fixtures`;
@@ -249,20 +250,28 @@ class Server {
 async function createServers() {
   const servers = [10200, 10503, 10420].map(port => {
     const server = new Server(port);
-    server._server.on('error', e => console.error(e.code, e));
+    server._server.on('error', e => console.error(e.message));
+    if (wasInvokedDirectly) {
+      server._server.on('listening', _ => console.log(`listening on http://localhost:${port}`));
+    }
     return server;
   });
-  await Promise.all(servers.map(s => s.listen(s._port, 'localhost')));
+
+  const outcomes = await Promise.allSettled(servers.map(s => s.listen(s._port, 'localhost')));
+  if (outcomes.some(o => o.status === 'rejected')) {
+    if (outcomes.every(o => o.reason.message.includes('already'))) {
+      console.warn('😧 Server already up. Continuing…');
+    } else {
+      console.error(outcomes.map(o => o.reason));
+      throw new Error('One or more servers did not start correctly');
+    }
+  }
   return servers;
 }
 
 // If called directly (such as via `yarn static-server`) then start all of the servers.
-if (esMain(import.meta)) {
-  createServers().then(servers => {
-    for (const server of servers) {
-      console.log(`listening on http://localhost:${server._port}`);
-    }
-  });
+if (wasInvokedDirectly) {
+  createServers();
 }
 
 export {

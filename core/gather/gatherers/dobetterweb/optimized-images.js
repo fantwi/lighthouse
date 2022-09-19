@@ -8,14 +8,15 @@
   * @fileoverview Determines optimized jpeg/webp filesizes for all same-origin and dataURI images by
   *   running the images through canvas in the browser context.
   */
-'use strict';
+
 
 import log from 'lighthouse-logger';
+
 import FRGatherer from '../../../fraggle-rock/gather/base-gatherer.js';
-import URL from '../../../lib/url-shim.js';
+import UrlUtils from '../../../lib/url-utils.js';
 import {NetworkRequest} from '../../../lib/network-request.js';
 import {Sentry} from '../../../lib/sentry.js';
-import NetworkRecords from '../../../computed/network-records.js';
+import {NetworkRecords} from '../../../computed/network-records.js';
 import DevtoolsLog from '../devtools-log.js';
 
 // Image encoding can be slow and we don't want to spend forever on it.
@@ -138,7 +139,7 @@ class OptimizedImages extends FRGatherer {
         // want to tank the entire run due to a single image.
         Sentry.captureException(err, {
           tags: {gatherer: 'OptimizedImages'},
-          extra: {imageUrl: URL.elideDataURI(record.url)},
+          extra: {imageUrl: UrlUtils.elideDataURI(record.url)},
           level: 'warning',
         });
 

@@ -28,7 +28,6 @@ declare module Config {
 
     // Fraggle Rock Only
     artifacts?: ArtifactJson[] | null;
-    navigations?: NavigationJson[] | null;
 
     // Legacy Only
     passes?: PassJson[] | null;

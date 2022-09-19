@@ -3,10 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import {Audit} from './audit.js';
-import ComputedTimingSummary from '../computed/metrics/timing-summary.js';
+import {TimingSummary} from '../computed/metrics/timing-summary.js';
 
 /** @type {Set<keyof LH.Artifacts.TimingSummary>} */
 const DECIMAL_METRIC_KEYS = new Set([
@@ -43,7 +42,7 @@ class Metrics extends Audit {
     const trace = artifacts.traces[Audit.DEFAULT_PASS];
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
     const URL = artifacts.URL;
-    const summary = await ComputedTimingSummary
+    const summary = await TimingSummary
       .request({trace, devtoolsLog, gatherContext, settings: context.settings, URL}, context);
     const metrics = summary.metrics;
     const debugInfo = summary.debugInfo;

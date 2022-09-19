@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import Speedline from '../../computed/speedline.js';
+import {Speedline} from '../../computed/speedline.js';
 import {readJson} from '../test-utils.js';
 
 const pwaTrace = readJson('../fixtures/traces/progressive-app.json', import.meta);

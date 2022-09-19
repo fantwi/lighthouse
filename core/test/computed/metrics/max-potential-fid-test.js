@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import MaxPotentialFID from '../../../computed/metrics/max-potential-fid.js';
+import {MaxPotentialFID} from '../../../computed/metrics/max-potential-fid.js';
 import {getURLArtifactFromDevtoolsLog, readJson} from '../../test-utils.js';
 
 const trace = readJson('../../fixtures/traces/progressive-app-m60.json', import.meta);

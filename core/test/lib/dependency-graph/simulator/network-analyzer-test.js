@@ -7,7 +7,7 @@
 import {strict as assert} from 'assert';
 
 import {NetworkAnalyzer} from '../../../../lib/dependency-graph/simulator/network-analyzer.js';
-import NetworkRecords from '../../../../computed/network-records.js';
+import {NetworkRecords} from '../../../../computed/network-records.js';
 import {readJson} from '../../../test-utils.js';
 
 const devtoolsLog = readJson('../../../fixtures/traces/progressive-app-m60.devtools.log.json', import.meta);

@@ -46,6 +46,8 @@ describe('NavigationRunner', () => {
   let mockDriver;
   /** @type {import('../../../fraggle-rock/gather/driver.js').Driver} */
   let driver;
+  /** @type {LH.Puppeteer.Page} */
+  let page;
   /** @type {LH.Config.FRConfig} */
   let config;
   /** @type {LH.Config.NavigationDefn} */
@@ -113,6 +115,7 @@ describe('NavigationRunner', () => {
     mockDriver = createMockDriver();
     mockDriver.url.mockReturnValue('about:blank');
     driver = mockDriver.asDriver();
+    page = mockDriver._page.asPage();
 
     mocks.reset();
   });
@@ -186,7 +189,7 @@ describe('NavigationRunner', () => {
 
   describe('_navigations', () => {
     const run = () =>
-      runner._navigations({driver, config, requestor, computedCache, baseArtifacts});
+      runner._navigations({driver, page, config, requestor, computedCache, baseArtifacts});
 
     it('should throw if no navigations available', async () => {
       config = {...config, navigations: null};
@@ -194,18 +197,24 @@ describe('NavigationRunner', () => {
     });
 
     it('should navigate as many times as there are navigations', async () => {
-      config = (await initializeConfig(
-        'navigation',
-        {
-          ...config,
-          navigations: [
-            {id: 'default', artifacts: ['FontSize']},
-            {id: 'second', artifacts: ['ConsoleMessages']},
-            {id: 'third', artifacts: ['ViewportDimensions']},
-            {id: 'fourth', artifacts: ['AnchorElements']},
-          ],
-        }
-      )).config;
+      // initializeConfig always produces a single config navigation.
+      // Artificially construct multiple navigations to test on the navigation runner.
+      const originalNavigation = config.navigations?.[0];
+      if (!originalNavigation) throw new Error('Should always have navigations');
+      const artifactDefns = originalNavigation.artifacts.filter(a =>
+        ['FontSize', 'ConsoleMessages', 'ViewportDimensions', 'AnchorElements'].includes(a.id)
+      );
+      const newNavigations = [];
+      for (let i = 0; i < artifactDefns.length; ++i) {
+        const artifactDefn = artifactDefns[i];
+        newNavigations.push({
+          ...originalNavigation,
+          id: i ? String(i) : 'default',
+          artifacts: [artifactDefn],
+        });
+      }
+
+      config.navigations = newNavigations;
 
       await run();
       const navigations = mocks.navigationMock.gotoURL.mock.calls;
@@ -220,8 +229,9 @@ describe('NavigationRunner', () => {
         'navigation',
         {
           ...config,
-          navigations: [
-            {id: 'default', artifacts: ['FontSize']},
+          artifacts: [
+            {id: 'FontSize', gatherer: 'seo/font-size'},
+            {id: 'MetaElements', gatherer: 'meta-elements'},
           ],
         }
       )).config;
@@ -242,16 +252,17 @@ describe('NavigationRunner', () => {
     });
 
     it('should merge artifacts between navigations', async () => {
-      config = (await initializeConfig(
-        'navigation',
-        {
-          ...config,
-          navigations: [
-            {id: 'default', artifacts: ['FontSize']},
-            {id: 'second', artifacts: ['ConsoleMessages']},
-          ],
-        }
-      )).config;
+      // initializeConfig always produces a single config navigation.
+      // Artificially construct multiple navigations to test on the navigation runner.
+      if (!config.navigations) throw new Error('Should always have navigations');
+      const firstNavigation = config.navigations[0];
+      const secondNavigation = {...firstNavigation, id: 'second'};
+      const fontSizeDef = firstNavigation.artifacts.find(a => a.id === 'FontSize');
+      const consoleMsgDef = firstNavigation.artifacts.find(a => a.id === 'ConsoleMessages');
+      if (!fontSizeDef || !consoleMsgDef) throw new Error('Artifact definitions not found');
+      secondNavigation.artifacts = [fontSizeDef];
+      firstNavigation.artifacts = [consoleMsgDef];
+      config.navigations.push(secondNavigation);
 
       // Both gatherers will error in these test conditions, but artifact errors
       // will be merged into single `artifacts` object.
@@ -266,9 +277,9 @@ describe('NavigationRunner', () => {
         'navigation',
         {
           ...config,
-          navigations: [
-            {id: 'default', loadFailureMode: 'fatal', artifacts: ['FontSize']},
-            {id: 'second', artifacts: ['ConsoleMessages']},
+          artifacts: [
+            {id: 'FontSize', gatherer: 'seo/font-size'},
+            {id: 'MetaElements', gatherer: 'meta-elements'},
           ],
         }
       )).config;
@@ -304,6 +315,7 @@ describe('NavigationRunner', () => {
     /** @param {LH.Config.NavigationDefn} navigation */
     const run = navigation => runner._navigation({
       driver,
+      page,
       config,
       navigation,
       requestor,
@@ -326,6 +338,7 @@ describe('NavigationRunner', () => {
 
       const {artifacts} = await runner._navigation({
         driver,
+        page,
         config,
         navigation,
         requestor: requestedUrl,
@@ -343,6 +356,7 @@ describe('NavigationRunner', () => {
     it('skips about:blank if using a callback requestor', async () => {
       const {artifacts} = await runner._navigation({
         driver,
+        page,
         config,
         navigation,
         requestor: () => {},
@@ -483,6 +497,7 @@ describe('NavigationRunner', () => {
       navigation.blankPage = 'data:text/html;...';
       await runner._setupNavigation({
         driver,
+        page,
         navigation,
         requestor: requestedUrl,
         config,
@@ -499,6 +514,7 @@ describe('NavigationRunner', () => {
     it('should prepare target for navigation', async () => {
       await runner._setupNavigation({
         driver,
+        page,
         navigation,
         requestor: requestedUrl,
         config,
@@ -513,6 +529,7 @@ describe('NavigationRunner', () => {
       mocks.prepareMock.prepareTargetForIndividualNavigation.mockResolvedValue({warnings});
       const result = await runner._setupNavigation({
         driver,
+        page,
         navigation,
         requestor: requestedUrl,
         config,
@@ -527,6 +544,7 @@ describe('NavigationRunner', () => {
     const run = () =>
       runner._navigate({
         driver,
+        page,
         navigation,
         requestor,
         config,

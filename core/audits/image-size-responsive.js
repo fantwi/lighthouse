@@ -8,10 +8,10 @@
  *   the page are large enough with respect to the pixel ratio. The
  *   audit will list all visible images that are too small.
  */
-'use strict';
+
 
 import {Audit} from './audit.js';
-import URL from '../lib/url-shim.js';
+import UrlUtils from '../lib/url-utils.js';
 import * as i18n from '../lib/i18n/i18n.js';
 
 /** @typedef {LH.Artifacts.ImageElement & Required<Pick<LH.Artifacts.ImageElement, 'naturalDimensions'>>} ImageWithNaturalDimensions */
@@ -96,7 +96,7 @@ function isCandidate(image) {
   ) {
     return false;
   }
-  if (URL.guessMimeType(image.src) === 'image/svg+xml') {
+  if (UrlUtils.guessMimeType(image.src) === 'image/svg+xml') {
     return false;
   }
   if (image.isCss) {
@@ -147,7 +147,7 @@ function getResult(image, DPR) {
   const [expectedWidth, expectedHeight] =
       expectedImageSize(image.displayedWidth, image.displayedHeight, DPR);
   return {
-    url: URL.elideDataURI(image.src),
+    url: UrlUtils.elideDataURI(image.src),
     node: Audit.makeNodeItem(image.node),
     displayedSize: `${image.displayedWidth} x ${image.displayedHeight}`,
     actualSize: `${image.naturalDimensions.width} x ${image.naturalDimensions.height}`,

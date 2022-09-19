@@ -3,7 +3,6 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /**
  * Adjustments needed for DevTools network throttling to simulate
@@ -95,6 +94,10 @@ const defaultSettings = {
   output: 'json',
   maxWaitForFcp: 30 * 1000,
   maxWaitForLoad: 45 * 1000,
+  pauseAfterFcpMs: 1000,
+  pauseAfterLoadMs: 1000,
+  networkQuietThresholdMs: 1000,
+  cpuQuietThresholdMs: 1000,
 
   formFactor: 'mobile',
   throttling: throttling.mobileSlow4G,
@@ -107,6 +110,8 @@ const defaultSettings = {
   disableStorageReset: false,
   debugNavigation: false,
   channel: 'node',
+  skipAboutBlank: false,
+  blankPage: 'about:blank',
 
   // the following settings have no defaults but we still want ensure that `key in settings`
   // in config will work in a typechecked way
@@ -119,7 +124,6 @@ const defaultSettings = {
   onlyAudits: null,
   onlyCategories: null,
   skipAudits: null,
-  skipAboutBlank: false,
 };
 
 /** @type {LH.Config.Pass} */

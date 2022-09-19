@@ -3,7 +3,6 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /**
  * @fileoverview Validates robots.txt file according to the official standard and its various
@@ -13,8 +12,7 @@
  */
 
 import {Audit} from '../audit.js';
-
-import URL from '../../lib/url-shim.js';
+import * as i18n from '../../lib/i18n/i18n.js';
 
 const HTTP_CLIENT_ERROR_CODE_LOW = 400;
 const HTTP_SERVER_ERROR_CODE_LOW = 500;
@@ -32,7 +30,6 @@ const DIRECTIVE_SAFELIST = new Set([
   'request-rate', 'visit-time', 'noindex', // not officially supported, but used in the wild
 ]);
 const SITEMAP_VALID_PROTOCOLS = new Set(['https:', 'http:', 'ftp:']);
-import * as i18n from '../../lib/i18n/i18n.js';
 
 const UIStrings = {
   /** Title of a Lighthouse audit that provides detail on the site's robots.txt file. Note: "robots.txt" is a canonical filename and should not be translated. This descriptive title is shown when the robots.txt file is present and configured correctly. */

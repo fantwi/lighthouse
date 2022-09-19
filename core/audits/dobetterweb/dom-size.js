@@ -10,7 +10,6 @@
  * based solely on the total number of elements found on the page.
  */
 
-'use strict';
 
 import {Audit} from '../audit.js';
 import * as i18n from '../../lib/i18n/i18n.js';

@@ -7,10 +7,10 @@
  * @fileoverview Audit a page to ensure that resources loaded with
  * gzip/br/deflate compression.
  */
-'use strict';
+
 
 import {ByteEfficiencyAudit} from './byte-efficiency-audit.js';
-import URL from '../../lib/url-shim.js';
+import UrlUtils from '../../lib/url-utils.js';
 import * as i18n from '../../lib/i18n/i18n.js';
 
 const UIStrings = {
@@ -68,7 +68,7 @@ class ResponsesAreCompressed extends ByteEfficiencyAudit {
       }
 
       // remove duplicates
-      const url = URL.elideDataURI(record.url);
+      const url = UrlUtils.elideDataURI(record.url);
       const isDuplicate = items.find(item => item.url === url &&
         item.totalBytes === record.resourceSize);
       if (isDuplicate) {

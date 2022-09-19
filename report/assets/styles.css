@@ -873,7 +873,7 @@
 
 .lh-audit--load-opportunity .lh-audit__display-text {
   text-align: right;
-  flex: 0 0 calc(3 * var(--report-font-size));
+  flex: 0 0 calc(4 * var(--report-font-size));
 }
 
 

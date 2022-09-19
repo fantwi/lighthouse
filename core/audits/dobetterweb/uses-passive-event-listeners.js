@@ -9,7 +9,6 @@
  * scroll-blocking touch and wheel event listeners.
  */
 
-'use strict';
 
 import ViolationAudit from '../violation-audit.js';
 import * as i18n from '../../lib/i18n/i18n.js';

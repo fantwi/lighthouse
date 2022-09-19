@@ -3,11 +3,10 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import {makeComputedArtifact} from '../computed-artifact.js';
-import NavigationMetric from './navigation-metric.js';
-import LanternInteractive from './lantern-interactive.js';
+import {NavigationMetric} from './navigation-metric.js';
+import {LanternInteractive} from './lantern-interactive.js';
 import {NetworkMonitor} from '../../gather/driver/network-monitor.js';
 import {TraceProcessor} from '../../lib/tracehouse/trace-processor.js';
 import {LighthouseError} from '../../lib/lh-error.js';
@@ -180,10 +179,11 @@ class Interactive extends NavigationMetric {
   }
 }
 
-export default makeComputedArtifact(
+const InteractiveComputed = makeComputedArtifact(
   Interactive,
   ['devtoolsLog', 'gatherContext', 'settings', 'simulator', 'trace', 'URL']
 );
+export {InteractiveComputed as Interactive};
 
 /**
  * @typedef TimePeriod

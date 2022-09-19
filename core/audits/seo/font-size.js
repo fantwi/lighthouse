@@ -3,14 +3,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /** @typedef {LH.Artifacts.FontSize['analyzedFailingNodesData'][0]} FailingNodeData */
 
 import * as i18n from '../../lib/i18n/i18n.js';
-
 import {Audit} from '../audit.js';
-import ComputedViewportMeta from '../../computed/viewport-meta.js';
+import {ViewportMeta} from '../../computed/viewport-meta.js';
 
 const MINIMAL_PERCENTAGE_OF_LEGIBLE_TEXT = 60;
 
@@ -258,7 +256,7 @@ class FontSize extends Audit {
       };
     }
 
-    const viewportMeta = await ComputedViewportMeta.request(artifacts.MetaElements, context);
+    const viewportMeta = await ViewportMeta.request(artifacts.MetaElements, context);
     if (!viewportMeta.isMobileOptimized) {
       return {
         score: 0,

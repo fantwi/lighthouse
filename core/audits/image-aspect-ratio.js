@@ -9,10 +9,10 @@
  *   audit will list all images that don't match with their display size
  *   aspect ratio.
  */
-'use strict';
+
 
 import {Audit} from './audit.js';
-import URL from '../lib/url-shim.js';
+import UrlUtils from '../lib/url-utils.js';
 import * as i18n from '../lib/i18n/i18n.js';
 
 const UIStrings = {
@@ -54,7 +54,7 @@ class ImageAspectRatio extends Audit {
    * @return {{url: string, node: LH.Audit.Details.NodeValue, displayedAspectRatio: string, actualAspectRatio: string, doRatiosMatch: boolean}}
    */
   static computeAspectRatios(image) {
-    const url = URL.elideDataURI(image.src);
+    const url = UrlUtils.elideDataURI(image.src);
     const actualAspectRatio = image.naturalDimensions.width / image.naturalDimensions.height;
     const displayedAspectRatio = image.displayedWidth / image.displayedHeight;
 
@@ -89,7 +89,7 @@ class ImageAspectRatio extends Audit {
       // - filter all svgs as they have no natural dimensions to audit
       // - filter out images that have falsy naturalWidth or naturalHeight
       return !image.isCss &&
-        URL.guessMimeType(image.src) !== 'image/svg+xml' &&
+        UrlUtils.guessMimeType(image.src) !== 'image/svg+xml' &&
         image.naturalDimensions &&
         image.naturalDimensions.height > 5 &&
         image.naturalDimensions.width > 5 &&

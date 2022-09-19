@@ -24,6 +24,7 @@ import log from 'lighthouse-logger';
 import {runSmokehouse, getShardedDefinitions} from '../smokehouse.js';
 import {updateTestDefnFormat} from './back-compat-util.js';
 import {LH_ROOT} from '../../../../root.js';
+import exclusions from '../config/exclusions.js';
 
 const coreTestDefnsPath =
   path.join(LH_ROOT, 'cli/test/smokehouse/core-tests.js');
@@ -42,14 +43,14 @@ const runnerPaths = {
  * Determine batches of smoketests to run, based on the `requestedIds`.
  * @param {Array<Smokehouse.TestDfn>} allTestDefns
  * @param {Array<string>} requestedIds
- * @param {{invertMatch: boolean}} options
+ * @param {Set<string>} excludedTests
  * @return {Array<Smokehouse.TestDfn>}
  */
-function getDefinitionsToRun(allTestDefns, requestedIds, {invertMatch}) {
+function getDefinitionsToRun(allTestDefns, requestedIds, excludedTests) {
   let smokes = [];
   const usage = `    ${log.dim}yarn smoke ${allTestDefns.map(t => t.id).join(' ')}${log.reset}\n`;
 
-  if (requestedIds.length === 0 && !invertMatch) {
+  if (requestedIds.length === 0) {
     smokes = [...allTestDefns];
     console.log('Running ALL smoketests. Equivalent to:');
     console.log(usage);
@@ -57,9 +58,7 @@ function getDefinitionsToRun(allTestDefns, requestedIds, {invertMatch}) {
     smokes = allTestDefns.filter(test => {
       // Include all tests that *include* requested id.
       // e.g. a requested 'pwa' will match 'pwa-airhorner', 'pwa-caltrain', etc
-      let isRequested = requestedIds.some(requestedId => test.id.includes(requestedId));
-      if (invertMatch) isRequested = !isRequested;
-      return isRequested;
+      return requestedIds.some(requestedId => test.id.includes(requestedId));
     });
     console.log(`Running ONLY smoketests for: ${smokes.map(t => t.id).join(' ')}\n`);
   }
@@ -69,6 +68,7 @@ function getDefinitionsToRun(allTestDefns, requestedIds, {invertMatch}) {
   });
   if (unmatchedIds.length) {
     console.log(log.redify(`Smoketests not found for: ${unmatchedIds.join(' ')}`));
+    console.log(`Check test exclusions (${[...excludedTests].join(' ')})\n`);
     console.log(usage);
   }
 
@@ -124,7 +124,6 @@ async function begin() {
     .help('help')
     .usage('node $0 [<options>] <test-ids>')
     .example('node $0 -j=1 pwa seo', 'run pwa and seo tests serially')
-    .example('node $0 --invert-match byte', 'run all smoke tests but `byte`')
     .option('_', {
       array: true,
       type: 'string',
@@ -158,15 +157,15 @@ async function begin() {
         type: 'string',
         describe: 'The path to a set of test definitions to run. Defaults to core smoke tests.',
       },
-      'invert-match': {
-        type: 'boolean',
-        default: false,
-        describe: 'Run all available tests except the ones provided',
-      },
       'shard': {
         type: 'string',
         // eslint-disable-next-line max-len
         describe: 'A argument of the form "n/d", which divides the selected tests into d groups and runs the nth group. n and d must be positive integers with 1 ≤ n ≤ d.',
+      },
+      'ignore-exclusions': {
+        type: 'boolean',
+        default: false,
+        describe: 'Ignore any smoke test exclusions set.',
       },
     })
     .wrap(y.terminalWidth())
@@ -193,8 +192,11 @@ async function begin() {
   const requestedTestIds = argv._;
   const {default: rawTestDefns} = await import(url.pathToFileURL(testDefnPath).href);
   const allTestDefns = updateTestDefnFormat(rawTestDefns);
-  const invertMatch = argv.invertMatch;
-  const requestedTestDefns = getDefinitionsToRun(allTestDefns, requestedTestIds, {invertMatch});
+  const excludedTests = new Set(exclusions[argv.runner] || []);
+  const filteredTestDefns = argv.ignoreExclusions ?
+    allTestDefns : allTestDefns.filter(test => !excludedTests.has(test.id));
+  const requestedTestDefns = getDefinitionsToRun(filteredTestDefns,
+      requestedTestIds, excludedTests);
   const testDefns = getShardedDefinitions(requestedTestDefns, argv.shard);
 
   let smokehouseResult;

@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import LargestContentfulPaintAllFrames from '../../../computed/metrics/largest-contentful-paint-all-frames.js'; // eslint-disable-line max-len
+import {LargestContentfulPaintAllFrames} from '../../../computed/metrics/largest-contentful-paint-all-frames.js';
 import {readJson} from '../../test-utils.js';
 
 const traceAllFrames = readJson('../../fixtures/traces/frame-metrics-m89.json', import.meta);

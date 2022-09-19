@@ -7,15 +7,15 @@
  * @fileoverview Checks to see if images are displayed only outside of the viewport.
  *     Images requested after TTI are not flagged as violations.
  */
-'use strict';
+
 
 import {ByteEfficiencyAudit} from './byte-efficiency-audit.js';
 import {NetworkRequest} from '../../lib/network-request.js';
 import {Sentry} from '../../lib/sentry.js';
-import URL from '../../lib/url-shim.js';
+import UrlUtils from '../../lib/url-utils.js';
 import * as i18n from '../../lib/i18n/i18n.js';
-import Interactive from '../../computed/metrics/interactive.js';
-import ProcessedTrace from '../../computed/processed-trace.js';
+import {Interactive} from '../../computed/metrics/interactive.js';
+import {ProcessedTrace} from '../../computed/processed-trace.js';
 
 const UIStrings = {
   /** Imperative title of a Lighthouse audit that tells the user to defer loading offscreen images. Offscreen images are images located outside of the visible browser viewport. As they are unseen by the user and slow down page load, they should be loaded later, closer to when the user is going to see them. This is displayed in a list of audit titles that Lighthouse generates. */
@@ -87,7 +87,7 @@ class OffscreenImages extends ByteEfficiencyAudit {
     // If the image had its loading behavior explicitly controlled already, treat it as passed.
     if (image.loading === 'lazy' || image.loading === 'eager') return null;
 
-    const url = URL.elideDataURI(image.src);
+    const url = UrlUtils.elideDataURI(image.src);
     const totalPixels = image.displayedWidth * image.displayedHeight;
     const visiblePixels = this.computeVisiblePixels(image.clientRect, viewportDimensions);
     // Treat images with 0 area as if they're offscreen. See https://github.com/GoogleChrome/lighthouse/issues/1914

@@ -3,14 +3,14 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import log from 'lighthouse-logger';
+
 import {NetworkMonitor} from './network-monitor.js';
 import {waitForFullyLoaded, waitForFrameNavigated, waitForUserToContinue} from './wait-for-condition.js'; // eslint-disable-line max-len
 import * as constants from '../../config/constants.js';
 import * as i18n from '../../lib/i18n/i18n.js';
-import URL from '../../lib/url-shim.js';
+import UrlUtils from '../../lib/url-utils.js';
 
 const UIStrings = {
   /**
@@ -130,7 +130,7 @@ async function gotoURL(driver, requestor, options) {
 
   let requestedUrl = navigationUrls.requestedUrl;
   if (typeof requestor === 'string') {
-    if (requestedUrl && !URL.equalWithExcludedFragments(requestor, requestedUrl)) {
+    if (requestedUrl && !UrlUtils.equalWithExcludedFragments(requestor, requestedUrl)) {
       log.error(
         'Navigation',
         `Provided URL (${requestor}) did not match initial navigation URL (${requestedUrl})`
@@ -169,7 +169,7 @@ function getNavigationWarnings(navigation) {
 
   if (navigation.timedOut) warnings.push(str_(UIStrings.warningTimeout));
 
-  if (!URL.equalWithExcludedFragments(requestedUrl, mainDocumentUrl)) {
+  if (!UrlUtils.equalWithExcludedFragments(requestedUrl, mainDocumentUrl)) {
     warnings.push(str_(UIStrings.warningRedirected, {
       requested: requestedUrl,
       final: mainDocumentUrl,

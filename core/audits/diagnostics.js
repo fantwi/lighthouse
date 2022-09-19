@@ -3,13 +3,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import {Audit} from './audit.js';
-import MainThreadTasksComputed from '../computed/main-thread-tasks.js';
-import NetworkRecordsComputed from '../computed/network-records.js';
-import NetworkAnalysisComputed from '../computed/network-analysis.js';
-import MainResource from '../computed/main-resource.js';
+import {MainThreadTasks} from '../computed/main-thread-tasks.js';
+import {NetworkRecords} from '../computed/network-records.js';
+import {NetworkAnalysis} from '../computed/network-analysis.js';
+import {MainResource} from '../computed/main-resource.js';
 
 class Diagnostics extends Audit {
   /**
@@ -34,9 +33,9 @@ class Diagnostics extends Audit {
   static async audit(artifacts, context) {
     const trace = artifacts.traces[Audit.DEFAULT_PASS];
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
-    const tasks = await MainThreadTasksComputed.request(trace, context);
-    const records = await NetworkRecordsComputed.request(devtoolsLog, context);
-    const analysis = await NetworkAnalysisComputed.request(devtoolsLog, context);
+    const tasks = await MainThreadTasks.request(trace, context);
+    const records = await NetworkRecords.request(devtoolsLog, context);
+    const analysis = await NetworkAnalysis.request(devtoolsLog, context);
     const mainResource = await MainResource.request({devtoolsLog, URL: artifacts.URL}, context);
 
     const toplevelTasks = tasks.filter(t => !t.parent);

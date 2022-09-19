@@ -114,7 +114,17 @@ export function swapLocale(lhr, requestedLocale) {
 function registerLocaleData(locale, lhlMessages) {
   // Stub function only included for types
 }
-export const format = {registerLocaleData};
+
+/**
+ * Returns whether the requestedLocale is registered and available for use
+ * @param {LH.Locale} requestedLocale
+ * @return {boolean}
+ */
+function hasLocale(requestedLocale) {
+  // Stub function only included for types
+  return false;
+}
+export const format = {registerLocaleData, hasLocale};
 `;
 
   const bundle = await rollup({

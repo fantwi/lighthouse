@@ -7,7 +7,6 @@
 import {strict as assert} from 'assert';
 
 import ServiceWorker from '../../audits/service-worker.js';
-import URL from '../../lib/url-shim.js';
 import {parseManifest} from '../../lib/manifest-parser.js';
 
 function getBaseDirectory(urlStr) {

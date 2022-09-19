@@ -19,7 +19,7 @@ import * as Printer from './printer.js';
 import lighthouse, {legacyNavigation} from '../core/index.js';
 import {getLhrFilenamePrefix} from '../report/generator/file-namer.js';
 import * as assetSaver from '../core/lib/asset-saver.js';
-import URL from '../core/lib/url-shim.js';
+import UrlUtils from '../core/lib/url-utils.js';
 
 /** @typedef {Error & {code: string, friendlyMessage?: string}} ExitError */
 
@@ -232,7 +232,7 @@ async function runLighthouse(url, flags, config) {
     }
 
     const shouldGather = flags.gatherMode || flags.gatherMode === flags.auditMode;
-    const shouldUseLocalChrome = URL.isLikeLocalhost(flags.hostname);
+    const shouldUseLocalChrome = UrlUtils.isLikeLocalhost(flags.hostname);
     if (shouldGather && shouldUseLocalChrome) {
       launchedChrome = await getDebuggableChrome(flags);
       flags.port = launchedChrome.port;

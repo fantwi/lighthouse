@@ -33,7 +33,7 @@ import prettyJSONStringify from 'pretty-json-stringify';
 
 import {makeHash} from './hash.js';
 import LegacyJavascript from '../../audits/byte-efficiency/legacy-javascript.js';
-import JsBundles from '../../computed/js-bundles.js';
+import {JSBundles} from '../../computed/js-bundles.js';
 import {LH_ROOT} from '../../../root.js';
 
 const hash = makeHash();
@@ -89,7 +89,7 @@ async function main() {
     Scripts: [{scriptId: '', url: '', content: bundleContents}],
     SourceMaps: [{scriptId: '', scriptUrl: '', map: bundleMap}],
   };
-  const bundles = await JsBundles.compute_(artifacts);
+  const bundles = await JSBundles.compute_(artifacts);
   if ('errorMessage' in bundles[0].sizes) throw new Error(bundles[0].sizes.errorMessage);
   const bundleFileSizes = bundles[0].sizes.files;
 

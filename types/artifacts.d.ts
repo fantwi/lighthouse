@@ -578,6 +578,7 @@ declare module Artifacts {
     node: NodeDetails;
     nodeId?: number;
     animations?: {name?: string, failureReasonsMask?: number, unsupportedProperties?: string[]}[];
+    type?: string;
   }
 
   interface ViewportDimensions {

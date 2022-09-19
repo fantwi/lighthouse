@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import SpeedIndex from '../../../computed/metrics/speed-index.js';
+import {SpeedIndex} from '../../../computed/metrics/speed-index.js';
 import {getURLArtifactFromDevtoolsLog, readJson} from '../../test-utils.js';
 
 const trace = readJson('../../fixtures/traces/progressive-app-m60.json', import.meta);

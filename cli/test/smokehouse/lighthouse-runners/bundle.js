@@ -19,7 +19,7 @@ import {once} from 'events';
 import puppeteer from 'puppeteer-core';
 import ChromeLauncher from 'chrome-launcher';
 
-import {CriConnection} from '../../../../core/gather/connections/cri.js';
+import {CriConnection} from '../../../../core/legacy/gather/connections/cri.js';
 import {LH_ROOT} from '../../../../root.js';
 import {loadArtifacts, saveArtifacts} from '../../../../core/lib/asset-saver.js';
 

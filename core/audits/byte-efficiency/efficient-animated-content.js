@@ -6,7 +6,7 @@
 /*
  * @fileoverview Audit a page to ensure that videos are used instead of animated gifs
  */
-'use strict';
+
 
 import {NetworkRequest} from '../../lib/network-request.js';
 import {ByteEfficiencyAudit} from './byte-efficiency-audit.js';

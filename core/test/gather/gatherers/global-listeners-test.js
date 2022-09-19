@@ -6,8 +6,8 @@
 
 import GlobalListenerGatherer from '../../../gather/gatherers/global-listeners.js';
 import {createMockSendCommandFn} from '../mock-commands.js';
-import {Connection} from '../../../gather/connections/connection.js';
-import {Driver} from '../../../gather/driver.js';
+import {Connection} from '../../../legacy/gather/connections/connection.js';
+import {Driver} from '../../../legacy/gather/driver.js';
 
 describe('Global Listener Gatherer', () => {
   it('remove duplicate listeners from artifacts', async () => {

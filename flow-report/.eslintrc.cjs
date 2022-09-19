@@ -13,24 +13,6 @@ module.exports = {
   plugins: [
     '@typescript-eslint',
   ],
-  rules: {
-    // TODO(esmodules): move to root eslint when all code is ESM
-    // or when this is resolved: https://github.com/import-js/eslint-plugin-import/issues/2214
-    'import/order': [2, {
-      'groups': [
-        'builtin',
-        'external',
-        ['sibling', 'parent'],
-        'index',
-        'object',
-        'type',
-      ],
-      'newlines-between': 'always',
-    }],
-    'import/group-exports': 2,
-    'import/exports-last': 2,
-    '@typescript-eslint/type-annotation-spacing': 2,
-  },
   overrides: [
     // TS already handles this issue.
     // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors

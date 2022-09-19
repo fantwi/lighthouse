@@ -3,10 +3,10 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import puppeteer from 'puppeteer-core';
 import log from 'lighthouse-logger';
+
 import {Driver} from './driver.js';
 import {Runner} from '../../runner.js';
 import {getEmptyArtifactState, collectPhaseArtifacts, awaitArtifacts} from './runner-helpers.js';
@@ -19,15 +19,16 @@ import {initializeConfig} from '../config/config.js';
 import {getBaseArtifacts, finalizeArtifacts} from './base-artifacts.js';
 import * as format from '../../../shared/localization/format.js';
 import {LighthouseError} from '../../lib/lh-error.js';
-import URL from '../../lib/url-shim.js';
+import UrlUtils from '../../lib/url-utils.js';
 import {getPageLoadError} from '../../lib/navigation-error.js';
 import Trace from '../../gather/gatherers/trace.js';
 import DevtoolsLog from '../../gather/gatherers/devtools-log.js';
-import NetworkRecords from '../../computed/network-records.js';
+import {NetworkRecords} from '../../computed/network-records.js';
 
 /**
  * @typedef NavigationContext
  * @property {Driver} driver
+ * @property {LH.Puppeteer.Page} page
  * @property {LH.Config.FRConfig} config
  * @property {LH.Config.NavigationDefn} navigation
  * @property {LH.NavigationRequestor} requestor
@@ -218,6 +219,7 @@ async function _navigation(navigationContext) {
     url: initialUrl,
     gatherMode: /** @type {const} */ ('navigation'),
     driver: navigationContext.driver,
+    page: navigationContext.page,
     computedCache: navigationContext.computedCache,
     artifactDefinitions: navigationContext.navigation.artifacts,
     artifactState,
@@ -250,10 +252,10 @@ async function _navigation(navigationContext) {
 }
 
 /**
- * @param {{driver: Driver, config: LH.Config.FRConfig, requestor: LH.NavigationRequestor; baseArtifacts: LH.FRBaseArtifacts, computedCache: NavigationContext['computedCache']}} args
+ * @param {{driver: Driver, page: LH.Puppeteer.Page, config: LH.Config.FRConfig, requestor: LH.NavigationRequestor; baseArtifacts: LH.FRBaseArtifacts, computedCache: NavigationContext['computedCache']}} args
  * @return {Promise<{artifacts: Partial<LH.FRArtifacts & LH.FRBaseArtifacts>}>}
  */
-async function _navigations({driver, config, requestor, baseArtifacts, computedCache}) {
+async function _navigations({driver, page, config, requestor, baseArtifacts, computedCache}) {
   if (!config.navigations) throw new Error('No navigations configured');
 
   /** @type {Partial<LH.FRArtifacts & LH.FRBaseArtifacts>} */
@@ -264,6 +266,7 @@ async function _navigations({driver, config, requestor, baseArtifacts, computedC
   for (const navigation of config.navigations) {
     const navigationContext = {
       driver,
+      page,
       navigation,
       requestor,
       config,
@@ -316,7 +319,7 @@ async function navigationGather(requestor, options) {
   const artifacts = await Runner.gather(
     async () => {
       let {page} = options;
-      const normalizedRequestor = isCallback ? requestor : URL.normalizeUrl(requestor);
+      const normalizedRequestor = isCallback ? requestor : UrlUtils.normalizeUrl(requestor);
 
       // For navigation mode, we shouldn't connect to a browser in audit mode,
       // therefore we connect to the browser in the gatherFn callback.
@@ -333,7 +336,7 @@ async function navigationGather(requestor, options) {
         requestor: normalizedRequestor,
       };
       const {baseArtifacts} = await _setup(context);
-      const {artifacts} = await _navigations({...context, baseArtifacts, computedCache});
+      const {artifacts} = await _navigations({...context, page, baseArtifacts, computedCache});
       await _cleanup(context);
 
       return finalizeArtifacts(baseArtifacts, artifacts);

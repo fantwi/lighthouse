@@ -11,12 +11,12 @@
  *   However, the audit will only fail pages that use images that have waste
  *   beyond a particular byte threshold.
  */
-'use strict';
+
 
 import {ByteEfficiencyAudit} from './byte-efficiency-audit.js';
 import {NetworkRequest} from '../../lib/network-request.js';
-import ImageRecords from '../../computed/image-records.js';
-import URL from '../../lib/url-shim.js';
+import {ImageRecords} from '../../computed/image-records.js';
+import UrlUtils from '../../lib/url-utils.js';
 import * as i18n from '../../lib/i18n/i18n.js';
 
 const UIStrings = {
@@ -100,7 +100,7 @@ class UsesResponsiveImages extends ByteEfficiencyAudit {
     const displayed = this.getDisplayedDimensions(image, ViewportDimensions);
     const usedPixels = displayed.width * displayed.height;
 
-    const url = URL.elideDataURI(image.src);
+    const url = UrlUtils.elideDataURI(image.src);
     const actualPixels = image.naturalWidth * image.naturalHeight;
     const wastedRatio = 1 - (usedPixels / actualPixels);
     const totalBytes = NetworkRequest.getResourceSizeOnNetwork(networkRecord);

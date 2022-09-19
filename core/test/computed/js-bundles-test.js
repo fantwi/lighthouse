@@ -4,10 +4,10 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
-import JsBundles from '../../computed/js-bundles.js';
+import {JSBundles} from '../../computed/js-bundles.js';
 import {createScript, loadSourceMapFixture} from '../test-utils.js';
 
-describe('JsBundles computed artifact', () => {
+describe('JSBundles computed artifact', () => {
   it('collates script element and source map', async () => {
     const artifacts = {
       SourceMaps: [{
@@ -16,7 +16,7 @@ describe('JsBundles computed artifact', () => {
       Scripts: [{scriptId: '1', url: 'https://www.example.com/app.js', content: ''}].map(createScript),
     };
     const context = {computedCache: new Map()};
-    const results = await JsBundles.request(artifacts, context);
+    const results = await JSBundles.request(artifacts, context);
     expect(results).toHaveLength(1);
     const result = results[0];
     expect(result.rawMap).toBe(artifacts.SourceMaps[0].map);
@@ -32,7 +32,7 @@ describe('JsBundles computed artifact', () => {
       Scripts: [{scriptId: '1', url: 'https://example.com/foo.min.js', content}].map(createScript),
     };
     const context = {computedCache: new Map()};
-    const results = await JsBundles.request(artifacts, context);
+    const results = await JSBundles.request(artifacts, context);
 
     expect(results).toHaveLength(1);
     const result = results[0];
@@ -79,7 +79,7 @@ describe('JsBundles computed artifact', () => {
       Scripts: [{scriptId: '1', url: 'https://example.com/foo.min.js', content}].map(createScript),
     };
     const context = {computedCache: new Map()};
-    const results = await JsBundles.request(artifacts, context);
+    const results = await JSBundles.request(artifacts, context);
 
     expect(results).toHaveLength(1);
     const result = results[0];
@@ -121,7 +121,7 @@ describe('JsBundles computed artifact', () => {
       Scripts: [{scriptId: '1', url: 'https://squoosh.app/main-app.js', content}].map(createScript),
     };
     const context = {computedCache: new Map()};
-    const results = await JsBundles.request(artifacts, context);
+    const results = await JSBundles.request(artifacts, context);
 
     expect(results).toHaveLength(1);
     const result = results[0];
@@ -243,7 +243,7 @@ describe('JsBundles computed artifact', () => {
         Scripts: [{scriptId: '1', url: 'https://example.com/foo.min.js', content}].map(createScript),
       };
       const context = {computedCache: new Map()};
-      const results = await JsBundles.request(artifacts, context);
+      const results = await JSBundles.request(artifacts, context);
       const result = results[0];
       const entry = result.map.findEntry(0, 644);
       return {sizes: result.sizes, entry};

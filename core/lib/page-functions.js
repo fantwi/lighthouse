@@ -3,7 +3,6 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /**
  * @fileoverview
@@ -540,35 +539,28 @@ function getNodeDetails(element) {
   return details;
 }
 
-const getNodeDetailsString = `function getNodeDetails(element) {
-  ${getNodePath.toString()};
-  ${getNodeSelector.toString()};
-  ${getBoundingClientRect.toString()};
-  ${getOuterHTMLSnippet.toString()};
-  ${getNodeLabel.toString()};
-  return (${getNodeDetails.toString()})(element);
+/** @type {string} */
+const getNodeDetailsRawString = getNodeDetails.toString();
+getNodeDetails.toString = () => `function getNodeDetails(element) {
+  ${getNodePath};
+  ${getNodeSelector};
+  ${getBoundingClientRect};
+  ${getOuterHTMLSnippet};
+  ${getNodeLabel};
+  return (${getNodeDetailsRawString})(element);
 }`;
 
-// TODO(esmodules): should this be refactored to export each function individually?
 export const pageFunctions = {
-  wrapRuntimeEvalErrorInBrowserString: wrapRuntimeEvalErrorInBrowser.toString(),
   wrapRuntimeEvalErrorInBrowser,
   getElementsInDocument,
-  getElementsInDocumentString: getElementsInDocument.toString(),
-  getOuterHTMLSnippetString: getOuterHTMLSnippet.toString(),
   getOuterHTMLSnippet,
   computeBenchmarkIndex,
-  computeBenchmarkIndexString: computeBenchmarkIndex.toString(),
   getMaxTextureSize,
-  getNodeDetailsString,
   getNodeDetails,
-  getNodePathString: getNodePath.toString(),
-  getNodeSelectorString: getNodeSelector.toString(),
   getNodePath,
   getNodeSelector,
   getNodeLabel,
-  getNodeLabelString: getNodeLabel.toString(),
-  isPositionFixedString: isPositionFixed.toString(),
+  isPositionFixed,
   wrapRequestIdleCallback,
-  getBoundingClientRectString: getBoundingClientRect.toString(),
+  getBoundingClientRect,
 };

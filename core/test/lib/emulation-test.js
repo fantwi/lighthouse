@@ -5,9 +5,9 @@
  */
 
 import * as emulation from '../../lib/emulation.js';
-import {Driver} from '../../gather/driver.js';
+import {Driver} from '../../legacy/gather/driver.js';
 import * as constants from '../../config/constants.js';
-import {Connection} from '../../gather/connections/connection.js';
+import {Connection} from '../../legacy/gather/connections/connection.js';
 import {createMockSendCommandFn} from '../gather/mock-commands.js';
 
 describe('emulation', () => {

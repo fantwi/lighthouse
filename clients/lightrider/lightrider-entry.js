@@ -3,13 +3,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /* global globalThis */
 
 import {Buffer} from 'buffer';
-import log from 'lighthouse-logger';
 
+import log from 'lighthouse-logger';
 import {Browser} from 'puppeteer-core/lib/esm/puppeteer/common/Browser.js';
 import {Connection as PptrConnection} from 'puppeteer-core/lib/esm/puppeteer/common/Connection.js';
 
@@ -17,7 +16,6 @@ import lighthouse, {legacyNavigation} from '../../core/index.js';
 import {LighthouseError} from '../../core/lib/lh-error.js';
 import {processForProto} from '../../core/lib/proto-preprocessor.js';
 import * as assetSaver from '../../core/lib/asset-saver.js';
-
 import mobileConfig from '../../core/config/lr-mobile-config.js';
 import desktopConfig from '../../core/config/lr-desktop-config.js';
 
@@ -27,7 +25,7 @@ const LR_PRESETS = {
   desktop: desktopConfig,
 };
 
-/** @typedef {import('../../core/gather/connections/connection.js').Connection} Connection */
+/** @typedef {import('../../core/legacy/gather/connections/connection.js').Connection} Connection */
 
 // Rollup seems to overlook some references to `Buffer`, so it must be made explicit.
 // (`parseSourceMapFromDataUrl` breaks without this)
@@ -79,7 +77,7 @@ async function getPageFromConnection(connection) {
  * @param {{lrDevice?: 'desktop'|'mobile', categoryIDs?: Array<string>, logAssets: boolean, configOverride?: LH.Config.Json, useFraggleRock?: boolean}} lrOpts Options coming from Lightrider
  * @return {Promise<string>}
  */
-export async function runLighthouseInLR(connection, url, flags, lrOpts) {
+async function runLighthouseInLR(connection, url, flags, lrOpts) {
   const {lrDevice, categoryIDs, logAssets, configOverride} = lrOpts;
 
   // Certain fixes need to kick in under LR, see https://github.com/GoogleChrome/lighthouse/issues/5839
@@ -162,3 +160,7 @@ if (typeof window !== 'undefined') {
   // @ts-expect-error
   self.listenForStatus = listenForStatus;
 }
+
+export {
+  runLighthouseInLR,
+};

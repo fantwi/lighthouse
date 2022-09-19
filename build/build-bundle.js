@@ -16,9 +16,8 @@ import {createRequire} from 'module';
 
 import esMain from 'es-main';
 import {rollup} from 'rollup';
-// TODO(esmodules): convert pubads to esm
-// // @ts-expect-error: plugin has no types.
-// import PubAdsPlugin from 'lighthouse-plugin-publisher-ads/plugin.js';
+// @ts-expect-error: plugin has no types.
+import PubAdsPlugin from 'lighthouse-plugin-publisher-ads';
 
 import * as rollupPlugins from './rollup-plugins.js';
 import {Runner} from '../core/runner.js';
@@ -27,13 +26,18 @@ import {readJson} from '../core/test/test-utils.js';
 
 const require = createRequire(import.meta.url);
 
-/** The commit hash for the current HEAD. */
-const COMMIT_HASH = execSync('git rev-parse HEAD').toString().trim();
+/**
+ * The git tag for the current HEAD (if HEAD is itself a tag),
+ * otherwise a combination of latest tag + #commits since + sha.
+ * Note: can't do this in CI because it is a shallow checkout.
+ */
+const GIT_READABLE_REF =
+  execSync(process.env.CI ? 'git rev-parse HEAD' : 'git describe').toString().trim();
 
 // HACK: manually include the lighthouse-plugin-publisher-ads audits.
 /** @type {Array<string>} */
-// // @ts-expect-error
-// const pubAdsAudits = PubAdsPlugin.audits.map(a => a.path);
+// @ts-expect-error
+const pubAdsAudits = PubAdsPlugin.audits.map(a => a.path);
 
 /** @param {string} file */
 const isDevtools = file =>
@@ -54,7 +58,7 @@ const today = (() => {
 const pkg = readJson(`${LH_ROOT}/package.json`);
 const banner = `
 /**
- * Lighthouse v${pkg.version} ${COMMIT_HASH} (${today})
+ * Lighthouse ${GIT_READABLE_REF} (${today})
  *
  * ${pkg.description}
  *
@@ -84,12 +88,12 @@ async function buildBundle(entryPath, distPath, opts = {minify: true}) {
   ];
 
   // Include lighthouse-plugin-publisher-ads.
-  // if (isDevtools(entryPath) || isLightrider(entryPath)) {
-  //   dynamicModulePaths.push('lighthouse-plugin-publisher-ads');
-  //   pubAdsAudits.forEach(pubAdAudit => {
-  //     dynamicModulePaths.push(pubAdAudit);
-  //   });
-  // }
+  if (isDevtools(entryPath) || isLightrider(entryPath)) {
+    dynamicModulePaths.push('lighthouse-plugin-publisher-ads');
+    pubAdsAudits.forEach(pubAdAudit => {
+      dynamicModulePaths.push(pubAdAudit);
+    });
+  }
 
   const bundledMapEntriesCode = dynamicModulePaths.map(modulePath => {
     const pathNoExt = modulePath.replace('.js', '');
@@ -98,7 +102,7 @@ async function buildBundle(entryPath, distPath, opts = {minify: true}) {
 
   /** @type {Record<string, string>} */
   const shimsObj = {
-    [require.resolve('../core/gather/connections/cri.js')]:
+    [require.resolve('../core/legacy/gather/connections/cri.js')]:
       'export const CriConnection = {}',
     [require.resolve('../package.json')]: `export const version = '${pkg.version}';`,
   };
@@ -251,6 +255,5 @@ if (esMain(import.meta)) {
 }
 
 export {
-  COMMIT_HASH,
   buildBundle,
 };

@@ -12,6 +12,10 @@ Object {
       "id": "Trace",
     },
     Object {
+      "gatherer": "network-user-agent",
+      "id": "NetworkUserAgent",
+    },
+    Object {
       "gatherer": "stacks",
       "id": "Stacks",
     },
@@ -140,6 +144,7 @@ Object {
       "artifacts": Array [
         "DevtoolsLog",
         "Trace",
+        "NetworkUserAgent",
         "Stacks",
         "devtoolsLogs",
         "traces",
@@ -160,9 +165,11 @@ Object {
   "settings": Object {
     "additionalTraceCategories": null,
     "auditMode": true,
+    "blankPage": "about:blank",
     "blockedUrlPatterns": null,
     "budgets": null,
     "channel": "cli",
+    "cpuQuietThresholdMs": 1000,
     "debugNavigation": false,
     "disableStorageReset": false,
     "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 7.0; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4695.0 Mobile Safari/537.36 Chrome-Lighthouse",
@@ -172,6 +179,7 @@ Object {
     "locale": "en-US",
     "maxWaitForFcp": 30000,
     "maxWaitForLoad": 45000,
+    "networkQuietThresholdMs": 1000,
     "onlyAudits": Array [
       "metrics",
     ],
@@ -179,6 +187,8 @@ Object {
     "output": Array [
       "json",
     ],
+    "pauseAfterFcpMs": 1000,
+    "pauseAfterLoadMs": 1000,
     "precomputedLanternData": null,
     "screenEmulation": Object {
       "deviceScaleFactor": 2.625,
@@ -333,9 +343,11 @@ Object {
   "settings": Object {
     "additionalTraceCategories": null,
     "auditMode": true,
+    "blankPage": "about:blank",
     "blockedUrlPatterns": null,
     "budgets": null,
     "channel": "cli",
+    "cpuQuietThresholdMs": 1000,
     "debugNavigation": false,
     "disableStorageReset": false,
     "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 7.0; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4695.0 Mobile Safari/537.36 Chrome-Lighthouse",
@@ -345,6 +357,7 @@ Object {
     "locale": "en-US",
     "maxWaitForFcp": 30000,
     "maxWaitForLoad": 45000,
+    "networkQuietThresholdMs": 1000,
     "onlyAudits": Array [
       "charset",
     ],
@@ -352,6 +365,8 @@ Object {
     "output": Array [
       "json",
     ],
+    "pauseAfterFcpMs": 1000,
+    "pauseAfterLoadMs": 1000,
     "precomputedLanternData": null,
     "screenEmulation": Object {
       "deviceScaleFactor": 2.625,

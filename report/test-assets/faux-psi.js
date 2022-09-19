@@ -13,77 +13,84 @@ const lighthouseRenderer = window['report'];
 
 const wait = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms));
 
-
 (async function __initPsiReports__() {
-  renderLHReport();
-
   document.querySelector('button#reanalyze')?.addEventListener('click', () => {
-    renderLHReport();
+    __initPsiReports__();
   });
 
   document.querySelector('button#translate')?.addEventListener('click', async () => {
-    await swapLhrLocale('es');
-    renderLHReport();
+    const hash = location.hash.slice(1);
+    const someLocales = ['es', 'ja', 'ru', 'ar', 'en-US'];
+    // Just rotate to the next one
+    const nextLocale = someLocales[(someLocales.indexOf(hash) + 1) % someLocales.length];
+    location.hash = `#${nextLocale}`;
+    location.reload();
+  });
+
+  const hash = location.hash.slice(1);
+  if (hash) {
+    // @ts-expect-error Can't do string to LH.Locale
+    await swapLhrLocale(hash);
+  }
+
+  // We deliberately want the non-blocking await behavior w/ forEach
+  ['mobile', 'desktop'].forEach(async id => {
+    const container = document.querySelector(`section#${id} .reportContainer`);
+    if (!container) throw new Error('Unexpected DOM. Bailing.');
+    container.textContent = 'Analyzing…';
+    await wait(id === 'desktop' ? 3000 : 500);
+
+    // @ts-expect-error
+    const lhr = JSON.parse(JSON.stringify(window.__LIGHTHOUSE_JSON__));
+    await distinguishLHR(lhr, id);
+
+    renderLHReport(lhr, container);
   });
 })();
 
-async function renderLHReport() {
-  // @ts-expect-error
-  const mobileLHR = window.__LIGHTHOUSE_JSON__;
-  const desktopLHR = JSON.parse(JSON.stringify(mobileLHR));
+/**
+ * @param {any} lhr
+ * @param {Element} container
+ */
+async function renderLHReport(lhr, container) {
+  try {
+    for (const el of container.childNodes) el.remove();
 
-  const lhrs = {
-    'mobile': mobileLHR,
-    'desktop': desktopLHR,
-  };
-
-  for (const [tabId, lhr] of Object.entries(lhrs)) {
-    await distinguishLHR(lhr, tabId);
-
-    const container = document.querySelector(`section#${tabId} .reportContainer`);
-    if (!container) throw new Error('Unexpected DOM. Bailing.');
-
-    try {
-      container.textContent = 'Analyzing…';
-      await wait(500);
-      for (const el of container.childNodes) el.remove();
-
-      const reportRootEl = lighthouseRenderer.renderReport(lhr, {
-        omitTopbar: true,
-        disableFireworks: true,
-        disableDarkMode: true,
-      });
-      // TODO: display warnings if appropriate.
-      for (const el of reportRootEl.querySelectorAll('.lh-warnings--toplevel')) {
-        el.setAttribute('hidden', 'true');
-      }
-
-      // Move env block
-      const metaItemsEl = reportRootEl.querySelector('.lh-meta__items');
-      if (metaItemsEl) {
-        reportRootEl.querySelector('.lh-metrics-container')?.parentNode?.insertBefore(
-          metaItemsEl,
-          reportRootEl.querySelector('.lh-buttons')
-        );
-        reportRootEl.querySelector('.lh-metrics-container')?.closest('.lh-category')?.classList
-            .add('lh--hoisted-meta');
-      }
-
-      container.append(reportRootEl);
-
-      // Override some LH styles. (To find .lh-vars we must descend from reportRootEl's parent)
-      for (const el of container.querySelectorAll('article.lh-vars')) {
-        // Ensure these css var names are not stale.
-        el.style.setProperty('--report-content-max-width', '100%');
-        el.style.setProperty('--edge-gap-padding', '0');
-      }
-      for (const el of reportRootEl.querySelectorAll('footer.lh-footer')) {
-        el.style.display = 'none';
-      }
-    } catch (e) {
-      console.error(e);
-      container.textContent = 'Error: LHR failed to render.';
+    const reportRootEl = lighthouseRenderer.renderReport(lhr, {
+      omitTopbar: true,
+      disableFireworks: true,
+      disableDarkMode: true,
+    });
+    // TODO: display warnings if appropriate.
+    for (const el of reportRootEl.querySelectorAll('.lh-warnings--toplevel')) {
+      el.setAttribute('hidden', 'true');
     }
+
+    // Move env block
+    const metaItemsEl = reportRootEl.querySelector('.lh-meta__items');
+    if (metaItemsEl) {
+      reportRootEl.querySelector('.lh-metrics-container')?.parentNode?.insertBefore(
+        metaItemsEl,
+        reportRootEl.querySelector('.lh-buttons')
+      );
+      reportRootEl.querySelector('.lh-metrics-container')?.closest('.lh-category')?.classList
+          .add('lh--hoisted-meta');
+    }
+
+    container.append(reportRootEl);
+
+    // Override some LH styles. (To find .lh-vars we must descend from reportRootEl's parent)
+    for (const el of container.querySelectorAll('article.lh-vars')) {
+      // Ensure these css var names are not stale.
+      el.style.setProperty('--report-content-max-width', '100%');
+      el.style.setProperty('--edge-gap-padding', '0');
+    }
+    for (const el of reportRootEl.querySelectorAll('footer.lh-footer')) {
+      el.style.display = 'none';
+    }
+  } catch (e) {
+    console.error(e);
+    container.textContent = 'Error: LHR failed to render.';
   }
 }
 
@@ -91,13 +98,20 @@ async function renderLHReport() {
  * @param {LH.Locale} locale
  */
 async function swapLhrLocale(locale) {
-  const response = await fetch(`https://www.gstatic.com/pagespeed/insights/ui/locales/${locale}.json`);
-  /** @type {import('../../shared/localization/locales').LhlMessages} */
-  const lhlMessages = await response.json();
-  console.log(lhlMessages);
-  if (!lhlMessages) throw new Error(`could not fetch data for locale: ${locale}`);
+  // @ts-expect-error LHR global
+  const lhrLocale = window.__LIGHTHOUSE_JSON__['configSettings']['locale'];
 
-  lighthouseRenderer.format.registerLocaleData(locale, lhlMessages);
+  // Only fetch and swapLocale if necessary.
+  if (lhrLocale === locale) return;
+
+  if (!lighthouseRenderer.format.hasLocale(locale)) {
+    // Requires running a server in LH root and viewing localhost:XXXX/dist/sample-reports/⌣.psi.english/index.html
+    const response = await fetch(`/shared/localization/locales/${locale}.json`);
+    /** @type {import('../../shared/localization/locales').LhlMessages} */
+    const lhlMessages = await response.json();
+    if (!lhlMessages) throw new Error(`could not fetch data for locale: ${locale}`);
+    lighthouseRenderer.format.registerLocaleData(locale, lhlMessages);
+  }
   // @ts-expect-error LHR global
   window.__LIGHTHOUSE_JSON__ = lighthouseRenderer.swapLocale(window.__LIGHTHOUSE_JSON__, locale)
     .lhr;

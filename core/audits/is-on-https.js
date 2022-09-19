@@ -3,12 +3,11 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import {Audit} from './audit.js';
-import URL from '../lib/url-shim.js';
+import UrlUtils from '../lib/url-utils.js';
 import {NetworkRequest} from '../lib/network-request.js';
-import NetworkRecords from '../computed/network-records.js';
+import {NetworkRecords} from '../computed/network-records.js';
 import * as i18n from '../lib/i18n/i18n.js';
 
 const UIStrings = {
@@ -76,7 +75,7 @@ class HTTPS extends Audit {
     return NetworkRecords.request(devtoolsLogs, context).then(networkRecords => {
       const insecureURLs = networkRecords
           .filter(record => !NetworkRequest.isSecureRequest(record))
-          .map(record => URL.elideDataURI(record.url));
+          .map(record => UrlUtils.elideDataURI(record.url));
 
       /** @type {Array<{url: string, resolution?: LH.IcuMessage|string}>}  */
       const items = Array.from(new Set(insecureURLs)).map(url => ({url, resolution: undefined}));

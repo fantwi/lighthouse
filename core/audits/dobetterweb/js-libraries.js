@@ -8,7 +8,6 @@
  * @fileoverview Diagnostic audit that lists all JavaScript libraries detected on the page
  */
 
-'use strict';
 
 import {Audit} from '../audit.js';
 import * as i18n from '../../lib/i18n/i18n.js';

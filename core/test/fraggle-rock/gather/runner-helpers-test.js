@@ -87,6 +87,8 @@ describe('collectPhaseArtifacts', () => {
 
   /** @type {ReturnType<ReturnType<typeof createMockDriver>['asDriver']>} */
   let driver;
+  /** @type {LH.Puppeteer.Page} */
+  let page;
   /** @type {ReturnType<typeof createMockDriver>} */
   let mockDriver;
   /** @type {LH.FRBaseArtifacts} */
@@ -112,6 +114,7 @@ describe('collectPhaseArtifacts', () => {
 
   beforeEach(() => {
     mockDriver = createMockDriver();
+    page = mockDriver._page.asPage();
     driver = mockDriver.asDriver();
     artifactState = {
       startInstrumentation: {},
@@ -130,6 +133,7 @@ describe('collectPhaseArtifacts', () => {
         const {artifactDefinitions, gatherers} = createGathererSet();
         await helpers.collectPhaseArtifacts({
           driver,
+          page,
           artifactDefinitions,
           artifactState,
           phase,
@@ -154,6 +158,7 @@ describe('collectPhaseArtifacts', () => {
     const {artifactDefinitions} = createGathererSet();
     await helpers.collectPhaseArtifacts({
       driver,
+      page,
       artifactDefinitions,
       artifactState,
       gatherMode: 'navigation',
@@ -186,6 +191,7 @@ describe('collectPhaseArtifacts', () => {
 
     await helpers.collectPhaseArtifacts({
       driver,
+      page,
       artifactDefinitions,
       artifactState,
       gatherMode: 'navigation',
@@ -219,6 +225,7 @@ describe('collectPhaseArtifacts', () => {
     const {artifactDefinitions, gatherers} = createGathererSet();
     await helpers.collectPhaseArtifacts({
       driver,
+      page,
       artifactDefinitions,
       artifactState,
       gatherMode: 'navigation',

@@ -11,11 +11,40 @@ To make performance budgets a part of your CI process, refer to [Lighthouse CI](
 
 ## Usage
 
+### CLI
+
 Performance budgets are supported in the CLI version of lighthouse. To use:
 1. Create a `budget.json` file.
 2. When running Lighthouse from the command line, pass the `--budget-path` flag followed by the path to budget file in order to calculate whenever a category is over budget.
 ```
 lighthouse https://youtube.com --budget-path=budget.json
+```
+
+### Config
+
+Performance budgets can also be defined on the Lighthouse config for usage with the Node API:
+
+```js
+import lighthouse from 'lighthouse';
+
+const config = {
+  extends: 'lighthouse:default',
+  settings: {
+    budgets: [
+      {
+        path: '/*',
+        resourceSizes: [
+          {
+            resourceType: 'script',
+            budget: 200
+          }
+        ]
+      }
+    ]
+  }
+}
+
+await lighthouse('https://example.com', undefined, config);
 ```
 
 ## budget.json
@@ -68,7 +97,7 @@ The `budget.json` file is an array containing one or more `Budget` objects.
     ]
   }
 ]
-``` 
+```
 
 ## Further Explanation
 
@@ -142,7 +171,7 @@ The `path` property indciates the pages that a budget applies to. This string sh
 
 If `path` is not supplied, a budget will apply to all pages.
 
-If a page's URL path matches the `path` property of more than one budget in `budget.json`, then the last matching budget will be applied. As a result, global budgets (e.g. `"path": "/*"`) should be listed first in `budget.json`, followed by the budgets that override the global budget (e.g. `"path": "/blog"`). 
+If a page's URL path matches the `path` property of more than one budget in `budget.json`, then the last matching budget will be applied. As a result, global budgets (e.g. `"path": "/*"`) should be listed first in `budget.json`, followed by the budgets that override the global budget (e.g. `"path": "/blog"`).
 
 Examples:
 

@@ -34,7 +34,9 @@ describe('Performance: preload-lcp audit', () => {
         {
           traceEventType: 'largest-contentful-paint',
           node: {
-            devtoolsNodePath: '1,HTML,1,BODY,3,DIV,2,IMG'},
+            devtoolsNodePath: '1,HTML,1,BODY,3,DIV,2,IMG',
+          },
+          type: 'image',
         },
       ],
       ImageElements: [
@@ -93,7 +95,31 @@ describe('Performance: preload-lcp audit', () => {
     ];
   };
 
-  it('shouldn\'t be applicable if lcp image is not found', async () => {
+  it('is not applicable if TraceElements does not include LCP', async () => {
+    const networkRecords = mockNetworkRecords();
+    const artifacts = mockArtifacts(networkRecords, mainDocumentNodeUrl, imageUrl);
+    artifacts.TraceElements = [];
+    const context = {settings: {}, computedCache: new Map()};
+    const result = await PreloadLCPImage.audit(artifacts, context);
+    expect(result).toEqual({
+      score: null,
+      notApplicable: true,
+    });
+  });
+
+  it('is not applicable if LCP was not an image', async () => {
+    const networkRecords = mockNetworkRecords();
+    const artifacts = mockArtifacts(networkRecords, mainDocumentNodeUrl, imageUrl);
+    artifacts.TraceElements[0].type = 'text';
+    const context = {settings: {}, computedCache: new Map()};
+    const result = await PreloadLCPImage.audit(artifacts, context);
+    expect(result).toEqual({
+      score: null,
+      notApplicable: true,
+    });
+  });
+
+  it('shouldn\'t be applicable if lcp image element is not found', async () => {
     const networkRecords = mockNetworkRecords();
     const artifacts = mockArtifacts(networkRecords, mainDocumentNodeUrl, imageUrl);
     artifacts.ImageElements = [];

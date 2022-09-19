@@ -3,12 +3,10 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /* globals window document getBoundingClientRect requestAnimationFrame */
 
 import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
-
 import * as emulation from '../../lib/emulation.js';
 import {pageFunctions} from '../../lib/page-functions.js';
 import {NetworkMonitor} from '../driver/network-monitor.js';
@@ -165,7 +163,7 @@ class FullPageScreenshot extends FRGatherer {
       return context.driver.executionContext.evaluate(resolveNodes, {
         args: [],
         useIsolation,
-        deps: [pageFunctions.getBoundingClientRectString],
+        deps: [pageFunctions.getBoundingClientRect],
       });
     }
 

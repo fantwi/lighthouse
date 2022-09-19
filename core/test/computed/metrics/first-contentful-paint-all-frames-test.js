@@ -4,8 +4,8 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
-import FirstContentfulPaintAllFrames from '../../../computed/metrics/first-contentful-paint-all-frames.js'; // eslint-disable-line max-len
-import FirstContentfulPaint from '../../../computed/metrics/first-contentful-paint.js'; // eslint-disable-line max-len
+import {FirstContentfulPaintAllFrames} from '../../../computed/metrics/first-contentful-paint-all-frames.js'; // eslint-disable-line max-len
+import {FirstContentfulPaint} from '../../../computed/metrics/first-contentful-paint.js'; // eslint-disable-line max-len
 import {readJson} from '../../test-utils.js';
 
 const trace = readJson('../../fixtures/traces/frame-metrics-m89.json', import.meta);

@@ -3,7 +3,6 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import {Audit} from './audit.js';
 import * as i18n from '../lib/i18n/i18n.js';
@@ -50,8 +49,9 @@ class LargestContentfulPaintLazyLoaded extends Audit {
    * @return {LH.Audit.Product}
    */
   static audit(artifacts) {
-    const lcpElement = artifacts.TraceElements
-      .find(element => element.traceEventType === 'largest-contentful-paint');
+    const lcpElement = artifacts.TraceElements.find(element => {
+      return element.traceEventType === 'largest-contentful-paint' && element.type === 'image';
+    });
     const lcpElementImage = lcpElement ? artifacts.ImageElements.find(elem => {
       return elem.node.devtoolsNodePath === lcpElement.node.devtoolsNodePath;
     }) : undefined;
@@ -59,7 +59,7 @@ class LargestContentfulPaintLazyLoaded extends Audit {
 
     if (!lcpElementImage ||
       !this.isImageInViewport(lcpElementImage, artifacts.ViewportDimensions)) {
-      return {score: 1, notApplicable: true};
+      return {score: null, notApplicable: true};
     }
 
     /** @type {LH.Audit.Details.Table['headings']} */

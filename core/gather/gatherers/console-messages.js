@@ -9,7 +9,6 @@
  * exceptions, and browser reports (on violations, interventions, deprecations, etc.).
  */
 
-'use strict';
 
 import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
 

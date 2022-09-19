@@ -3,21 +3,20 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /**
  * @fileoverview Example Express server for demonstrating how to run Lighthouse on an authenticated
  * page. See docs/recipes/auth/README.md for more.
  */
 
-import createError from 'http-errors';
-
-import express from 'express';
-import morgan from 'morgan';
-import session from 'express-session';
 import http from 'http';
 import path from 'path';
 import url from 'url';
+
+import createError from 'http-errors';
+import express from 'express';
+import morgan from 'morgan';
+import session from 'express-session';
 import esMain from 'es-main';
 
 const moduleDir = path.dirname(url.fileURLToPath(import.meta.url));

@@ -3,7 +3,6 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /* global getNodeDetails */
 
@@ -14,18 +13,17 @@
  */
 
 import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
-
 import {resolveNodeIdToObjectId} from '../driver/dom.js';
 import {pageFunctions} from '../../lib/page-functions.js';
 import * as RectHelpers from '../../lib/rect-helpers.js';
 import {Sentry} from '../../lib/sentry.js';
 import Trace from './trace.js';
-import ProcessedTrace from '../../computed/processed-trace.js';
-import ProcessedNavigation from '../../computed/processed-navigation.js';
+import {ProcessedTrace} from '../../computed/processed-trace.js';
+import {ProcessedNavigation} from '../../computed/processed-navigation.js';
 import {LighthouseError} from '../../lib/lh-error.js';
-import ComputedResponsiveness from '../../computed/metrics/responsiveness.js';
+import {Responsiveness} from '../../computed/metrics/responsiveness.js';
 
-/** @typedef {{nodeId: number, score?: number, animations?: {name?: string, failureReasonsMask?: number, unsupportedProperties?: string[]}[]}} TraceElementData */
+/** @typedef {{nodeId: number, score?: number, animations?: {name?: string, failureReasonsMask?: number, unsupportedProperties?: string[]}[], type?: string}} TraceElementData */
 
 /**
  * @this {HTMLElement}
@@ -152,7 +150,7 @@ class TraceElements extends FRGatherer {
   static async getResponsivenessElement(trace, context) {
     const {settings} = context;
     try {
-      const responsivenessEvent = await ComputedResponsiveness.request({trace, settings}, context);
+      const responsivenessEvent = await Responsiveness.request({trace, settings}, context);
       if (!responsivenessEvent || responsivenessEvent.name === 'FallbackTiming') return;
       return {nodeId: responsivenessEvent.args.data.nodeId};
     } catch {
@@ -215,6 +213,34 @@ class TraceElements extends FRGatherer {
   }
 
   /**
+   * @param {LH.Artifacts.ProcessedTrace} processedTrace
+   * @param {LH.Gatherer.FRTransitionalContext} context
+   * @return {Promise<{nodeId: number, type: string} | undefined>}
+   */
+  static async getLcpElement(processedTrace, context) {
+    let processedNavigation;
+    try {
+      processedNavigation = await ProcessedNavigation.request(processedTrace, context);
+    } catch (err) {
+      // If we were running in timespan mode and there was no paint, treat LCP as missing.
+      if (context.gatherMode === 'timespan' && err.code === LighthouseError.errors.NO_FCP.code) {
+        return;
+      }
+
+      throw err;
+    }
+
+    // These should exist, but trace types are loose.
+    const lcpData = processedNavigation.largestContentfulPaintEvt?.args?.data;
+    if (lcpData?.nodeId === undefined || !lcpData.type) return;
+
+    return {
+      nodeId: lcpData.nodeId,
+      type: lcpData.type,
+    };
+  }
+
+  /**
    * @param {LH.Gatherer.FRTransitionalContext} context
    */
   async startInstrumentation(context) {
@@ -242,26 +268,16 @@ class TraceElements extends FRGatherer {
     }
 
     const processedTrace = await ProcessedTrace.request(trace, context);
-    const {largestContentfulPaintEvt} = await ProcessedNavigation
-      .request(processedTrace, context)
-      .catch(err => {
-        // If we were running in timespan mode and there was no paint, treat LCP as missing.
-        if (context.gatherMode === 'timespan' && err.code === LighthouseError.errors.NO_FCP.code) {
-          return {largestContentfulPaintEvt: undefined};
-        }
-
-        throw err;
-      });
     const {mainThreadEvents} = processedTrace;
 
-    const lcpNodeId = largestContentfulPaintEvt?.args?.data?.nodeId;
+    const lcpNodeData = await TraceElements.getLcpElement(processedTrace, context);
     const clsNodeData = TraceElements.getTopLayoutShiftElements(mainThreadEvents);
     const animatedElementData = await this.getAnimatedElements(mainThreadEvents);
     const responsivenessElementData = await TraceElements.getResponsivenessElement(trace, context);
 
     /** @type {Map<string, TraceElementData[]>} */
     const backendNodeDataMap = new Map([
-      ['largest-contentful-paint', lcpNodeId ? [{nodeId: lcpNodeId}] : []],
+      ['largest-contentful-paint', lcpNodeData ? [lcpNodeData] : []],
       ['layout-shift', clsNodeData],
       ['animation', animatedElementData],
       ['responsiveness', responsivenessElementData ? [responsivenessElementData] : []],
@@ -279,7 +295,7 @@ class TraceElements extends FRGatherer {
             objectId,
             functionDeclaration: `function () {
               ${getNodeDetailsData.toString()};
-              ${pageFunctions.getNodeDetailsString};
+              ${pageFunctions.getNodeDetails};
               return getNodeDetailsData.call(this);
             }`,
             returnByValue: true,
@@ -300,6 +316,7 @@ class TraceElements extends FRGatherer {
             score: backendNodeData[i].score,
             animations: backendNodeData[i].animations,
             nodeId: backendNodeId,
+            type: backendNodeData[i].type,
           });
         }
       }

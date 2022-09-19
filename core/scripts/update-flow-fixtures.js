@@ -120,6 +120,12 @@ async function rebaselineArtifacts(artifactKeys) {
     for (let i = 0; i < flowArtifacts.gatherSteps.length; ++i) {
       const gatherStep = flowArtifacts.gatherSteps[i];
       const newGatherStep = newFlowArtifacts.gatherSteps[i];
+
+      // Always update these three values
+      gatherStep.config = newGatherStep.config;
+      gatherStep.flags = newGatherStep.flags;
+      gatherStep.name = newGatherStep.name;
+
       for (const key of artifactKeys) {
         // @ts-expect-error
         gatherStep.artifacts[key] = newGatherStep.artifacts[key];

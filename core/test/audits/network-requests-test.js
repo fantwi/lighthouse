@@ -35,6 +35,7 @@ describe('Network requests audit', () => {
       statusCode: 200,
       mimeType: 'text/html',
       resourceType: 'Document',
+      priority: 'VeryHigh',
     });
     expect(output.details.items[2]).toMatchObject({
       startTime: expect.toBeApproximately(711, 0),
@@ -45,6 +46,7 @@ describe('Network requests audit', () => {
       statusCode: 200,
       mimeType: 'image/png',
       resourceType: 'Image',
+      priority: 'Low',
     });
     expect(output.details.items[5]).toMatchObject({
       startTime: expect.toBeApproximately(717, 0),
@@ -55,6 +57,7 @@ describe('Network requests audit', () => {
       statusCode: 200,
       mimeType: 'application/javascript',
       resourceType: 'Script',
+      priority: 'Medium',
     });
 
     expect(output.details.debugData).toStrictEqual({

@@ -3,12 +3,10 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /* eslint-disable max-len */
 
 import * as constants from './constants.js';
-
 import * as i18n from '../lib/i18n/i18n.js';
 import {metricsToAudits} from './metrics-to-audits.js';
 
@@ -220,62 +218,6 @@ const defaultConfig = {
 
     // FullPageScreenshot comes at the very end so all other node analysis is captured.
     {id: artifacts.FullPageScreenshot, gatherer: 'full-page-screenshot'},
-  ],
-  navigations: [
-    {
-      id: 'default',
-      pauseAfterFcpMs: 1000,
-      pauseAfterLoadMs: 1000,
-      networkQuietThresholdMs: 1000,
-      cpuQuietThresholdMs: 1000,
-      artifacts: [
-        // Artifacts which can be depended on come first.
-        artifacts.DevtoolsLog,
-        artifacts.Trace,
-
-        artifacts.Accessibility,
-        artifacts.AnchorElements,
-        artifacts.CacheContents,
-        artifacts.ConsoleMessages,
-        artifacts.CSSUsage,
-        artifacts.Doctype,
-        artifacts.DOMStats,
-        artifacts.EmbeddedContent,
-        artifacts.FontSize,
-        artifacts.Inputs,
-        artifacts.GlobalListeners,
-        artifacts.IFrameElements,
-        artifacts.ImageElements,
-        artifacts.InstallabilityErrors,
-        artifacts.InspectorIssues,
-        artifacts.JsUsage,
-        artifacts.LinkElements,
-        artifacts.MainDocumentContent,
-        artifacts.MetaElements,
-        artifacts.NetworkUserAgent,
-        artifacts.OptimizedImages,
-        artifacts.PasswordInputsWithPreventedPaste,
-        artifacts.ResponseCompression,
-        artifacts.RobotsTxt,
-        artifacts.ServiceWorker,
-        artifacts.ScriptElements,
-        artifacts.Scripts,
-        artifacts.SourceMaps,
-        artifacts.Stacks,
-        artifacts.TagsBlockingFirstPaint,
-        artifacts.TapTargets,
-        artifacts.TraceElements,
-        artifacts.ViewportDimensions,
-        artifacts.WebAppManifest,
-
-        // Compat artifacts come last.
-        artifacts.devtoolsLogs,
-        artifacts.traces,
-
-        // FullPageScreenshot comes at the very end so all other node analysis is captured.
-        artifacts.FullPageScreenshot,
-      ],
-    },
   ],
   audits: [
     'is-on-https',
@@ -730,10 +672,10 @@ const defaultConfig = {
   },
 };
 
-export default defaultConfig;
-
 // Use `defineProperty` so that the strings are accesible from original but ignored when we copy it
 Object.defineProperty(defaultConfig, 'UIStrings', {
   enumerable: false,
   get: () => UIStrings,
 });
+
+export default defaultConfig;

@@ -5,8 +5,8 @@
  */
 
 import {Fetcher} from '../../gather/fetcher.js';
-import {Driver} from '../../gather/driver.js';
-import {Connection} from '../../gather/connections/connection.js';
+import {Driver} from '../../legacy/gather/driver.js';
+import {Connection} from '../../legacy/gather/connections/connection.js';
 import {fnAny, mockCommands} from '../test-utils.js';
 
 const {createMockSendCommandFn} = mockCommands;

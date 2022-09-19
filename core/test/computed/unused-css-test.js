@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import UnusedCSS from '../../computed/unused-css.js';
+import {UnusedCSS} from '../../computed/unused-css.js';
 
 describe('UnusedCSS computed artifact', () => {
   function generate(content, length) {

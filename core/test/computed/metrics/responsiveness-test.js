@@ -6,7 +6,7 @@
 
 import {strict as assert} from 'assert';
 
-import Responsiveness from '../../../computed/metrics/responsiveness.js';
+import {Responsiveness} from '../../../computed/metrics/responsiveness.js';
 import {createTestTrace} from '../../create-test-trace.js';
 import {readJson} from '../../test-utils.js';
 

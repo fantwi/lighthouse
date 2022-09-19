@@ -12,9 +12,9 @@ import jestMock from 'jest-mock';
 import * as td from 'testdouble';
 
 // import Runner from '../runner.js';
-// import {GatherRunner} from '../gather/gather-runner.js';
-import {fakeDriver as driverMock} from './gather/fake-driver.js';
-// import {Config} from '../config/config.js';
+// import {GatherRunner} from '../legacy/gather/gather-runner.js';
+import {fakeDriver as driverMock} from './legacy/gather/fake-driver.js';
+// import {Config} from '../legacy/config/config.js';
 import {Audit} from '../audits/audit.js';
 import {Gatherer} from '../gather/gatherers/gatherer.js';
 import * as assetSaver from '../lib/asset-saver.js';
@@ -32,9 +32,9 @@ await makeMocksForGatherRunner();
 //      https://github.com/facebook/jest/issues/10025
 /** @type {typeof import('../runner.js').Runner} */
 let Runner;
-/** @type {typeof import('../gather/gather-runner.js').GatherRunner} */
+/** @type {typeof import('../legacy/gather/gather-runner.js').GatherRunner} */
 let GatherRunner;
-/** @type {typeof import('../config/config.js').Config} */
+/** @type {typeof import('../legacy/config/config.js').Config} */
 let Config;
 
 /** @type {jestMock.Mock} */
@@ -61,8 +61,8 @@ await td.replaceEsm('../gather/driver/service-workers.js', {
 
 before(async () => {
   Runner = (await import('../runner.js')).Runner;
-  GatherRunner = (await import('../gather/gather-runner.js')).GatherRunner;
-  Config = (await import('../config/config.js')).Config;
+  GatherRunner = (await import('../legacy/gather/gather-runner.js')).GatherRunner;
+  Config = (await import('../legacy/config/config.js')).Config;
 });
 
 beforeEach(() => {

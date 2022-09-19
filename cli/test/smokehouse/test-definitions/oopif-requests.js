@@ -26,13 +26,10 @@ const config = {
     // Be a little more forgiving on how long it takes all network requests of several nested iframes
     // to complete.
     maxWaitForLoad: 180000,
-  },
-  navigations: [{
-    id: 'default',
     // CI machines are pretty weak which lead to many more long tasks than normal.
     // Reduce our requirement for CPU quiet.
     cpuQuietThresholdMs: 500,
-  }],
+  },
 };
 
 /**

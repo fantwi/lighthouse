@@ -5,6 +5,12 @@
  */
 'use strict';
 
+/**
+ * eslint does not support ESM rc files, so this must be a .cjs file.
+ * @see https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
+ * @see https://github.com/eslint/eslint/issues/13481
+ */
+
 module.exports = {
   // All subdirectory eslintrcs extend from this one.
   root: true,
@@ -21,6 +27,19 @@ module.exports = {
   },
   rules: {
     // 2 == error, 1 == warning, 0 == off
+    'import/order': [2, {
+      'groups': [
+        'builtin',
+        'external',
+        ['sibling', 'parent'],
+        'index',
+        'object',
+        'type',
+      ],
+      'newlines-between': 'always',
+    }],
+    'import/group-exports': 2,
+    'import/exports-last': 2,
     'eqeqeq': 2,
     'indent': [2, 2, {
       SwitchCase: 1,
@@ -95,6 +114,6 @@ module.exports = {
       globalReturn: true,
       jsx: false,
     },
-    sourceType: 'script',
+    sourceType: 'module',
   },
 };

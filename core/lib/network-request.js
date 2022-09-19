@@ -3,7 +3,6 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /**
  * @fileoverview Fills most of the role of NetworkManager and NetworkRequest classes from DevTools.
@@ -53,7 +52,7 @@
       Trace: ResourceFinish.ts
  */
 
-import URL from './url-shim.js';
+import UrlUtils from './url-utils.js';
 
 // Lightrider X-Header names for timing information.
 // See: _updateTransferSizeForLightrider and _updateTimingsForLightrider.
@@ -216,7 +215,7 @@ class NetworkRequest {
       host: url.hostname,
       securityOrigin: url.origin,
     };
-    this.isSecure = URL.isSecureScheme(this.parsedURL.scheme);
+    this.isSecure = UrlUtils.isSecureScheme(this.parsedURL.scheme);
 
     this.startTime = data.timestamp;
 
@@ -523,9 +522,9 @@ class NetworkRequest {
    */
   static isNonNetworkRequest(record) {
     // The 'protocol' field in devtools a string more like a `scheme`
-    return URL.isNonNetworkProtocol(record.protocol) ||
+    return UrlUtils.isNonNetworkProtocol(record.protocol) ||
       // But `protocol` can fail to be populated if the request fails, so fallback to scheme.
-      URL.isNonNetworkProtocol(record.parsedURL.scheme);
+      UrlUtils.isNonNetworkProtocol(record.parsedURL.scheme);
   }
 
   /**
@@ -536,9 +535,9 @@ class NetworkRequest {
    * @return {boolean}
    */
   static isSecureRequest(record) {
-    return URL.isSecureScheme(record.parsedURL.scheme) ||
-        URL.isSecureScheme(record.protocol) ||
-        URL.isLikeLocalhost(record.parsedURL.host) ||
+    return UrlUtils.isSecureScheme(record.parsedURL.scheme) ||
+        UrlUtils.isSecureScheme(record.protocol) ||
+        UrlUtils.isLikeLocalhost(record.parsedURL.host) ||
         NetworkRequest.isHstsRequest(record);
   }
 

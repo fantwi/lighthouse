@@ -3,13 +3,12 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import {makeComputedArtifact} from '../computed-artifact.js';
 import ComputedMetric from './metric.js';
 import {TraceProcessor} from '../../lib/tracehouse/trace-processor.js';
-import LanternTotalBlockingTime from './lantern-total-blocking-time.js';
-import TimetoInteractive from './interactive.js';
+import {LanternTotalBlockingTime} from './lantern-total-blocking-time.js';
+import {Interactive} from './interactive.js';
 import {calculateSumOfBlockingTime} from './tbt-utils.js';
 
 /**
@@ -47,7 +46,7 @@ class TotalBlockingTime extends ComputedMetric {
     if (data.processedNavigation) {
       const {firstContentfulPaint} = data.processedNavigation.timings;
       const metricData = ComputedMetric.getMetricComputationInput(data);
-      const interactiveTimeMs = (await TimetoInteractive.request(metricData, context)).timing;
+      const interactiveTimeMs = (await Interactive.request(metricData, context)).timing;
 
       return {
         timing: calculateSumOfBlockingTime(
@@ -68,7 +67,8 @@ class TotalBlockingTime extends ComputedMetric {
   }
 }
 
-export default makeComputedArtifact(
+const TotalBlockingTimeComputed = makeComputedArtifact(
   TotalBlockingTime,
   ['devtoolsLog', 'gatherContext', 'settings', 'simulator', 'trace', 'URL']
 );
+export {TotalBlockingTimeComputed as TotalBlockingTime};

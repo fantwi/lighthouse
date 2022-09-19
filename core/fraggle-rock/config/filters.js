@@ -3,9 +3,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import log from 'lighthouse-logger';
+
 import {Audit} from '../../audits/audit.js';
 
 /** @type {Record<keyof LH.FRBaseArtifacts, string>} */
@@ -31,7 +31,8 @@ const filterResistantAuditIds = ['full-page-screenshot'];
 
 // Some artifacts are used by the report for additional information.
 // Always run these artifacts even if audits do not request them.
-const filterResistantArtifactIds = ['HostUserAgent', 'HostFormFactor', 'Stacks', 'GatherContext'];
+// These are similar to base artifacts but they cannot be run in all 3 modes.
+const filterResistantArtifactIds = ['Stacks', 'NetworkUserAgent'];
 
 /**
  * Returns the set of audit IDs used in the list of categories.

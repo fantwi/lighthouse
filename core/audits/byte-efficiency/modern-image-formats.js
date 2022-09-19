@@ -6,10 +6,10 @@
 /*
  * @fileoverview This audit determines if the images could be smaller when compressed with WebP.
  */
-'use strict';
+
 
 import {ByteEfficiencyAudit} from './byte-efficiency-audit.js';
-import URL from '../../lib/url-shim.js';
+import UrlUtils from '../../lib/url-utils.js';
 import * as i18n from '../../lib/i18n/i18n.js';
 
 const UIStrings = {
@@ -106,7 +106,7 @@ class ModernImageFormats extends ByteEfficiencyAudit {
       const imageElement = imageElementsByURL.get(image.url);
 
       if (image.failed) {
-        warnings.push(`Unable to decode ${URL.getURLDisplayName(image.url)}`);
+        warnings.push(`Unable to decode ${UrlUtils.getURLDisplayName(image.url)}`);
         continue;
       }
 
@@ -123,7 +123,7 @@ class ModernImageFormats extends ByteEfficiencyAudit {
 
       if (typeof webpSize === 'undefined') {
         if (!imageElement) {
-          warnings.push(`Unable to locate resource ${URL.getURLDisplayName(image.url)}`);
+          warnings.push(`Unable to locate resource ${UrlUtils.getURLDisplayName(image.url)}`);
           continue;
         }
 
@@ -152,8 +152,8 @@ class ModernImageFormats extends ByteEfficiencyAudit {
       const wastedBytes = image.originalSize - avifSize;
       if (wastedBytes < IGNORE_THRESHOLD_IN_BYTES) continue;
 
-      const url = URL.elideDataURI(image.url);
-      const isCrossOrigin = !URL.originsMatch(pageURL, image.url);
+      const url = UrlUtils.elideDataURI(image.url);
+      const isCrossOrigin = !UrlUtils.originsMatch(pageURL, image.url);
 
       items.push({
         node: imageElement ? ByteEfficiencyAudit.makeNodeItem(imageElement.node) : undefined,

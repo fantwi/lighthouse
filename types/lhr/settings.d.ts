@@ -99,6 +99,17 @@ export type ScreenEmulationSettings = {
   precomputedLanternData?: PrecomputedLanternData | null;
   /** The budget.json object for LightWallet. */
   budgets?: Array<Budget> | null;
+
+  /** The number of milliseconds to wait after FCP until the page should be considered loaded. */
+  pauseAfterFcpMs?: number;
+  /** The number of milliseconds to wait after the load event until the page should be considered loaded. */
+  pauseAfterLoadMs?: number;
+  /** The number of milliseconds to wait between high priority network requests or 3 simulataneous requests before the page should be considered loaded. */
+  networkQuietThresholdMs?: number;
+  /** The number of milliseconds to wait between long tasks until the page should be considered loaded. */
+  cpuQuietThresholdMs?: number;
+  /** The URL to use for the "blank" neutral page in between navigations. Defaults to `about:blank`. */
+  blankPage?: string;
 }
 
 export interface ConfigSettings extends Required<SharedFlagsSettings> {

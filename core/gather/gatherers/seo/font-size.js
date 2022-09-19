@@ -3,7 +3,6 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 /**
  * @fileoverview Extracts information about illegible text from the page.
@@ -23,7 +22,7 @@ const MINIMAL_LEGIBLE_FONT_SIZE_PX = 12;
 // limit number of protocol calls to make sure that gatherer doesn't take more than 1-2s
 const MAX_NODES_SOURCE_RULE_FETCHED = 50; // number of nodes to fetch the source font-size rule
 
-/** @typedef {import('../../driver.js')} Driver */
+/** @typedef {import('../../../legacy/gather/driver.js')} Driver */
 /** @typedef {LH.Artifacts.FontSize['analyzedFailingNodesData'][0]} NodeFontData */
 /** @typedef {Map<number, {fontSize: number, textLength: number}>} BackendIdsToFontData */
 

@@ -3,14 +3,13 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-'use strict';
 
 import {BaseNode} from '../../lib/dependency-graph/base-node.js';
 import {NetworkRequest} from '../../lib/network-request.js';
-import ProcessedTrace from '../processed-trace.js';
-import ProcessedNavigation from '../processed-navigation.js';
-import PageDependencyGraph from '../page-dependency-graph.js';
-import LoadSimulator from '../load-simulator.js';
+import {ProcessedTrace} from '../processed-trace.js';
+import {ProcessedNavigation} from '../processed-navigation.js';
+import {PageDependencyGraph} from '../page-dependency-graph.js';
+import {LoadSimulator} from '../load-simulator.js';
 
 /** @typedef {import('../../lib/dependency-graph/base-node.js').Node} Node */
 /** @typedef {import('../../lib/dependency-graph/network-node').NetworkNode} NetworkNode */
@@ -25,7 +24,7 @@ import LoadSimulator from '../load-simulator.js';
  * @property {{speedIndex: number}=} speedline
  */
 
-class LanternMetricArtifact {
+class LanternMetric {
   /**
    * @param {Node} dependencyGraph
    * @param {function(NetworkNode):boolean=} condition
@@ -162,4 +161,4 @@ class LanternMetricArtifact {
   }
 }
 
-export default LanternMetricArtifact;
+export {LanternMetric};

@@ -8,17 +8,18 @@
   * @fileoverview Determines optimized gzip/br/deflate filesizes for all responses by
   *   checking the content-encoding header.
   */
-'use strict';
+
 
 import {Buffer} from 'buffer';
+import {gzip} from 'zlib';
+
 import FRGatherer from '../../../fraggle-rock/gather/base-gatherer.js';
-import URL from '../../../lib/url-shim.js';
+import UrlUtils from '../../../lib/url-utils.js';
 import {Sentry} from '../../../lib/sentry.js';
 import {NetworkRequest} from '../../../lib/network-request.js';
-import {gzip} from 'zlib';
 import DevtoolsLog from '../devtools-log.js';
 import {fetchResponseBodyFromCache} from '../../driver/network.js';
-import NetworkRecords from '../../../computed/network-records.js';
+import {NetworkRecords} from '../../../computed/network-records.js';
 
 const CHROME_EXTENSION_PROTOCOL = 'chrome-extension:';
 const compressionHeaders = [
@@ -121,7 +122,7 @@ class ResponseCompression extends FRGatherer {
       }).catch(err => {
         Sentry.captureException(err, {
           tags: {gatherer: 'ResponseCompression'},
-          extra: {url: URL.elideDataURI(record.url)},
+          extra: {url: UrlUtils.elideDataURI(record.url)},
           level: 'warning',
         });
 

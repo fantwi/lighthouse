@@ -246,5 +246,14 @@ describe('CLI flags', function() {
           .toThrow(`Invalid value: 'screenEmulation.disabled' must be a boolean`);
       });
     });
+
+    describe('outputPath', () => {
+      it('throws when path cannot be written to', () => {
+        expect(() => getFlags(`${url} --output-path=i/do/not/exist.json`, {noExitOnFailure: true}))
+          .toThrow('--output-path (i/do/not/exist.json) cannot be written to');
+        expect(() => getFlags(`${url} --output-path=ok.json`, {noExitOnFailure: true}))
+          .not.toThrow();
+      });
+    });
   });
 });

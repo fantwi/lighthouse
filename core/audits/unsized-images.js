@@ -8,11 +8,10 @@
  * Audit that checks whether all images have explicit width and height.
  */
 
-'use strict';
 
 import {Audit} from './audit.js';
 import * as i18n from './../lib/i18n/i18n.js';
-import URL from './../lib/url-shim.js';
+import UrlUtils from '../lib/url-utils.js';
 
 const UIStrings = {
   /** Title of a Lighthouse audit that provides detail on whether all images have explicit width and height. This descriptive title is shown to users when every image has explicit width and height */
@@ -106,9 +105,9 @@ class UnsizedImages extends Audit {
    * @return {boolean}
    */
   static isNonNetworkSvg(image) {
-    const isSvg = URL.guessMimeType(image.src) === 'image/svg+xml';
+    const isSvg = UrlUtils.guessMimeType(image.src) === 'image/svg+xml';
     const urlScheme = image.src.slice(0, image.src.indexOf(':'));
-    const isNonNetwork = URL.isNonNetworkProtocol(urlScheme);
+    const isNonNetwork = UrlUtils.isNonNetworkProtocol(urlScheme);
     return isSvg && isNonNetwork;
   }
 
@@ -140,7 +139,7 @@ class UnsizedImages extends Audit {
       if (isNotDisplayed) continue;
 
       unsizedImages.push({
-        url: URL.elideDataURI(image.src),
+        url: UrlUtils.elideDataURI(image.src),
         node: Audit.makeNodeItem(image.node),
       });
     }
