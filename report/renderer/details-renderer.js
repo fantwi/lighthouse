@@ -299,27 +299,6 @@ export class DetailsRenderer {
   }
 
   /**
-   * @param {Exclude<LH.Audit.Details.TableColumnHeading['subItemsHeading'], undefined>} subItemsHeading
-   * @param {LH.Audit.Details.TableColumnHeading} parentHeading
-   * @return {LH.Audit.Details.TableColumnHeading['subItemsHeading']}
-   */
-  _getCanonicalizedsubItemsHeading(subItemsHeading, parentHeading) {
-    // Low-friction way to prevent committing a falsy key (which is never allowed for
-    // a subItemsHeading) from passing in CI.
-    if (!subItemsHeading.key) {
-      // eslint-disable-next-line no-console
-      console.warn('key should not be null');
-    }
-
-    return {
-      key: subItemsHeading.key || '',
-      valueType: subItemsHeading.valueType || parentHeading.valueType,
-      granularity: subItemsHeading.granularity || parentHeading.granularity,
-      displayUnit: subItemsHeading.displayUnit || parentHeading.displayUnit,
-    };
-  }
-
-  /**
    * Returns a new heading where the values are defined first by `heading.subItemsHeading`,
    * and secondly by `heading`. If there is no subItemsHeading, returns null, which will
    * be rendered as an empty column.
