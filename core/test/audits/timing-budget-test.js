@@ -57,9 +57,9 @@ describe('Performance: Timing budget audit', () => {
     it('table headers are correct', async () => {
       const result = await TimingBudgetAudit.audit(artifacts, context);
       const headers = result.details.headings;
-      expect(headers[0].text).toBeDisplayString('Metric');
-      expect(headers[1].text).toBeDisplayString('Measurement');
-      expect(headers[2].text).toBeDisplayString('Over Budget');
+      expect(headers[0].label).toBeDisplayString('Metric');
+      expect(headers[1].label).toBeDisplayString('Measurement');
+      expect(headers[2].label).toBeDisplayString('Over Budget');
     });
 
     it('table item info is correct', async () => {
