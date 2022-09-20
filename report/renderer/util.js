@@ -105,13 +105,16 @@ class Util {
             /** @type {{itemType: LH.Audit.Details.ItemValueType|undefined, text: string|undefined}} */
             // @ts-expect-error
             const {itemType, text} = heading;
-            if (itemType !== undefined) heading.valueType = itemType;
-            if (text !== undefined) heading.label = text;
-
-            // @ts-expect-error
-            delete heading.itemType;
-            // @ts-expect-error
-            delete heading.text;
+            if (itemType !== undefined) {
+              heading.valueType = itemType;
+              // @ts-expect-error
+              delete heading.itemType;
+            }
+            if (text !== undefined) {
+              heading.label = text;
+              // @ts-expect-error
+              delete heading.text;
+            }
 
             // @ts-expect-error
             const subItemsItemType = heading.subItemsHeading?.itemType;
