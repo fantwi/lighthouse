@@ -20,7 +20,7 @@ import WebAppManifest from '../../gather/gatherers/web-app-manifest.js';
 import InstallabilityErrors from '../../gather/gatherers/installability-errors.js';
 import NetworkUserAgent from '../../gather/gatherers/network-user-agent.js';
 import Stacks from '../../gather/gatherers/stacks.js';
-import {finalizeArtifacts} from '../../fraggle-rock/gather/base-artifacts.js';
+import {finalizeArtifacts} from '../../gather/base-artifacts.js';
 import UrlUtils from '../../lib/url-utils.js';
 
 /** @typedef {import('./driver.js').Driver} Driver */

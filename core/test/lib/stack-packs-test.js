@@ -6,7 +6,7 @@
 
 import lighthouseStackPacksDep from 'lighthouse-stack-packs';
 
-import {initializeConfig} from '../../fraggle-rock/config/config.js';
+import {initializeConfig} from '../../config/config.js';
 import {stackPacksToInclude} from '../../lib/stack-packs.js';
 
 async function getAuditIds() {

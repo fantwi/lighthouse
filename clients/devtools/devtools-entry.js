@@ -11,7 +11,7 @@ import {Buffer} from 'buffer';
 import log from 'lighthouse-logger';
 
 import lighthouse, {legacyNavigation} from '../../core/index.js';
-import {navigation, startTimespan, snapshot} from '../../core/fraggle-rock/api.js';
+import {navigation, startTimespan, snapshot} from '../../core/api.js';
 import {RawConnection} from '../../core/legacy/gather/connections/raw.js';
 import {lookupLocale} from '../../core/lib/i18n/i18n.js';
 import {registerLocaleData, getCanonicalLocales} from '../../shared/localization/format.js';

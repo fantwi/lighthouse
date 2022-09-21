@@ -10,9 +10,9 @@ import {Runner} from './runner.js';
 import {CriConnection} from './legacy/gather/connections/cri.js';
 import {Config} from './legacy/config/config.js';
 import UrlUtils from './lib/url-utils.js';
-import * as fraggleRock from './fraggle-rock/api.js';
+import * as fraggleRock from './api.js';
 import {Driver} from './legacy/gather/driver.js';
-import {initializeConfig} from './fraggle-rock/config/config.js';
+import {initializeConfig} from './config/config.js';
 
 /** @typedef {import('./legacy/gather/connections/connection.js').Connection} Connection */
 
@@ -109,7 +109,7 @@ const traceCategories = Driver.traceCategories;
 
 export default lighthouse;
 export {Audit} from './audits/audit.js';
-export {default as Gatherer} from './fraggle-rock/gather/base-gatherer.js';
+export {default as Gatherer} from './gather/base-gatherer.js';
 export {NetworkRecords} from './computed/network-records.js';
 export {
   legacyNavigation,

@@ -5,7 +5,7 @@
  */
 
 import {makePromiseInspectable, flushAllTimersAndMicrotasks, timers} from '../../test-utils.js';
-import {createMockContext} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockContext} from '../mock-driver.js';
 import TraceGatherer from '../../../gather/gatherers/trace.js';
 
 timers.useFakeTimers();

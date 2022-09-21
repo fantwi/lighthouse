@@ -10,7 +10,7 @@
  * This protocol log can be used to recreate the network records using lib/network-recorder.js.
  */
 
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 import {TraceProcessor} from '../../lib/tracehouse/trace-processor.js';
 
 class Trace extends FRGatherer {

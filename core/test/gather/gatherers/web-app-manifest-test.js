@@ -8,7 +8,7 @@ import fs from 'fs';
 
 import {LH_ROOT} from '../../../../root.js';
 import WebAppManifest from '../../../gather/gatherers/web-app-manifest.js';
-import {createMockSession} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockSession} from '../mock-driver.js';
 
 describe('WebAppManifest Gatherer', () => {
   let session = createMockSession();

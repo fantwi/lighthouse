@@ -15,7 +15,7 @@
  * This gatherer collects stylesheet metadata by itself, instead of relying on the styles gatherer which is slow (because it parses the stylesheet content).
  */
 
-import FRGatherer from '../../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../../base-gatherer.js';
 
 const FONT_SIZE_PROPERTY_NAME = 'font-size';
 const MINIMAL_LEGIBLE_FONT_SIZE_PX = 12;

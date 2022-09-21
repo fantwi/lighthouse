@@ -10,7 +10,7 @@
  * This protocol log can be used to recreate the network records using lib/network-recorder.js.
  */
 
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 
 class DevtoolsLog extends FRGatherer {
   static symbol = Symbol('DevtoolsLog');

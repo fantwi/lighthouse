@@ -10,7 +10,7 @@
 
 import log from 'lighthouse-logger';
 
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 import {Sentry} from '../../lib/sentry.js';
 
 class CSSUsage extends FRGatherer {

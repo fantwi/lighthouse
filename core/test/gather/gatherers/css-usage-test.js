@@ -6,7 +6,7 @@
 
 import CSSUsage from '../../../gather/gatherers/css-usage.js';
 import {defaultSettings} from '../../../config/constants.js';
-import {createMockDriver, createMockBaseArtifacts} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockDriver, createMockBaseArtifacts} from '../mock-driver.js';
 import {flushAllTimersAndMicrotasks, timers} from '../../test-utils.js';
 
 timers.useFakeTimers();

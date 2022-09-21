@@ -5,7 +5,7 @@
  */
 
 import InstallabilityErrors from '../../../gather/gatherers/installability-errors.js';
-import {createMockSession} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockSession} from '../mock-driver.js';
 
 describe('.getInstallabilityErrors', () => {
   let session = createMockSession();

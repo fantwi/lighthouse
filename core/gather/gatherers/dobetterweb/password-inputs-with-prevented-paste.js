@@ -6,7 +6,7 @@
 
 /* global document ClipboardEvent getNodeDetails */
 
-import FRGatherer from '../../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../../base-gatherer.js';
 import {pageFunctions} from '../../../lib/page-functions.js';
 
 /**

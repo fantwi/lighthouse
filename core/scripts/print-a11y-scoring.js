@@ -6,7 +6,7 @@
 
 // node core/scripts/print-a11y-scoring.js
 
-import {initializeConfig} from '../fraggle-rock/config/config.js';
+import {initializeConfig} from '../config/config.js';
 
 const {config} = await initializeConfig('navigation');
 if (!config.categories || !config.audits) throw new Error('wut');

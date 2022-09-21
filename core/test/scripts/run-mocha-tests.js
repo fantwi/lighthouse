@@ -65,7 +65,7 @@ function getFailedTests() {
 const testsToIsolate = new Set([
   // grep -lRE '^timers\.useFakeTimers' --include='*-test.*' --exclude-dir=node_modules
   'flow-report/test/common-test.tsx',
-  'core/test/fraggle-rock/gather/session-test.js',
+  'core/test/gather/session-test.js',
   'core/test/legacy/gather/driver-test.js',
   'core/test/gather/driver/execution-context-test.js',
   'core/test/gather/driver/navigation-test.js',
@@ -79,28 +79,28 @@ const testsToIsolate = new Set([
   'core/test/gather/gatherers/trace-test.js',
 
   // grep -lRE '^await td\.replace' --include='*-test.*' --exclude-dir=node_modules
-  'core/test/fraggle-rock/gather/snapshot-runner-test.js',
-  'core/test/fraggle-rock/gather/timespan-runner-test.js',
-  'core/test/fraggle-rock/user-flow-test.js',
+  'core/test/gather/snapshot-runner-test.js',
+  'core/test/gather/timespan-runner-test.js',
+  'core/test/user-flow-test.js',
   'core/test/gather/driver/prepare-test.js',
   'core/test/gather/gatherers/link-elements-test.js',
   'core/test/gather/gatherers/service-worker-test.js',
   'core/test/runner-test.js',
 
   // grep -lRE --include='-test.js' 'mockDriverSubmodules|mockRunnerModule|mockDriverModule|mockDriverSubmodules|makeMocksForGatherRunner' --include='*-test.*' --exclude-dir=node_modules
-  'core/test/fraggle-rock/gather/navigation-runner-test.js',
-  'core/test/fraggle-rock/gather/snapshot-runner-test.js',
-  'core/test/fraggle-rock/gather/timespan-runner-test.js',
-  'core/test/fraggle-rock/user-flow-test.js',
+  'core/test/gather/navigation-runner-test.js',
+  'core/test/gather/snapshot-runner-test.js',
+  'core/test/gather/timespan-runner-test.js',
+  'core/test/user-flow-test.js',
   'core/test/legacy/gather/gather-runner-test.js',
   'core/test/gather/gatherers/dobetterweb/response-compression-test.js',
   'core/test/gather/gatherers/script-elements-test.js',
   'core/test/runner-test.js',
 
   // These tend to timeout in puppeteer when run in parallel with other tests.
-  'core/test/fraggle-rock/scenarios/api-test-pptr.js',
-  'core/test/fraggle-rock/scenarios/cross-origin-test-pptr.js',
-  'core/test/fraggle-rock/scenarios/disconnect-test-pptr.js',
+  'core/test/scenarios/api-test-pptr.js',
+  'core/test/scenarios/cross-origin-test-pptr.js',
+  'core/test/scenarios/disconnect-test-pptr.js',
 
   // ?
   'clients/test/lightrider/lightrider-entry-test.js', // Runner overrides.
@@ -108,7 +108,7 @@ const testsToIsolate = new Set([
   'cli/test/cli/bin-test.js',
   'cli/test/cli/run-test.js',
   'core/test/legacy/config/config-test.js',
-  'core/test/fraggle-rock/config/config-test.js',
+  'core/test/config/config-test.js',
   'core/test/lib/emulation-test.js',
   'core/test/lib/sentry-test.js',
   'report/test/clients/bundle-test.js',
@@ -180,7 +180,7 @@ const defaultTestMatches = [
   'clients/test/**/*-test.js',
   'cli/**/*-test.js',
   'core/**/*-test.js',
-  'core/test/fraggle-rock/**/*-test-pptr.js',
+  'core/test/**/*-test-pptr.js',
   'report/**/*-test.js',
   'shared/**/*-test.js',
   'third-party/**/*-test.js',

@@ -12,7 +12,7 @@
 
 import log from 'lighthouse-logger';
 
-import FRGatherer from '../../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../../base-gatherer.js';
 import UrlUtils from '../../../lib/url-utils.js';
 import {NetworkRequest} from '../../../lib/network-request.js';
 import {Sentry} from '../../../lib/sentry.js';

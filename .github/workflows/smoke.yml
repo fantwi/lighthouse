@@ -149,7 +149,7 @@ jobs:
       run: bash $GITHUB_WORKSPACE/core/scripts/download-chrome.sh && mv chrome-linux chrome-linux-tot
 
     - run: sudo apt-get install xvfb
-    - name: yarn smoke --fraggle-rock
+    - name: yarn smoke --legacy-navigation
       run: xvfb-run --auto-servernum yarn smoke --debug --legacy-navigation -j=2 --retries=2 --shard=${{ matrix.smoke-test-shard }}/$SHARD_TOTAL
 
     # Fail if any changes were written to source files.

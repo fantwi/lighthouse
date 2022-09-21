@@ -14,7 +14,7 @@ import {Budget} from './budget.js';
 import ConfigPlugin from './config-plugin.js';
 import {Runner} from '../runner.js';
 import * as i18n from '../lib/i18n/i18n.js';
-import * as validation from '../fraggle-rock/config/validation.js';
+import * as validation from './validation.js';
 import {getModuleDirectory} from '../../esm-utils.js';
 
 const require = createRequire(import.meta.url);

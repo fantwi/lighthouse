@@ -11,7 +11,7 @@
  * around page unload, but this can be expanded in the future.
  */
 
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 
 class GlobalListeners extends FRGatherer {
   /** @type {LH.Gatherer.GathererMeta} */

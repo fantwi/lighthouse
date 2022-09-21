@@ -10,12 +10,12 @@ jobs:
   unit:
     strategy:
       matrix:
-        node: ['14', '16', '17']
+        node: ['14', '16', '18']
       fail-fast: false
     runs-on: ubuntu-latest
     name: node ${{ matrix.node }}
     env:
-      LATEST_NODE: '17'
+      LATEST_NODE: '18'
 
     steps:
     - name: git clone

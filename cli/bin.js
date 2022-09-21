@@ -31,7 +31,7 @@ import {generateConfig, generateLegacyConfig} from '../core/index.js';
 import {askPermission} from './sentry-prompt.js';
 import {LH_ROOT} from '../root.js';
 import {Sentry} from '../core/lib/sentry.js';
-import {getConfigDisplayString} from '../core/fraggle-rock/config/config.js';
+import {getConfigDisplayString} from '../core/config/config.js';
 
 const pkg = JSON.parse(fs.readFileSync(LH_ROOT + '/package.json', 'utf-8'));
 

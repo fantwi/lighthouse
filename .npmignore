@@ -9,7 +9,6 @@ coverage/
 proto/
 docs/
 
-core/lib/sd-validation/
 core/scripts/*
 core/test/
 viewer/

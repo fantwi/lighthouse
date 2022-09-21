@@ -9,7 +9,7 @@ import {EventEmitter} from 'events';
 import {CDPSession} from 'puppeteer-core/lib/cjs/puppeteer/common/Connection.js';
 
 import {TargetManager} from '../../../gather/driver/target-manager.js';
-import {createMockCdpSession} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockCdpSession} from '../mock-driver.js';
 import {createMockSendCommandFn} from '../../gather/mock-commands.js';
 import {fnAny} from '../../test-utils.js';
 

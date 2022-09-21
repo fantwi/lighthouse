@@ -13,7 +13,7 @@ import EventEmitter from 'events';
 
 import log from 'lighthouse-logger';
 
-import {ProtocolSession} from '../../fraggle-rock/gather/session.js';
+import {ProtocolSession} from '../session.js';
 
 /**
  * @typedef {{

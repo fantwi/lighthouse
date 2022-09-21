@@ -157,8 +157,6 @@
     "jest-mock": "^27.3.0",
     "jest-snapshot": "^28.1.0",
     "jsdom": "^12.2.0",
-    "jsonld": "^5.2.0",
-    "jsonlint-mod": "^1.7.6",
     "lighthouse-plugin-publisher-ads": "1.5.7-beta",
     "magic-string": "^0.25.7",
     "mime-types": "^2.1.30",

@@ -12,7 +12,7 @@
  * We take the backend nodeId from the trace and use it to find the corresponding element in the DOM.
  */
 
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 import {resolveNodeIdToObjectId} from '../driver/dom.js';
 import {pageFunctions} from '../../lib/page-functions.js';
 import * as RectHelpers from '../../lib/rect-helpers.js';

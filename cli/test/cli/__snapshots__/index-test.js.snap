@@ -12,6 +12,10 @@ Object {
       "id": "Trace",
     },
     Object {
+      "gatherer": "network-user-agent",
+      "id": "NetworkUserAgent",
+    },
+    Object {
       "gatherer": "stacks",
       "id": "Stacks",
     },
@@ -140,6 +144,7 @@ Object {
       "artifacts": Array [
         "DevtoolsLog",
         "Trace",
+        "NetworkUserAgent",
         "Stacks",
         "devtoolsLogs",
         "traces",

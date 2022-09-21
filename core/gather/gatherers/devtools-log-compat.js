@@ -11,7 +11,7 @@
  */
 
 import DevtoolsLogGatherer from './devtools-log.js';
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 
 /** @implements {LH.Gatherer.FRGathererInstance<'DevtoolsLog'>} */
 class DevtoolsLogCompat extends FRGatherer {

@@ -6,7 +6,7 @@
 
 /* global document, window, getComputedStyle, getElementsInDocument, Node, getNodeDetails, getRectCenterPoint */
 
-import FRGatherer from '../../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../../base-gatherer.js';
 import {pageFunctions} from '../../../lib/page-functions.js';
 import * as RectHelpers from '../../../lib/rect-helpers.js';
 

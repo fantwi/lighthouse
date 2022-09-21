@@ -6,7 +6,7 @@
 
 /* global caches */
 
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 
 /**
  * @return {Promise<Array<string>>}

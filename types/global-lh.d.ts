@@ -19,7 +19,6 @@ import LHResult from './lhr/lhr';
 import FlowResult_ from './lhr/flow';
 import Protocol_ from './protocol';
 import * as Settings from './lhr/settings';
-import StructuredData_ from './structured-data';
 import Treemap_ from './lhr/treemap';
 import UserFlow_ from './user-flow';
 import puppeteer from 'puppeteer-core';
@@ -78,7 +77,6 @@ declare global {
     export import OutputMode = Settings.OutputMode;
     export import PrecomputedLanternData = Settings.PrecomputedLanternData;
 
-    export import StructuredData = StructuredData_;
     export import Treemap = Treemap_;
   }
 }

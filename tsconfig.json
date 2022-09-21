@@ -24,7 +24,6 @@
     "third-party/axe/valid-langs.js",
 
     "core/test/results/sample_v2.json",
-    "core/lib/sd-validation/assets/*.json",
     "core/test/fixtures/unresolved-perflog.json",
     "core/test/fixtures/traces/lcp-m78.devtools.log.json",
     "core/audits/byte-efficiency/polyfill-graph-data.json",
@@ -89,7 +88,6 @@
     "core/test/lib/page-functions-test.js",
     "core/test/lib/proto-preprocessor-test.js",
     "core/test/lib/rect-helpers-test.js",
-    "core/test/lib/sd-validation-test.js",
     "core/test/lib/sentry-test.js",
     "core/test/lib/stack-packs-test.js",
     "core/test/lib/statistics-test.js",

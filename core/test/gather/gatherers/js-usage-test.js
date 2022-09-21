@@ -8,7 +8,7 @@ import {Driver} from '../../../legacy/gather/driver.js';
 import {Connection} from '../../../legacy/gather/connections/connection.js';
 import JsUsage from '../../../gather/gatherers/js-usage.js';
 import {createMockSendCommandFn, createMockOnFn} from '../mock-commands.js';
-import {createMockContext} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockContext} from '../../gather/mock-driver.js';
 import {flushAllTimersAndMicrotasks, timers} from '../../test-utils.js';
 
 timers.useFakeTimers();

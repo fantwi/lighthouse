@@ -16,7 +16,7 @@ import yargs from 'yargs';
 import {getChromePath} from 'chrome-launcher';
 
 import {LH_ROOT} from '../../root.js';
-import * as api from '../fraggle-rock/api.js';
+import * as api from '../api.js';
 import * as assetSaver from '../lib/asset-saver.js';
 
 const ARTIFACTS_PATH =

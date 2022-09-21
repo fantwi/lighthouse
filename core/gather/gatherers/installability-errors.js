@@ -6,7 +6,7 @@
 
 import log from 'lighthouse-logger';
 
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 
 class InstallabilityErrors extends FRGatherer {
   /** @type {LH.Gatherer.GathererMeta} */

@@ -6,7 +6,7 @@
 
 import * as td from 'testdouble';
 
-import {createMockSession, createMockDriver} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockSession, createMockDriver} from '../mock-driver.js';
 import {flushAllTimersAndMicrotasks, fnAny, timers} from '../../test-utils.js';
 // import prepare from '../../../gather/driver/prepare.js';
 import * as constants from '../../../config/constants.js';

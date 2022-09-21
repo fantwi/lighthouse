@@ -11,7 +11,7 @@
  */
 
 import TraceGatherer from './trace.js';
-import FRGatherer from '../../fraggle-rock/gather/base-gatherer.js';
+import FRGatherer from '../base-gatherer.js';
 
 /** @implements {LH.Gatherer.FRGathererInstance<'Trace'>} */
 class TraceCompat extends FRGatherer {

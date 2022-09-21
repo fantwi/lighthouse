@@ -9,7 +9,7 @@ import jestMock from 'jest-mock';
 import ImageElements from '../../../gather/gatherers/image-elements.js';
 import {NetworkRecorder} from '../../../lib/network-recorder.js';
 import {createMockContext, createMockDriver, createMockSession} from
-  '../../fraggle-rock/gather/mock-driver.js';
+  '../mock-driver.js';
 import {fnAny, readJson, timers} from '../../test-utils.js';
 
 const devtoolsLog = readJson('../../fixtures/traces/lcp-m78.devtools.log.json', import.meta);

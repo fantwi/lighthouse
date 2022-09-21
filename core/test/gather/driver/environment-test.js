@@ -6,7 +6,7 @@
 
 import {defaultSettings} from '../../../config/constants.js';
 import * as environment from '../../../gather/driver/environment.js';
-import {createMockSession} from '../../fraggle-rock/gather/mock-driver.js';
+import {createMockSession} from '../mock-driver.js';
 
 describe('.getBrowserVersion', () => {
   let sessionMock = createMockSession();

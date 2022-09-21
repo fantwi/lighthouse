@@ -6,7 +6,7 @@
 
 import TagsBlockingFirstPaint from
   '../../../../gather/gatherers/dobetterweb/tags-blocking-first-paint.js';
-import {createMockContext} from '../../../fraggle-rock/gather/mock-driver.js';
+import {createMockContext} from '../../../gather/mock-driver.js';
 
 let tagsBlockingFirstPaint;
 const traceData = {
