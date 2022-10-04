@@ -31,7 +31,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/delayed-fcp.html',
-    finalUrl: 'http://localhost:10200/delayed-fcp.html',
+    finalDisplayedUrl: 'http://localhost:10200/delayed-fcp.html',
     audits: {
       'first-contentful-paint': {
         numericValue: '>1', // We just want to check that it doesn't error

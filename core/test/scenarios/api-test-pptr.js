@@ -42,8 +42,7 @@ describe('Fraggle Rock API', function() {
       const {lhr, artifacts} = result;
       const url = `${state.serverBaseUrl}/onclick.html#done`;
       expect(artifacts.URL).toEqual({
-        initialUrl: url,
-        finalUrl: url,
+        finalDisplayedUrl: url,
       });
 
       const accessibility = lhr.categories.accessibility;
@@ -76,8 +75,7 @@ describe('Fraggle Rock API', function() {
 
       const {lhr, artifacts} = result;
       expect(artifacts.URL).toEqual({
-        initialUrl: 'about:blank',
-        finalUrl: `${state.serverBaseUrl}/onclick.html#done`,
+        finalDisplayedUrl: `${state.serverBaseUrl}/onclick.html#done`,
       });
 
       const bestPractices = lhr.categories['best-practices'];
@@ -119,8 +117,7 @@ describe('Fraggle Rock API', function() {
 
     it('should compute results from timespan after page load', async () => {
       const {page, serverBaseUrl} = state;
-      const initialUrl = `${serverBaseUrl}/onclick.html`;
-      await page.goto(initialUrl);
+      await page.goto(`${serverBaseUrl}/onclick.html`);
       await page.waitForSelector('button');
 
       const run = await lighthouse.startTimespan(state.page);
@@ -136,8 +133,7 @@ describe('Fraggle Rock API', function() {
       if (!result) throw new Error('Lighthouse failed to produce a result');
 
       expect(result.artifacts.URL).toEqual({
-        initialUrl,
-        finalUrl: `${initialUrl}#done`,
+        finalDisplayedUrl: `${serverBaseUrl}/onclick.html#done`,
       });
 
       const {auditResults, erroredAudits, notApplicableAudits} = getAuditsBreakdown(result.lhr);
@@ -164,10 +160,9 @@ describe('Fraggle Rock API', function() {
 
       const {lhr, artifacts} = result;
       expect(artifacts.URL).toEqual({
-        initialUrl: 'about:blank',
         requestedUrl: url,
         mainDocumentUrl: url,
-        finalUrl: url,
+        finalDisplayedUrl: url,
       });
 
       const {auditResults, failedAudits, erroredAudits} = getAuditsBreakdown(lhr);
@@ -191,10 +186,9 @@ describe('Fraggle Rock API', function() {
 
     it('should compute results with callback requestor', async () => {
       const {page, serverBaseUrl} = state;
-      const initialUrl = `${serverBaseUrl}/links-to-index.html`;
       const requestedUrl = `${serverBaseUrl}/?redirect=/index.html`;
       const mainDocumentUrl = `${serverBaseUrl}/index.html`;
-      await page.goto(initialUrl);
+      await page.goto(`${serverBaseUrl}/links-to-index.html`);
 
       const requestor = jestMock.fn(async () => {
         await page.click('a');
@@ -207,12 +201,11 @@ describe('Fraggle Rock API', function() {
 
       const {lhr, artifacts} = result;
       expect(lhr.requestedUrl).toEqual(requestedUrl);
-      expect(lhr.finalUrl).toEqual(mainDocumentUrl);
+      expect(lhr.finalDisplayedUrl).toEqual(mainDocumentUrl);
       expect(artifacts.URL).toEqual({
-        initialUrl,
         requestedUrl,
         mainDocumentUrl,
-        finalUrl: mainDocumentUrl,
+        finalDisplayedUrl: mainDocumentUrl,
       });
 
       const {auditResults, failedAudits, erroredAudits} = getAuditsBreakdown(lhr);

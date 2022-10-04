@@ -62,6 +62,7 @@ import seoStatus403 from './test-definitions/seo-status-403.js';
 import seoTapTargets from './test-definitions/seo-tap-targets.js';
 import sourceMaps from './test-definitions/source-maps.js';
 import timing from './test-definitions/timing.js';
+import fpsScaled from './test-definitions/fps-scaled.js';
 
 /** @type {ReadonlyArray<Smokehouse.TestDfn>} */
 const smokeTests = [
@@ -123,6 +124,7 @@ const smokeTests = [
   seoTapTargets,
   sourceMaps,
   timing,
+  fpsScaled,
 ];
 
 export default smokeTests;

@@ -25,7 +25,7 @@ const expectations = {
     // Archived version of https://github.com/pwarocks/pwa.rocks
     // Fork is here: https://github.com/connorjclark/pwa.rocks
     requestedUrl: 'https://connorjclark.github.io/pwa.rocks/',
-    finalUrl: 'https://connorjclark.github.io/pwa.rocks/',
+    finalDisplayedUrl: 'https://connorjclark.github.io/pwa.rocks/',
     audits: {
       'service-worker': {
         score: 1,

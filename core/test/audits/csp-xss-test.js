@@ -75,10 +75,9 @@ it('audit basic header', async () => {
       ]),
     },
     URL: {
-      initialUrl: 'about:blank',
       requestedUrl: 'https://example.com',
       mainDocumentUrl: 'https://example.com',
-      finalUrl: 'https://example.com',
+      finalDisplayedUrl: 'https://example.com',
     },
   };
   const results = await CspXss.audit(artifacts, {computedCache: new Map()});
@@ -113,10 +112,9 @@ it('audit basic header', async () => {
 it('marked N/A if no warnings found', async () => {
   const artifacts = {
     URL: {
-      initialUrl: 'about:blank',
       requestedUrl: 'https://example.com',
       mainDocumentUrl: 'https://example.com',
-      finalUrl: 'https://example.com',
+      finalDisplayedUrl: 'https://example.com',
     },
     MetaElements: [],
     devtoolsLogs: {
@@ -141,10 +139,9 @@ describe('getRawCsps', () => {
   it('basic case', async () => {
     const artifacts = {
       URL: {
-        initialUrl: 'about:blank',
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
-        finalUrl: 'https://example.com',
+        finalDisplayedUrl: 'https://example.com',
       },
       MetaElements: [
         {
@@ -184,10 +181,9 @@ describe('getRawCsps', () => {
   it('split on comma', async () => {
     const artifacts = {
       URL: {
-        initialUrl: 'about:blank',
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
-        finalUrl: 'https://example.com',
+        finalDisplayedUrl: 'https://example.com',
       },
       MetaElements: [],
       devtoolsLogs: {
@@ -221,10 +217,9 @@ describe('getRawCsps', () => {
   it('ignore if empty', async () => {
     const artifacts = {
       URL: {
-        initialUrl: 'about:blank',
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
-        finalUrl: 'https://example.com',
+        finalDisplayedUrl: 'https://example.com',
       },
       MetaElements: [],
       devtoolsLogs: {
@@ -256,10 +251,9 @@ describe('getRawCsps', () => {
   it('ignore if only whitespace', async () => {
     const artifacts = {
       URL: {
-        initialUrl: 'about:blank',
         requestedUrl: 'https://example.com',
         mainDocumentUrl: 'https://example.com',
-        finalUrl: 'https://example.com',
+        finalDisplayedUrl: 'https://example.com',
       },
       MetaElements: [],
       devtoolsLogs: {

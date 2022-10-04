@@ -15,7 +15,7 @@ const resourceType = 'Script';
 describe('Page uses optimized responses', () => {
   it('fails when given unminified scripts', () => {
     const auditResult = UnminifiedJavascriptAudit.audit_({
-      URL: {finalUrl: 'https://www.example.com'},
+      URL: {finalDisplayedUrl: 'https://www.example.com'},
       Scripts: [
         {
           scriptId: '123.1',
@@ -79,7 +79,7 @@ describe('Page uses optimized responses', () => {
 
   it('fails when given unminified scripts even with missing network record', () => {
     const auditResult = UnminifiedJavascriptAudit.audit_({
-      URL: {finalUrl: 'https://www.example.com'},
+      URL: {finalDisplayedUrl: 'https://www.example.com'},
       Scripts: [
         {
           startLine: 30,
@@ -113,7 +113,7 @@ describe('Page uses optimized responses', () => {
 
   it('passes when scripts are already minified', () => {
     const auditResult = UnminifiedJavascriptAudit.audit_({
-      URL: {finalUrl: 'https://www.example.com'},
+      URL: {finalDisplayedUrl: 'https://www.example.com'},
       Scripts: [
         {
           scriptId: '123.1',

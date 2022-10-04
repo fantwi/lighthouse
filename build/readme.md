@@ -5,7 +5,7 @@ Lighthouse is built into browser-friendly bundles for two clients:
 * Chrome DevTools Audits Panel
 * Lightrider, the backend of PageSpeed Insights
 
-Additionally, there are build processes for: 
+Additionally, there are build processes for:
 
 * [The Lighthouse report viewer](../viewer/)
 * The chrome extension (as of Nov 2019 is a thin-client that defers to the viewer)
@@ -40,7 +40,7 @@ dist
 
 `LighthouseService` uses `self.runLighthouse`, the main export of `lighthouse-dt-bundle.js`.
 
-`LighthousePanel` uses `new LighthouseReportRenderer(dom)`, which overrides `LighthouseReport.ReportRenderer`, ([defined here](https://github.com/GoogleChrome/lighthouse/blob/master/report/renderer/report-renderer.js)) which is exported by `report.js`. This renderer takes a Lighthouse result and a `rootEl` DOM element - it then renders the report to the target element. The CSS used by the report is embedded inside `bundle.esm.js` and is injected by the `ReportRenderer` via a call to `dom.createComponent('styles')`.
+`LighthousePanel` uses `new LighthouseReportRenderer(dom)`, which overrides `LighthouseReport.ReportRenderer`, ([defined here](https://github.com/GoogleChrome/lighthouse/blob/main/report/renderer/report-renderer.js)) which is exported by `report.js`. This renderer takes a Lighthouse result and a `rootEl` DOM element - it then renders the report to the target element. The CSS used by the report is embedded inside `bundle.esm.js` and is injected by the `ReportRenderer` via a call to `dom.createComponent('styles')`.
 
 A Lighthouse report (including what is shown within the Lighthouse panel) can also Export as HTML. Normally the report just uses `documentElement.outerHTML`, but from DevTools we get quine-y and use `Lighthouse.ReportGenerator`. This generator is defined in `report-generator.js`.
 

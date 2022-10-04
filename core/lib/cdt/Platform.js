@@ -6,7 +6,7 @@
  */
 
 // Functions manually copied from:
-// https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/core/platform/array-utilities.ts#L125
+// https://github.com/ChromeDevTools/devtools-frontend/blob/main/front_end/core/platform/array-utilities.ts#L125
 
 /**
  * @param {any[]} array

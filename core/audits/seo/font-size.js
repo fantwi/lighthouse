@@ -280,7 +280,7 @@ class FontSize extends Audit {
     const failingRules = getUniqueFailingRules(analyzedFailingNodesData);
     const percentageOfPassingText =
       (totalTextLength - failingTextLength) / totalTextLength * 100;
-    const pageUrl = artifacts.URL.finalUrl;
+    const pageUrl = artifacts.URL.finalDisplayedUrl;
 
     /** @type {LH.Audit.Details.Table['headings']} */
     const headings = [

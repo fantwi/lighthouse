@@ -65,7 +65,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'http://localhost:10503/offline-ready.html',
-    finalUrl: 'http://localhost:10503/offline-ready.html',
+    finalDisplayedUrl: 'http://localhost:10503/offline-ready.html',
     audits: {
       'is-on-https': {
         score: 1,

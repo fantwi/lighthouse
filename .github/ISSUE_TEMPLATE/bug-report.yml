@@ -10,9 +10,9 @@ body:
     id: faq
     attributes:
       label: FAQ
-      description: Please double check that this isn't one of our most common questions already answered by [documentation]((https://github.com/GoogleChrome/lighthouse/blob/master/docs).
+      description: Please double check that this isn't one of our most common questions already answered by [documentation]((https://github.com/GoogleChrome/lighthouse/blob/main/docs).
       options:
-        - label: Yes, my issue is not about [variability](https://github.com/GoogleChrome/lighthouse/blob/master/docs/variability.md) or [throttling](https://github.com/GoogleChrome/lighthouse/blob/master/docs/throttling.md).
+        - label: Yes, my issue is not about [variability](https://github.com/GoogleChrome/lighthouse/blob/main/docs/variability.md) or [throttling](https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md).
           required: true
         - label: Yes, my issue is not about a specific accessibility audit (file with [axe-core](https://github.com/dequelabs/axe-core) instead).
           required: true

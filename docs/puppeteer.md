@@ -4,7 +4,7 @@
 
 ### [Using Puppeteer for authenticated pages](./recipes/auth/README.md)
 
-### [Using Puppeteer in a custom gatherer](https://github.com/GoogleChrome/lighthouse/tree/master/docs/recipes/custom-gatherer-puppeteer)
+### [Using Puppeteer in a custom gatherer](https://github.com/GoogleChrome/lighthouse/tree/main/docs/recipes/custom-gatherer-puppeteer)
 
 ## General Process
 

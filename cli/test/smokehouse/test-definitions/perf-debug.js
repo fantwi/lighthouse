@@ -20,7 +20,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/perf/debug.html',
-    finalUrl: 'http://localhost:10200/perf/debug.html',
+    finalDisplayedUrl: 'http://localhost:10200/perf/debug.html',
     audits: {metrics: {details: {items: {0: {observedTraceEnd: '>30000'}}}}},
   },
 };

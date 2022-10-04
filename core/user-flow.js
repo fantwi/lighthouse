@@ -85,7 +85,7 @@ class UserFlow {
 
   /**
    * This is an alternative to `navigate()` that can be used to analyze a navigation triggered by user interaction.
-   * For more on user triggered navigations, see https://github.com/GoogleChrome/lighthouse/blob/master/docs/user-flows.md#triggering-a-navigation-via-user-interactions.
+   * For more on user triggered navigations, see https://github.com/GoogleChrome/lighthouse/blob/main/docs/user-flows.md#triggering-a-navigation-via-user-interactions.
    *
    * @param {LH.UserFlow.StepFlags} [stepOptions]
    */
@@ -219,7 +219,7 @@ function shortenUrl(longUrl) {
  * @return {string}
  */
 function getDefaultStepName(artifacts) {
-  const shortUrl = shortenUrl(artifacts.URL.finalUrl);
+  const shortUrl = shortenUrl(artifacts.URL.finalDisplayedUrl);
   switch (artifacts.GatherContext.gatherMode) {
     case 'navigation':
       return `Navigation report (${shortUrl})`;
@@ -264,7 +264,7 @@ async function auditGatherSteps(gatherSteps, options) {
     steps.push({lhr: result.lhr, name});
   }
 
-  const url = new URL(gatherSteps[0].artifacts.URL.finalUrl);
+  const url = new URL(gatherSteps[0].artifacts.URL.finalDisplayedUrl);
   const flowName = options.name || `User flow (${url.hostname})`;
   return {steps, name: flowName};
 }

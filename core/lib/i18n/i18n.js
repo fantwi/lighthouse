@@ -155,7 +155,7 @@ function lookupLocale(locales, possibleLocales) {
   if (!closestLocale) {
     // Log extra info if we're pretty sure this version of Node was built with `--with-intl=small-icu`.
     if (Intl.NumberFormat.supportedLocalesOf('es').length === 0) {
-      log.warn('i18n', 'Requested locale not available in this version of node. The `full-icu` npm module can provide additional locales. For help, see https://github.com/GoogleChrome/lighthouse/blob/master/readme.md#how-do-i-get-localized-lighthouse-results-via-the-cli');
+      log.warn('i18n', 'Requested locale not available in this version of node. The `full-icu` npm module can provide additional locales. For help, see https://github.com/GoogleChrome/lighthouse/blob/main/readme.md#how-do-i-get-localized-lighthouse-results-via-the-cli');
     }
     // eslint-disable-next-line max-len
     log.warn('i18n', `locale(s) '${locales}' not available. Falling back to default '${DEFAULT_LOCALE}'`);

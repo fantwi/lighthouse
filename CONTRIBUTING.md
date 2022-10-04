@@ -25,7 +25,7 @@ If you have a contribution for our [documentation](https://web.dev/learn/#lighth
 1. Ensure that your code adheres to the existing style in the sample to which you are contributing.
 1. Submit a pull request.
 
-If you've submitted a number of significant patches, feel free to add yourself in a PR to the project's `AUTHORS` [file](https://github.com/GoogleChrome/lighthouse/blob/master/AUTHORS) in the root of the repo to be recognized for your contributions!
+If you've submitted a number of significant patches, feel free to add yourself in a PR to the project's `AUTHORS` [file](https://github.com/GoogleChrome/lighthouse/blob/main/AUTHORS) in the root of the repo to be recognized for your contributions!
 
 ## Audit PRs
 
@@ -108,7 +108,7 @@ We're using [conventional-commit](https://conventionalcommits.org/) for our comm
 
 > type(scope): message subject
 
-* The `type` must be one of: `new_audit` `core` `tests` `i18n`, `docs` `deps` `report` `cli` `clients` `misc`. (See [`.cz-config`](https://github.com/GoogleChrome/lighthouse/blob/master/.cz-config.js#L13))
+* The `type` must be one of: `new_audit` `core` `tests` `i18n`, `docs` `deps` `report` `cli` `clients` `misc`. (See [`.cz-config`](https://github.com/GoogleChrome/lighthouse/blob/main/.cz-config.js#L13))
 * The `scope` is optional, but recommended. Any string is allowed; it should indicate what the change affects.
 * The `message subject` should be pithy and direct.
 

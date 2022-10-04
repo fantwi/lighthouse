@@ -24,9 +24,16 @@ const config = {
  * Expected Lighthouse audit values for a site with a single server-side redirect (2s).
  */
 const expectations = {
+  artifacts: {
+    URL: {
+      requestedUrl: 'http://localhost:10200/online-only.html?delay=2000&redirect=%2Fredirects-final.html#hash',
+      mainDocumentUrl: 'http://localhost:10200/redirects-final.html',
+      finalDisplayedUrl: 'http://localhost:10200/redirects-final.html#hash',
+    },
+  },
   lhr: {
-    requestedUrl: `http://localhost:10200/online-only.html?delay=2000&redirect=%2Fredirects-final.html`,
-    finalUrl: 'http://localhost:10200/redirects-final.html',
+    requestedUrl: `http://localhost:10200/online-only.html?delay=2000&redirect=%2Fredirects-final.html#hash`,
+    finalDisplayedUrl: 'http://localhost:10200/redirects-final.html#hash',
     audits: {
       'first-contentful-paint': {
         numericValue: '>=2000',

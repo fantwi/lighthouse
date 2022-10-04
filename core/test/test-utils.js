@@ -269,7 +269,11 @@ function getURLArtifactFromDevtoolsLog(devtoolsLog) {
   }
   if (!requestedUrl || !mainDocumentUrl) throw new Error('No main frame navigations found');
 
-  return {initialUrl: 'about:blank', requestedUrl, mainDocumentUrl, finalUrl: mainDocumentUrl};
+  return {
+    requestedUrl,
+    mainDocumentUrl,
+    finalDisplayedUrl: mainDocumentUrl,
+  };
 }
 
 /**

@@ -18,7 +18,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/perf/third-party.html',
-    finalUrl: 'http://localhost:10200/perf/third-party.html',
+    finalDisplayedUrl: 'http://localhost:10200/perf/third-party.html',
     audits: {
       'third-party-facades': {
         score: 0,

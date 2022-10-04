@@ -6,10 +6,9 @@
   "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3358.0 Safari/537.36",
   "fetchTime": "2018-03-13T00:55:45.840Z",
   "URL": {
-    "initialUrl": "about:blank",
     "requestedUrl": "https://www.reddit.com/r/nba",
     "mainDocumentUrl": "https://www.reddit.com/r/nba",
-    "finalUrl": "https://www.reddit.com/r/nba"
+    "finalDisplayedUrl": "https://www.reddit.com/r/nba"
   },
   "GatherContext": {
     "gatherMode": "navigation"

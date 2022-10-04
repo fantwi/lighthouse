@@ -29,7 +29,7 @@ const expectations = {
       length: 1,
     },
     requestedUrl: 'https://jakearchibald.github.io/svgomg/',
-    finalUrl: 'https://jakearchibald.github.io/svgomg/',
+    finalDisplayedUrl: 'https://jakearchibald.github.io/svgomg/',
     audits: {
       'service-worker': {
         score: 1,

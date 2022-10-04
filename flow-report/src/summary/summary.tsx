@@ -23,7 +23,7 @@ const SummaryNavigationHeader: FunctionComponent<{lhr: LH.Result}> = ({lhr}) => 
     <div className="SummaryNavigationHeader" data-testid="SummaryNavigationHeader">
       <FlowSegment/>
       <div className="SummaryNavigationHeader__url">
-        <a rel="noopener" target="_blank" href={lhr.finalUrl}>{lhr.finalUrl}</a>
+        <a rel="noopener" target="_blank" href={lhr.finalDisplayedUrl}>{lhr.finalDisplayedUrl}</a>
       </div>
       <div className="SummaryNavigationHeader__category">
         {strings.categoryPerformance}
@@ -76,7 +76,7 @@ const SummaryFlowStep: FunctionComponent<{
             category={reportResult.categories[c]}
             href={`#index=${hashIndex}&anchor=${c}`}
             gatherMode={lhr.gatherMode}
-            finalUrl={lhr.finalUrl}
+            finalDisplayedUrl={lhr.finalDisplayedUrl}
           />
         ))
       }

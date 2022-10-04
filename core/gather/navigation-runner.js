@@ -214,9 +214,8 @@ async function _computeNavigationResult(
  */
 async function _navigation(navigationContext) {
   const artifactState = getEmptyArtifactState();
-  const initialUrl = await navigationContext.driver.url();
   const phaseState = {
-    url: initialUrl,
+    url: await navigationContext.driver.url(),
     gatherMode: /** @type {const} */ ('navigation'),
     driver: navigationContext.driver,
     page: navigationContext.page,
@@ -236,10 +235,9 @@ async function _navigation(navigationContext) {
   // If we haven't set all the required urls yet, set them here.
   if (!Object.values(phaseState.baseArtifacts).every(Boolean)) {
     phaseState.baseArtifacts.URL = {
-      initialUrl,
       requestedUrl: navigateResult.requestedUrl,
       mainDocumentUrl: navigateResult.mainDocumentUrl,
-      finalUrl: navigateResult.mainDocumentUrl,
+      finalDisplayedUrl: await navigationContext.driver.url(),
     };
   }
   phaseState.url = navigateResult.mainDocumentUrl;

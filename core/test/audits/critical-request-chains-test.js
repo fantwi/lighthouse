@@ -69,7 +69,7 @@ const EMPTY_CHAIN_RECORDS = [];
 const mockArtifacts = (chainNetworkRecords) => {
   const trace = createTestTrace({topLevelTasks: [{ts: 0}]});
   const devtoolsLog = networkRecordsToDevtoolsLog(chainNetworkRecords);
-  const finalUrl = chainNetworkRecords[0] ? chainNetworkRecords[0].url : 'https://example.com';
+  const finalDisplayedUrl = chainNetworkRecords[0] ? chainNetworkRecords[0].url : 'https://example.com';
 
   return {
     traces: {
@@ -79,10 +79,9 @@ const mockArtifacts = (chainNetworkRecords) => {
       [CriticalRequestChains.DEFAULT_PASS]: devtoolsLog,
     },
     URL: {
-      initialUrl: 'about:blank',
-      requestedUrl: finalUrl,
-      mainDocumentUrl: finalUrl,
-      finalUrl,
+      requestedUrl: finalDisplayedUrl,
+      mainDocumentUrl: finalDisplayedUrl,
+      finalDisplayedUrl,
     },
   };
 };
@@ -113,10 +112,9 @@ describe('Performance: critical-request-chains audit', () => {
       traces: {defaultPass: createTestTrace({topLevelTasks: [{ts: 0}]})},
       devtoolsLogs: {defaultPass: redditDevtoolsLog},
       URL: {
-        initialUrl: 'about:blank',
         requestedUrl: 'https://www.reddit.com/r/nba',
         mainDocumentUrl: 'https://www.reddit.com/r/nba',
-        finalUrl: 'https://www.reddit.com/r/nba',
+        finalDisplayedUrl: 'https://www.reddit.com/r/nba',
       },
     };
     const context = {computedCache: new Map()};

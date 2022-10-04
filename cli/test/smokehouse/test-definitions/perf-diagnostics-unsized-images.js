@@ -18,7 +18,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/perf/unsized-images.html',
-    finalUrl: 'http://localhost:10200/perf/unsized-images.html',
+    finalDisplayedUrl: 'http://localhost:10200/perf/unsized-images.html',
     audits: {
       'unsized-images': {
         score: 0,

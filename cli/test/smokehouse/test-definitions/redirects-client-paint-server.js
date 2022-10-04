@@ -28,7 +28,7 @@ const expectations = {
   // TODO: Assert performance metrics on client-side redirects, see https://github.com/GoogleChrome/lighthouse/pull/10325
   lhr: {
     requestedUrl: `http://localhost:10200/js-redirect.html?delay=2000&jsDelay=5000&jsRedirect=%2Fonline-only.html%3Fdelay%3D1000%26redirect%3D%2Fredirects-final.html`,
-    finalUrl: 'http://localhost:10200/redirects-final.html',
+    finalDisplayedUrl: 'http://localhost:10200/redirects-final.html',
     audits: {
       // Just captures the server-side at the moment, should be 8s in the future
       'first-contentful-paint': {

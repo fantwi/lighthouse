@@ -33,7 +33,7 @@ describe('Best Practices: unused css rules audit', () => {
     function getArtifacts({CSSUsage, networkRecords = defaultNetworkRecords}) {
       return {
         devtoolsLogs: {defaultPass: networkRecordsToDevtoolsLog(networkRecords)},
-        URL: {finalUrl: ''},
+        URL: {finalDisplayedUrl: ''},
         CSSUsage,
       };
     }

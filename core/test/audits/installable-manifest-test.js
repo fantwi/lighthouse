@@ -24,7 +24,7 @@ function generateMockArtifacts(src = manifestSrc) {
   const clonedArtifacts = JSON.parse(JSON.stringify({
     WebAppManifest: exampleManifest,
     InstallabilityErrors: {errors: []},
-    URL: {finalUrl: 'https://example.com'},
+    URL: {finalDisplayedUrl: 'https://example.com'},
   }));
   return clonedArtifacts;
 }

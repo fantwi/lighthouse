@@ -10,10 +10,15 @@
 const expectations = {
   artifacts: {
     MainDocumentContent: /Redirect to myself/,
+    URL: {
+      requestedUrl: 'http://localhost:10200/redirects-self.html',
+      mainDocumentUrl: 'http://localhost:10200/redirects-self.html?done=',
+      finalDisplayedUrl: 'http://localhost:10200/redirects-self.html',
+    },
   },
   lhr: {
     requestedUrl: 'http://localhost:10200/redirects-self.html',
-    finalUrl: 'http://localhost:10200/redirects-self.html?done=',
+    finalDisplayedUrl: 'http://localhost:10200/redirects-self.html',
     audits: {
     },
     runWarnings: [

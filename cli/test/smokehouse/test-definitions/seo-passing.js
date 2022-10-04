@@ -35,7 +35,7 @@ const passHeaders = headersParam([[
 const expectations = {
   lhr: {
     requestedUrl: BASE_URL + 'seo-tester.html?' + passHeaders,
-    finalUrl: BASE_URL + 'seo-tester.html?' + passHeaders,
+    finalDisplayedUrl: BASE_URL + 'seo-tester.html?' + passHeaders,
     audits: {
       'viewport': {
         score: 1,

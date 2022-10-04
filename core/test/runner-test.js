@@ -144,7 +144,7 @@ describe('Runner', () => {
         expect(loadArtifactsSpy).toHaveBeenCalled();
         expect(gatherRunnerRunSpy).not.toHaveBeenCalled();
         expect(saveArtifactsSpy).not.toHaveBeenCalled();
-        expect(saveLhrSpy).not.toHaveBeenCalled();
+        expect(saveLhrSpy).toHaveBeenCalled();
         expect(runAuditSpy).toHaveBeenCalled();
       });
     });

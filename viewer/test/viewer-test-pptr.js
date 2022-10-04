@@ -173,7 +173,8 @@ describe('Lighthouse Viewer', () => {
     });
 
     it('should support swapping locales', async () => {
-      function queryLocaleState() {
+      async function queryLocaleState() {
+        await viewerPage.waitForSelector('.lh-locale-selector');
         return viewerPage.$$eval('.lh-locale-selector', (elems) => {
           const selectEl = elems[0];
           const optionEls = [...selectEl.querySelectorAll('option')];

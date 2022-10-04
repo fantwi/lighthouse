@@ -62,7 +62,7 @@ enum LighthouseError {
 }
 
 // The overarching Lighthouse Response object (LHR)
-// https://github.com/GoogleChrome/lighthouse/blob/master/types/lhr.d.ts
+// https://github.com/GoogleChrome/lighthouse/blob/main/types/lhr.d.ts
 message LighthouseResult {
   // The timestamp of when the results were generated.
   google.protobuf.Timestamp fetch_time = 1;
@@ -133,7 +133,7 @@ message LighthouseResult {
     // was deprecated. Meanwhile in v7, the form_factor field was added and has
     // a mobile/desktop enum, so we simplify reuse, minus the `none` option.
     // See
-    // https://github.com/GoogleChrome/lighthouse/blob/master/docs/emulation.md#changes-made-in-v7
+    // https://github.com/GoogleChrome/lighthouse/blob/main/docs/emulation.md#changes-made-in-v7
     enum EmulatedFormFactor {
       UNKNOWN_FORM_FACTOR = 0;
       mobile = 1;
@@ -223,6 +223,12 @@ message LighthouseResult {
 
   // Gather mode used to collect artifacts.
   string gather_mode = 16;
+
+  // URL of the main document request of the final navigation.
+  string main_document_url = 17;
+
+  // URL displayed on the page after Lighthouse finishes.
+  string final_displayed_url = 18;
 }
 
 // Message containing a category

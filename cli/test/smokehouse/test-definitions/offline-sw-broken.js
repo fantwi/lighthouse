@@ -40,7 +40,7 @@ const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10503/offline-ready.html?broken',
     // This page's SW has a `fetch` handler that doesn't provide a 200 response.
-    finalUrl: 'http://localhost:10503/offline-ready.html?broken',
+    finalDisplayedUrl: 'http://localhost:10503/offline-ready.html?broken',
     audits: {
       'installable-manifest': {
         score: 0,

@@ -170,7 +170,7 @@ class ServiceWorker extends Audit {
       };
     }
 
-    // SW controls both finalUrl and start_url.
+    // SW controls both finalDisplayedUrl and start_url.
     return {
       score: 1,
       details,

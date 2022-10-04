@@ -22,6 +22,6 @@ fi
 
 git fetch origin
 git fetch --tags
-git checkout -f master
-git reset --hard origin/master
+git checkout -f main
+git reset --hard origin/main
 git clean -fdx # Forcibly clean all untracked files and directories, including `.gitignore`d ones.

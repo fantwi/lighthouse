@@ -60,7 +60,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'http://localhost:10200/perf/frame-metrics.html',
-    finalUrl: 'http://localhost:10200/perf/frame-metrics.html',
+    finalDisplayedUrl: 'http://localhost:10200/perf/frame-metrics.html',
     audits: {
       'metrics': {
         score: null,

@@ -39,7 +39,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10503/offline-ready.html?slow',
-    finalUrl: 'http://localhost:10503/offline-ready.html?slow',
+    finalDisplayedUrl: 'http://localhost:10503/offline-ready.html?slow',
     audits: {
       'service-worker': {
         score: 1,

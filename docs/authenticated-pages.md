@@ -8,7 +8,7 @@ Default runs of Lighthouse load a page as a "new user", with no previous session
 
 See [a working demo at /docs/recipes/auth](./recipes/auth).
 
-View our full documentation for using [Lighthouse along with Puppeteer](https://github.com/GoogleChrome/lighthouse/blob/master/docs/puppeteer.md).
+View our full documentation for using [Lighthouse along with Puppeteer](https://github.com/GoogleChrome/lighthouse/blob/main/docs/puppeteer.md).
 
 ## Option 2: Leverage logged-in state with Chrome DevTools
 

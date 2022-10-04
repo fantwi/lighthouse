@@ -14,7 +14,7 @@ describe('Page does not use document.write()', () => {
   it('passes when document.write() is not used', async () => {
     const auditResult = await DocWriteUseAudit.audit({
       ConsoleMessages: [],
-      URL: {finalUrl: URL},
+      URL: {finalDisplayedUrl: URL},
       SourceMaps: [],
       Scripts: [],
     }, {computedCache: new Map()});
@@ -25,7 +25,7 @@ describe('Page does not use document.write()', () => {
   it('fails when document.write() is used', async () => {
     const text = 'Do not use document.write';
     const auditResult = await DocWriteUseAudit.audit({
-      URL: {finalUrl: URL},
+      URL: {finalDisplayedUrl: URL},
       ConsoleMessages: [
         {source: 'violation', url: 'https://example.com/', text},
         {source: 'violation', url: 'https://example2.com/two', text},

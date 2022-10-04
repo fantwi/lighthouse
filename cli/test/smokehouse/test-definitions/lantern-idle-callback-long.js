@@ -26,7 +26,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/ric-shim.html?long',
-    finalUrl: 'http://localhost:10200/ric-shim.html?long',
+    finalDisplayedUrl: 'http://localhost:10200/ric-shim.html?long',
     audits: {
       'total-blocking-time': {
         // With a 4x throttling multiplier in place each 50ms task takes 200ms, which results in 150ms blocking time

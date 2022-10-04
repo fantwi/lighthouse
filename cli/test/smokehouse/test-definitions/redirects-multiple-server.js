@@ -26,7 +26,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: `http://localhost:10200/online-only.html?delay=1000&redirect_count=3&redirect=%2Fredirects-final.html`,
-    finalUrl: 'http://localhost:10200/redirects-final.html',
+    finalDisplayedUrl: 'http://localhost:10200/redirects-final.html',
     audits: {
       'first-contentful-paint': {
         numericValue: '>=3000',

@@ -71,7 +71,10 @@ describe('ReportRenderer', () => {
 
     it('renders a topbar', () => {
       const topbar = renderer._renderReportTopbar(sampleResults);
-      assert.equal(topbar.querySelector('.lh-topbar__url').textContent, sampleResults.finalUrl);
+      assert.equal(
+        topbar.querySelector('.lh-topbar__url').textContent,
+        sampleResults.finalDisplayedUrl
+      );
     });
 
     it('renders a header', () => {

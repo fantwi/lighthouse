@@ -17,7 +17,7 @@ describe('Third party summary', () => {
     const artifacts = {
       devtoolsLogs: {defaultPass: pwaDevtoolsLog},
       traces: {defaultPass: pwaTrace},
-      URL: {finalUrl: 'https://pwa-rocks.com'},
+      URL: {finalDisplayedUrl: 'https://pwa-rocks.com'},
     };
 
     const results = await ThirdPartySummary.audit(artifacts, {computedCache: new Map()});
@@ -82,7 +82,7 @@ describe('Third party summary', () => {
     const artifacts = {
       devtoolsLogs: {defaultPass: pwaDevtoolsLog},
       traces: {defaultPass: pwaTrace},
-      URL: {finalUrl: 'https://pwa-rocks.com'},
+      URL: {finalDisplayedUrl: 'https://pwa-rocks.com'},
     };
 
     const settings = {throttlingMethod: 'simulate', throttling: {cpuSlowdownMultiplier: 4}};
@@ -100,7 +100,7 @@ describe('Third party summary', () => {
     const artifacts = {
       devtoolsLogs: {defaultPass: networkRecordsToDevtoolsLog([{url: 'chrome://version'}])},
       traces: {defaultPass: noThirdPartyTrace},
-      URL: {finalUrl: 'chrome://version'},
+      URL: {finalDisplayedUrl: 'chrome://version'},
     };
 
     const settings = {throttlingMethod: 'simulate', throttling: {cpuSlowdownMultiplier: 4}};
@@ -121,7 +121,7 @@ describe('Third party summary', () => {
         ]),
       },
       traces: {defaultPass: pwaTrace},
-      URL: {finalUrl: 'http://example.com'},
+      URL: {finalDisplayedUrl: 'http://example.com'},
     };
     const facebookArtifacts = {
       devtoolsLogs: {
@@ -131,7 +131,7 @@ describe('Third party summary', () => {
         ]),
       },
       traces: {defaultPass: pwaTrace},
-      URL: {finalUrl: 'http://facebook.com'},
+      URL: {finalDisplayedUrl: 'http://facebook.com'},
     };
     const context = {computedCache: new Map()};
 

@@ -13,7 +13,7 @@ describe('SEO: link text audit', () => {
     const invalidLink = {href: 'https://example.com/otherpage.html', text: 'click here', rel: ''};
     const artifacts = {
       URL: {
-        finalUrl: 'https://example.com/page.html',
+        finalDisplayedUrl: 'https://example.com/page.html',
       },
       AnchorElements: [
         {href: 'https://example.com/otherpage.html', text: 'legit link text', rel: ''},
@@ -32,7 +32,7 @@ describe('SEO: link text audit', () => {
   it('ignores links pointing to the main document', () => {
     const artifacts = {
       URL: {
-        finalUrl: 'https://example.com/page.html',
+        finalDisplayedUrl: 'https://example.com/page.html',
       },
       AnchorElements: [
         {href: 'https://example.com/otherpage.html', text: 'legit link text', rel: ''},
@@ -49,7 +49,7 @@ describe('SEO: link text audit', () => {
   it('ignores javascript: links', () => {
     const artifacts = {
       URL: {
-        finalUrl: 'https://example.com/page.html',
+        finalDisplayedUrl: 'https://example.com/page.html',
       },
       AnchorElements: [
         {href: 'javascript:alert(1)', text: 'click here', rel: ''},
@@ -65,7 +65,7 @@ describe('SEO: link text audit', () => {
   it('ignores mailto: links', () => {
     const artifacts = {
       URL: {
-        finalUrl: 'https://example.com/page.html',
+        finalDisplayedUrl: 'https://example.com/page.html',
       },
       AnchorElements: [
         {href: 'mailto:info@example.com', text: 'click here', rel: ''},
@@ -80,7 +80,7 @@ describe('SEO: link text audit', () => {
   it('ignores links with no href', () => {
     const artifacts = {
       URL: {
-        finalUrl: 'https://example.com/page.html',
+        finalDisplayedUrl: 'https://example.com/page.html',
       },
       AnchorElements: [
         {href: '', text: 'click here', rel: ''},
@@ -94,7 +94,7 @@ describe('SEO: link text audit', () => {
   it('ignores links with nofollow', () => {
     const artifacts = {
       URL: {
-        finalUrl: 'https://example.com/page.html',
+        finalDisplayedUrl: 'https://example.com/page.html',
       },
       AnchorElements: [
         {href: '', text: 'click here', rel: 'noopener nofollow'},
@@ -108,7 +108,7 @@ describe('SEO: link text audit', () => {
   it('passes when all links have descriptive texts', () => {
     const artifacts = {
       URL: {
-        finalUrl: 'https://example.com/page.html',
+        finalDisplayedUrl: 'https://example.com/page.html',
       },
       AnchorElements: [
         {href: 'https://example.com/otherpage.html', text: 'legit link text', rel: ''},

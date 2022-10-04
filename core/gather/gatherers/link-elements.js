@@ -22,12 +22,12 @@ import {MainResource} from '../../computed/main-resource.js';
 /**
  *
  * @param {string} url
- * @param {string} finalUrl
+ * @param {string} finalDisplayedUrl
  * @return {string|null}
  */
-function normalizeUrlOrNull(url, finalUrl) {
+function normalizeUrlOrNull(url, finalDisplayedUrl) {
   try {
-    return new URL(url, finalUrl).href;
+    return new URL(url, finalDisplayedUrl).href;
   } catch (_) {
     return null;
   }
@@ -128,7 +128,7 @@ class LinkElements extends FRGatherer {
       for (const link of LinkHeader.parse(header.value).refs) {
         linkElements.push({
           rel: link.rel || '',
-          href: normalizeUrlOrNull(link.uri, context.baseArtifacts.URL.finalUrl),
+          href: normalizeUrlOrNull(link.uri, context.baseArtifacts.URL.finalDisplayedUrl),
           hrefRaw: link.uri || '',
           hreflang: link.hreflang || '',
           as: link.as || '',

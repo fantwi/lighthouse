@@ -21,7 +21,7 @@ Lighthouse audits that surface in the report should:
 
 ### Detail Types
 
-An audit can return a number of different [detail types](https://github.com/GoogleChrome/lighthouse/blob/master/types/lhr/audit-details.d.ts).
+An audit can return a number of different [detail types](https://github.com/GoogleChrome/lighthouse/blob/main/types/lhr/audit-details.d.ts).
 
 | detail type               | resource              | notes                                  |
 |---------------------------|-----------------------|----------------------------------------|

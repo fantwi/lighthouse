@@ -147,7 +147,7 @@ function assertValidFlags(flags) {
 
   // @ts-expect-error Checking for removed flags
   if (flags.emulatedFormFactor || flags.internalDisableDeviceScreenEmulation) {
-    throw new Error('Invalid emulation flag. Emulation configuration changed in LH 7.0. See https://github.com/GoogleChrome/lighthouse/blob/master/docs/emulation.md');
+    throw new Error('Invalid emulation flag. Emulation configuration changed in LH 7.0. See https://github.com/GoogleChrome/lighthouse/blob/main/docs/emulation.md');
   }
 }
 

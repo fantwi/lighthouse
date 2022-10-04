@@ -6,7 +6,7 @@ By default this is done using the Lighthouse CLI (to exercise the full pipeline)
 
 ## Options
 
-See [`SmokehouseOptions`](https://github.com/GoogleChrome/lighthouse/blob/master/cli/test/smokehouse/smokehouse.js#L23).
+See [`SmokehouseOptions`](https://github.com/GoogleChrome/lighthouse/blob/main/cli/test/smokehouse/smokehouse.js#L23).
 
 ## Test definitions
 
@@ -188,7 +188,7 @@ Smokehouse comes with a core set of test definitions, but it can run any set of 
   const expectations = [{
     lhr: {
       requestedUrl: 'http://localhost:8080/index.html',
-      finalUrl: 'http://localhost:8080/index.html',
+      finalDisplayedUrl: 'http://localhost:8080/index.html',
       audits: {
         'preload-as': {
           score: 1,

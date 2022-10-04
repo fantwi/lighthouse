@@ -12,7 +12,7 @@ if [[ "$CI" ]]; then
   if [[ -z "$GITHUB_ACTIONS_COMMIT_RANGE" ]]; then echo "No commit range available!" && exit 1 ; fi
   CHANGED_FILES=$(git --no-pager diff --name-only "$GITHUB_ACTIONS_COMMIT_RANGE")
 else
-  CHANGED_FILES=$(git --no-pager diff --name-only master)
+  CHANGED_FILES=$(git --no-pager diff --name-only main)
 fi
 
 printf "Determined the following files have been touched:\n\n$CHANGED_FILES\n\n"

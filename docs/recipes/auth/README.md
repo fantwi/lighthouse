@@ -115,7 +115,7 @@ node example-lh-auth.js # login via puppeteer and run lighthouse
 
 ## Alternatives
 
-### [`page.setCookie`](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagesetcookiecookies)
+### [`page.setCookie`](https://puppeteer.github.io/pptr.dev/#?product=Puppeteer&version=v15.0.0&show=api-pagesetcookiecookies)
 
 **NOTE:** We strongly recommend your tests use the form-based login flow above instead. Only directly set the token like this as a last resort.
 

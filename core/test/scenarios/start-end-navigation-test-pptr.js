@@ -38,14 +38,13 @@ describe('Start/End navigation', function() {
     const artifacts = flowArtifacts.gatherSteps[0].artifacts;
 
     expect(artifacts.URL).toEqual({
-      initialUrl: `${state.serverBaseUrl}/links-to-index.html`,
       requestedUrl: `${state.serverBaseUrl}/?redirect=/index.html`,
       mainDocumentUrl: `${state.serverBaseUrl}/index.html`,
-      finalUrl: `${state.serverBaseUrl}/index.html`,
+      finalDisplayedUrl: `${state.serverBaseUrl}/index.html`,
     });
 
     expect(lhr.requestedUrl).toEqual(`${state.serverBaseUrl}/?redirect=/index.html`);
-    expect(lhr.finalUrl).toEqual(`${state.serverBaseUrl}/index.html`);
+    expect(lhr.finalDisplayedUrl).toEqual(`${state.serverBaseUrl}/index.html`);
 
     const {erroredAudits} = getAuditsBreakdown(lhr);
     expect(erroredAudits).toHaveLength(0);

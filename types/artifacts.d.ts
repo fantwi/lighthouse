@@ -188,8 +188,6 @@ declare module Artifacts {
   type MetaElement = Artifacts['MetaElements'][0];
 
   interface URL {
-    /** URL of the main frame before Lighthouse starts. */
-    initialUrl: string;
     /**
      * URL of the initially requested URL during a Lighthouse navigation.
      * Will be `undefined` in timespan/snapshot.
@@ -200,12 +198,8 @@ declare module Artifacts {
      * Will be `undefined` in timespan/snapshot.
      */
     mainDocumentUrl?: string;
-    /**
-     * Will be the same as `mainDocumentUrl` in navigation mode.
-     * Wil be the URL of the main frame after Lighthouse finishes in timespan/snapshot.
-     * TODO: Use the main frame URL in navigation mode as well.
-     */
-    finalUrl: string;
+    /** URL displayed on the page after Lighthouse finishes. */
+    finalDisplayedUrl: string;
   }
 
   interface NodeDetails {

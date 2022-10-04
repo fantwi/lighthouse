@@ -26,7 +26,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/ric-shim.html?short',
-    finalUrl: 'http://localhost:10200/ric-shim.html?short',
+    finalDisplayedUrl: 'http://localhost:10200/ric-shim.html?short',
     audits: {
       'total-blocking-time': {
         // With the requestIdleCallback shim in place 1ms tasks should not block at all and should max add up to

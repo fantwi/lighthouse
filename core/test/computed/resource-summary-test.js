@@ -15,7 +15,7 @@ function mockArtifacts(networkRecords) {
     URL: {
       requestedUrl: networkRecords[0].url,
       mainDocumentUrl: networkRecords[0].url,
-      finalUrl: networkRecords[0].url,
+      finalDisplayedUrl: networkRecords[0].url,
     },
     budgets: null,
   };

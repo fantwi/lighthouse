@@ -26,7 +26,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/tricky-main-thread.html?fetch',
-    finalUrl: 'http://localhost:10200/tricky-main-thread.html?fetch',
+    finalDisplayedUrl: 'http://localhost:10200/tricky-main-thread.html?fetch',
     audits: {
       'interactive': {
         // Make sure all of the CPU time is reflected in the perf metrics as well.

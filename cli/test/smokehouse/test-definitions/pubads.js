@@ -16,7 +16,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/online-only.html',
-    finalUrl: 'http://localhost:10200/online-only.html',
+    finalDisplayedUrl: 'http://localhost:10200/online-only.html',
     // We should receive warnings about no ads being on the page.
     runWarnings: {length: '>0'},
     audits: {

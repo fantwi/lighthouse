@@ -90,7 +90,9 @@ class Runner {
       const i18nLhr = {
         lighthouseVersion,
         requestedUrl: artifacts.URL.requestedUrl,
-        finalUrl: artifacts.URL.finalUrl,
+        mainDocumentUrl: artifacts.URL.mainDocumentUrl,
+        finalDisplayedUrl: artifacts.URL.finalDisplayedUrl,
+        finalUrl: artifacts.URL.mainDocumentUrl,
         fetchTime: artifacts.fetchTime,
         gatherMode: artifacts.GatherContext.gatherMode,
         runtimeError: Runner.getArtifactRuntimeError(artifacts),
@@ -121,8 +123,7 @@ class Runner {
       // LHR has now been localized.
       const lhr = /** @type {LH.Result} */ (i18nLhr);
 
-      // Save lhr to ./latest-run, but only if -GA is used.
-      if (settings.gatherMode && settings.auditMode) {
+      if (settings.auditMode) {
         const path = Runner._getDataSavePath(settings);
         assetSaver.saveLhr(lhr, path);
       }

@@ -24,7 +24,7 @@ const expectations = {
       /The page may not be loading as expected/,
     ],
     requestedUrl: 'http://localhost:10200/online-only.html?redirect=/redirects-scripts.html',
-    finalUrl: 'http://localhost:10200/redirects-scripts.html',
+    finalDisplayedUrl: 'http://localhost:10200/redirects-scripts.html',
     audits: {
       'unused-javascript': {
         details: {

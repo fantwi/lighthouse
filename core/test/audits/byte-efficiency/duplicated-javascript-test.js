@@ -21,7 +21,7 @@ describe('DuplicatedJavascript computed artifact', () => {
     const {map, content} = loadSourceMapFixture('foo.min');
     const artifacts = {
       GatherContext: {gatherMode: 'navigation'},
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       SourceMaps: [
         {scriptId: '1', scriptUrl: 'https://example.com/foo1.min.js', map},
         {scriptId: '2', scriptUrl: 'https://example.com/foo2.min.js', map},
@@ -48,7 +48,7 @@ describe('DuplicatedJavascript computed artifact', () => {
     const bundleData2 = loadSourceMapFixture('coursehero-bundle-2');
     const artifacts = {
       GatherContext: {gatherMode: 'navigation'},
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       SourceMaps: [
         {scriptId: '1', scriptUrl: 'https://example.com/coursehero-bundle-1.js', map: bundleData1.map},
         {scriptId: '2', scriptUrl: 'https://example.com/coursehero-bundle-2.js', map: bundleData2.map},

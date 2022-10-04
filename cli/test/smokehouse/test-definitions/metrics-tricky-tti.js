@@ -31,7 +31,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/tricky-tti.html',
-    finalUrl: 'http://localhost:10200/tricky-tti.html',
+    finalDisplayedUrl: 'http://localhost:10200/tricky-tti.html',
     audits: {
       'interactive': {
         // stalls for ~5 seconds, ~5 seconds out, so should be at least ~10s

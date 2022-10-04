@@ -15,7 +15,7 @@ module.exports = {
   ],
   overrides: [
     // TS already handles this issue.
-    // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
+    // https://github.com/typescript-eslint/typescript-eslint/blob/main/docs/linting/TROUBLESHOOTING.md#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
     {
       files: ['**/*.ts', '**/*.tsx', '**/*.js'],
       rules: {

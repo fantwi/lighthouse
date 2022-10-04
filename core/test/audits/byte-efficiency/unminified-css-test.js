@@ -15,7 +15,7 @@ describe('Page uses optimized css', () => {
   it('fails when given unminified stylesheets', () => {
     const auditResult = UnminifiedCssAudit.audit_(
       {
-        URL: {finalUrl: ''},
+        URL: {finalDisplayedUrl: ''},
         CSSUsage: {stylesheets: [
           {
             header: {sourceURL: 'foo.css'},
@@ -61,7 +61,7 @@ describe('Page uses optimized css', () => {
   it('passes when stylesheets are already minified', () => {
     const auditResult = UnminifiedCssAudit.audit_(
       {
-        URL: {finalUrl: ''},
+        URL: {finalDisplayedUrl: ''},
         CSSUsage: {stylesheets: [
           {header: {sourceURL: 'foo.css'}, content: '#id{width:100px;}'},
           {

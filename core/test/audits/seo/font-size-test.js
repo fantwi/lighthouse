@@ -11,7 +11,7 @@ import * as constants from '../../../config/constants.js';
 
 const URL = {
   requestedUrl: 'https://example.com',
-  finalUrl: 'https://example.com',
+  finalDisplayedUrl: 'https://example.com',
 };
 const validViewport = 'width=device-width';
 
@@ -282,7 +282,7 @@ describe('SEO: Font size audit', () => {
       expect(auditResult.details.items[0]).toMatchObject({
         source: {
           type: 'url',
-          value: URL.finalUrl,
+          value: URL.finalDisplayedUrl,
         },
         selector: {
           type: 'node',
@@ -304,7 +304,7 @@ describe('SEO: Font size audit', () => {
       expect(auditResult.details.items[0]).toMatchObject({
         source: {
           type: 'url',
-          value: URL.finalUrl,
+          value: URL.finalDisplayedUrl,
         },
         selector: {
           type: 'node',

@@ -154,6 +154,8 @@ beforeEach(async () => {
   driver = new EmulationDriver(connectionStub);
   resetDefaultMockResponses();
 
+  fakeDriver.url = jestMock.fn().mockResolvedValue('about:blank');
+
   const {gotoURL} = await importMock('../../../gather/driver/navigation.js', import.meta);
   gotoURL.mockReset().mockResolvedValue({
     mainDocumentUrl: 'https://example.com',
@@ -174,6 +176,8 @@ describe('GatherRunner', function() {
     const driver = {};
     const {gotoURL} = await importMock('../../../gather/driver/navigation.js', import.meta);
     gotoURL.mockResolvedValue({mainDocumentUrl: url2, warnings: []});
+    driver.url = jestMock.fn()
+      .mockResolvedValueOnce(url2);
 
     const passContext = {
       url: url1,
@@ -184,14 +188,15 @@ describe('GatherRunner', function() {
       },
       baseArtifacts: {
         URL: {
-          finalUrl: url1,
+          finalDisplayedUrl: url1,
         },
       },
+      driver,
     };
 
     return GatherRunner.loadPage(driver, passContext).then(_ => {
       assert.equal(passContext.url, url2);
-      assert.equal(passContext.baseArtifacts.URL.finalUrl, url2);
+      assert.equal(passContext.baseArtifacts.URL.finalDisplayedUrl, url2);
     });
   });
 
@@ -249,6 +254,7 @@ describe('GatherRunner', function() {
     const mainDocumentUrl = 'https://example.com/interstitial';
     const {gotoURL} = await importMock('../../../gather/driver/navigation.js', import.meta);
     gotoURL.mockResolvedValue({mainDocumentUrl, timedOut: false, warnings: []});
+    fakeDriver.url = jestMock.fn().mockResolvedValue(mainDocumentUrl);
     const config = await makeConfig({passes: [{passName: 'defaultPass'}]});
     const options = {
       requestedUrl,
@@ -260,7 +266,11 @@ describe('GatherRunner', function() {
     return GatherRunner.run(config.passes, options).then(artifacts => {
       assert.deepStrictEqual(
         artifacts.URL,
-        {initialUrl: 'about:blank', requestedUrl, mainDocumentUrl, finalUrl: mainDocumentUrl},
+        {
+          requestedUrl,
+          mainDocumentUrl,
+          finalDisplayedUrl: mainDocumentUrl,
+        },
         'did not find expected URL artifact');
     });
   });
@@ -644,7 +654,7 @@ describe('GatherRunner', function() {
         return Promise.resolve();
       },
       gotoURL() {
-        return Promise.resolve({finalUrl: '', timedOut: false});
+        return Promise.resolve({finalDisplayedUrl: '', timedOut: false});
       },
     };
 
@@ -1210,7 +1220,7 @@ describe('GatherRunner', function() {
       const unresolvedDriver = Object.assign({}, fakeDriver, {
         online: true,
         gotoURL() {
-          return Promise.resolve({finalUrl: requestedUrl, timedOut: false});
+          return Promise.resolve({finalDisplayedUrl: requestedUrl, timedOut: false});
         },
         endDevtoolsLog() {
           return unresolvedPerfLog;
@@ -1277,8 +1287,8 @@ describe('GatherRunner', function() {
 
       const {gotoURL} = await importMock('../../../gather/driver/navigation.js', import.meta);
       gotoURL
-        .mockResolvedValueOnce({finalUrl: requestedUrl, warnings: []})
-        .mockResolvedValueOnce({finalUrl: requestedUrl, warnings: ['It is too slow']});
+        .mockResolvedValueOnce({finalDisplayedUrl: requestedUrl, warnings: []})
+        .mockResolvedValueOnce({finalDisplayedUrl: requestedUrl, warnings: ['It is too slow']});
 
       return GatherRunner.run(config.passes, {
         driver: timedoutDriver,

@@ -19,7 +19,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'https://chromestatus.com/features',
-    finalUrl: 'https://chromestatus.com/features',
+    finalDisplayedUrl: 'https://chromestatus.com/features',
     audits: {
       'service-worker': {
         score: 0,

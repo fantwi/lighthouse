@@ -62,7 +62,7 @@ describe('Metrics: Lantern FCP', () => {
     const URL = {
       requestedUrl: 'https://example.com/',
       mainDocumentUrl: 'https://example.com/',
-      finalUrl: 'https://example.com/',
+      finalDisplayedUrl: 'https://example.com/',
     };
     const artifacts = {
       trace,

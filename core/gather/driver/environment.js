@@ -17,7 +17,7 @@ const UIStrings = {
    */
   warningSlowHostCpu: 'The tested device appears to have a slower CPU than  ' +
   'Lighthouse expects. This can negatively affect your performance score. Learn more about ' +
-  '[calibrating an appropriate CPU slowdown multiplier](https://github.com/GoogleChrome/lighthouse/blob/master/docs/throttling.md#cpu-throttling).',
+  '[calibrating an appropriate CPU slowdown multiplier](https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md#cpu-throttling).',
 };
 
 /**
@@ -80,7 +80,7 @@ function getSlowHostCpuWarning(context) {
   if (!isThrottledMethod || !isDefaultMultiplier) return;
 
   // Only warn if the device didn't meet the threshold.
-  // See https://github.com/GoogleChrome/lighthouse/blob/master/docs/throttling.md#cpu-throttling
+  // See https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md#cpu-throttling
   if (baseArtifacts.BenchmarkIndex > SLOW_CPU_BENCHMARK_INDEX_THRESHOLD) return;
 
   return str_(UIStrings.warningSlowHostCpu);

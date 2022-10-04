@@ -13,6 +13,7 @@ import idbKeyval from 'idb-keyval';
 import {FirebaseAuth} from './firebase-auth.js';
 // eslint-disable-next-line max-len
 import {getLhrFilenamePrefix, getFlowResultFilenamePrefix} from '../../../report/generator/file-namer.js';
+import {Util} from '../../../report/renderer/util.js';
 
 /**
  * Wrapper around the GitHub API for reading/writing gists.
@@ -51,7 +52,7 @@ export class GithubApi {
         filename = getFlowResultFilenamePrefix(jsonFile);
       } else {
         filename = getLhrFilenamePrefix({
-          finalUrl: jsonFile.finalUrl,
+          finalDisplayedUrl: Util.getFinalDisplayedUrl(jsonFile),
           fetchTime: jsonFile.fetchTime,
         });
       }

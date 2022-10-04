@@ -26,7 +26,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'https://www.mixedcontentexamples.com/Test/NonSecureImage',
-    finalUrl: 'https://www.mixedcontentexamples.com/Test/NonSecureImage',
+    finalDisplayedUrl: 'https://www.mixedcontentexamples.com/Test/NonSecureImage',
     audits: {
       'is-on-https': {
         score: 0,

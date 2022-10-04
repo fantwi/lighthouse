@@ -37,7 +37,7 @@ function computeWindowNameSuffix(json) {
   // @ts-expect-error - If this is a v2 LHR, use old `generatedTime`.
   const fallbackFetchTime = /** @type {string} */ (json.generatedTime);
   const fetchTime = json.fetchTime || fallbackFetchTime;
-  return `${json.lighthouseVersion}-${json.finalUrl}-${fetchTime}`;
+  return `${json.lighthouseVersion}-${json.finalDisplayedUrl}-${fetchTime}`;
 }
 
 /**
@@ -119,7 +119,9 @@ function openTreemap(json) {
   /** @type {LH.Treemap.Options} */
   const treemapOptions = {
     lhr: {
+      mainDocumentUrl: json.mainDocumentUrl,
       finalUrl: json.finalUrl,
+      finalDisplayedUrl: json.finalDisplayedUrl,
       audits: {
         'script-treemap-data': json.audits['script-treemap-data'],
       },

@@ -24,7 +24,7 @@ if (smallBundle.content.length >= LARGE_JS_BYTE_THRESHOLD) {
 describe('Valid source maps audit', () => {
   it('passes when no script elements or source maps are provided', async () => {
     const artifacts = {
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       Scripts: [],
       SourceMaps: [],
     };
@@ -35,7 +35,7 @@ describe('Valid source maps audit', () => {
 
   it('passes when all large, first-party JS have corresponding source maps', async () => {
     const artifacts = {
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       Scripts: [
         {scriptId: '1', url: 'https://example.com/script1.min.js', content: largeBundle.content},
         {scriptId: '2', url: 'https://example.com/script2.min.js', content: largeBundle.content},
@@ -52,7 +52,7 @@ describe('Valid source maps audit', () => {
 
   it('fails when any large, first-party JS has no corresponding source map', async () => {
     const artifacts = {
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       Scripts: [
         {scriptId: '1', url: 'https://example.com/script1.min.js', content: largeBundle.content},
         {scriptId: '2', url: 'https://example.com/script2.min.js', content: largeBundle.content},
@@ -72,7 +72,7 @@ describe('Valid source maps audit', () => {
 
   it('passes when small, first-party JS have no corresponding source maps', async () => {
     const artifacts = {
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       Scripts: [
         {scriptId: '1', url: 'https://example.com/script1.min.js', content: largeBundle.content},
         {scriptId: '2', url: 'https://example.com/script2.min.js', content: smallBundle.content},
@@ -89,7 +89,7 @@ describe('Valid source maps audit', () => {
 
   it('passes when large, third-party JS have no corresponding source maps', async () => {
     const artifacts = {
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       Scripts: [
         {scriptId: '1', url: 'https://example.com/script1.min.js', content: largeBundle.content},
         {scriptId: '2', url: 'https://d36mpcpuzc4ztk.cloudfront.net/script2.js', content: largeBundle.content},
@@ -109,7 +109,7 @@ describe('Valid source maps audit', () => {
     delete bundleWithMissingContent.map.sourcesContent[0];
 
     const artifacts = {
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       Scripts: [
         {scriptId: '1', url: 'https://example.com/script1.min.js', content: bundleNormal.content},
         {scriptId: '2', url: 'https://example.com/script2.min.js', content: bundleWithMissingContent.content},
@@ -139,7 +139,7 @@ describe('Valid source maps audit', () => {
     delete bundleWithMissingContent.map.sourcesContent[0];
 
     const artifacts = {
-      URL: {finalUrl: 'https://example.com'},
+      URL: {finalDisplayedUrl: 'https://example.com'},
       Scripts: [
         {scriptId: '1', url: 'https://example.com/script1.min.js', content: bundleWithMissingContent.content},
         {scriptId: '2', url: 'https://example.com/script2.min.js', content: largeBundle.content},

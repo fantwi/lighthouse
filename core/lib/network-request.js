@@ -10,7 +10,7 @@
  * @see https://cs.chromium.org/chromium/src/third_party/blink/renderer/devtools/front_end/sdk/NetworkManager.js
 
  A detailed overview of the Chromium networking layer can be found here:
-    https://raw.githubusercontent.com/GoogleChrome/lighthouse/master/docs/Network-Timing.svg
+    https://raw.githubusercontent.com/GoogleChrome/lighthouse/main/docs/Network-Timings.svg
 
   Below is a simplified model.
 

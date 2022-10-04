@@ -16,7 +16,7 @@ fi
 cd ./lighthouse
 
 git fetch origin
-git checkout -f origin/master
+git checkout -f origin/main
 yarn install
 
 # Import WPT_KEY vars

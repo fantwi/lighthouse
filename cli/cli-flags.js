@@ -176,7 +176,7 @@ function getYargsParser(manualArgv) {
       },
       'enable-error-reporting': {
         type: 'boolean',
-        describe: 'Enables error reporting, overriding any saved preference. --no-enable-error-reporting will do the opposite. More: https://github.com/GoogleChrome/lighthouse/blob/master/docs/error-reporting.md',
+        describe: 'Enables error reporting, overriding any saved preference. --no-enable-error-reporting will do the opposite. More: https://github.com/GoogleChrome/lighthouse/blob/main/docs/error-reporting.md',
       },
       'gather-mode': {
         alias: 'G',

@@ -16,7 +16,7 @@ GCLOUD_USER=$(gcloud config get-value account | awk -F '@' '{gsub("[^a-z]","",$1
 INSTANCE_SUFFIX=${1:-instance0}
 INSTANCE_NAME="lighthouse-collection-$GCLOUD_USER-$INSTANCE_SUFFIX"
 CLOUDSDK_CORE_PROJECT=${LIGHTHOUSE_COLLECTION_GCLOUD_PROJECT:-lighthouse-lantern-collect}
-LIGHTHOUSE_GIT_REF=${TARGET_GIT_REF:-master}
+LIGHTHOUSE_GIT_REF=${TARGET_GIT_REF:-main}
 NUMBER_OF_RUNS=${TARGET_RUNS:-1}
 BASE_LIGHTHOUSE_FLAGS="--max-wait-for-load=90000 $LIGHTHOUSE_FLAGS"
 ZONE=us-central1-a

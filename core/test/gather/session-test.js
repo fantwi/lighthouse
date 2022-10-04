@@ -6,7 +6,7 @@
 
 import {EventEmitter} from 'events';
 
-import {CDPSession} from 'puppeteer/lib/cjs/puppeteer/common/Connection.js';
+import {CDPSessionImpl} from 'puppeteer-core/lib/cjs/puppeteer/common/Connection.js';
 
 import {ProtocolSession} from '../../gather/session.js';
 import {
@@ -29,7 +29,7 @@ describe('ProtocolSession', () => {
 
   beforeEach(() => {
     // @ts-expect-error - Individual mock functions are applied as necessary.
-    puppeteerSession = new CDPSession({_rawSend: fnAny(), send: fnAny()}, '', 'root');
+    puppeteerSession = new CDPSessionImpl({_rawSend: fnAny(), send: fnAny()}, '', 'root');
     session = new ProtocolSession(puppeteerSession);
   });
 

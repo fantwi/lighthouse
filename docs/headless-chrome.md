@@ -57,14 +57,14 @@ lighthouse --port=9222 https://github.com
 
 ## Posting Lighthouse reports to GitHub Gists
 
-Be sure to replace `${GITHUB_OWNER}` and `${GITHUB_TOKEN}` with your own credentials. The code below is tested on Ubuntu. 
+Be sure to replace `${GITHUB_OWNER}` and `${GITHUB_TOKEN}` with your own credentials. The code below is tested on Ubuntu.
 
 ```sh
 apt-get install -y nodejs npm chromium jq
 npm install -g lighthouse
 
-# Run lighthouse as JSON, pipe it to jq to wrangle and send it to GitHub Gist via curl 
-# so Lighthouse Viewer can grab it. 
+# Run lighthouse as JSON, pipe it to jq to wrangle and send it to GitHub Gist via curl
+# so Lighthouse Viewer can grab it.
 lighthouse "http://localhost" --chrome-flags="--no-sandbox --headless" \
   --output json \
 | jq -r "{ description: \"YOUR TITLE HERE\", public: \"false\", files: {\"$(date "+%Y%m%d").lighthouse.report.json\": {content: (. | tostring) }}}" \
@@ -115,5 +115,5 @@ launchChromeAndRunLighthouse('https://github.com', flags).then(results => {
 Other resources you might find helpful:
 
 - [Getting Started with Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome)
-- Example [Dockerfile](https://github.com/ebidel/lighthouse-ci/blob/master/builder/Dockerfile)
-- Lighthouse's GitHub Actions [`.ci.yml`](https://github.com/GoogleChrome/lighthouse/blob/master/.github/workflows/ci.yml)
+- Example [Dockerfile](https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/recipes/docker-client/Dockerfile)
+- Lighthouse's GitHub Actions [`.ci.yml`](https://github.com/GoogleChrome/lighthouse/blob/main/.github/workflows/ci.yml)

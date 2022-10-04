@@ -100,7 +100,7 @@ class FontDisplay extends Audit {
         for (const relativeURL of relativeURLs) {
           try {
             const relativeRoot = UrlUtils.isValid(stylesheet.header.sourceURL) ?
-              stylesheet.header.sourceURL : artifacts.URL.finalUrl;
+              stylesheet.header.sourceURL : artifacts.URL.finalDisplayedUrl;
             const absoluteURL = new URL(relativeURL, relativeRoot);
             targetURLSet.add(absoluteURL.href);
           } catch (err) {

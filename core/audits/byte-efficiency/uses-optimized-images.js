@@ -69,7 +69,7 @@ class UsesOptimizedImages extends ByteEfficiencyAudit {
    * @return {import('./byte-efficiency-audit.js').ByteEfficiencyProduct}
    */
   static audit_(artifacts) {
-    const pageURL = artifacts.URL.finalUrl;
+    const pageURL = artifacts.URL.finalDisplayedUrl;
     const images = artifacts.OptimizedImages;
     const imageElements = artifacts.ImageElements;
     /** @type {Map<string, LH.Artifacts.ImageElement>} */

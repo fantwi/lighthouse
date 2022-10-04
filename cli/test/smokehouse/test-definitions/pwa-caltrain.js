@@ -21,7 +21,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'https://caltrainschedule.io/',
-    finalUrl: 'https://caltrainschedule.io/',
+    finalDisplayedUrl: 'https://caltrainschedule.io/',
     audits: {
       'service-worker': {
         score: 1,

@@ -2,7 +2,7 @@ name: DevTools
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request: # run on all PRs, not just PRs to a particular branch
 
 env:
@@ -49,8 +49,8 @@ jobs:
         # 3) every change to file in Lighthouse repo important to running these tests.
         #
         # The number is how many times this hash key was manually updated to break the cache.
-        key: ${{ runner.os }}-9-${{ env.WEEK_OF_THE_YEAR }}-${{ hashFiles('cdt-test-hash.txt') }}
-        restore-keys: ${{ runner.os }}-9
+        key: ${{ runner.os }}-10-${{ env.WEEK_OF_THE_YEAR }}-${{ hashFiles('cdt-test-hash.txt') }}
+        restore-keys: ${{ runner.os }}-10
     - name: Set GHA_DEVTOOLS_CACHE_HIT
       if: steps.devtools-cache.outputs.cache-hit == 'true'
       run: echo "GHA_DEVTOOLS_CACHE_HIT=1" >> $GITHUB_ENV

@@ -22,7 +22,7 @@ const chromeLauncher = require('chrome-launcher');
   fs.writeFileSync('lhreport.html', reportHtml);
 
   // `.lhr` is the Lighthouse Result as a JS object
-  console.log('Report is done for', runnerResult.lhr.finalUrl);
+  console.log('Report is done for', runnerResult.lhr.finalDisplayedUrl);
   console.log('Performance score was', runnerResult.lhr.categories.performance.score * 100);
 
   await chrome.kill();
@@ -40,7 +40,7 @@ const flags = {onlyCategories: ['performance']};
 launchChromeAndRunLighthouse(url, flags).then( // ...
 ```
 
-You can also craft your own config (e.g. [experimental-config.js](https://github.com/GoogleChrome/lighthouse/blob/master/core/config/experimental-config.js)) for custom runs. Also see the [basic custom audit recipe](https://github.com/GoogleChrome/lighthouse/tree/master/docs/recipes/custom-audit).
+You can also craft your own config (e.g. [experimental-config.js](https://github.com/GoogleChrome/lighthouse/blob/main/core/config/experimental-config.js)) for custom runs. Also see the [basic custom audit recipe](https://github.com/GoogleChrome/lighthouse/tree/main/docs/recipes/custom-audit).
 
 ### Differences from CLI flags
 
@@ -89,9 +89,9 @@ In order to extend the Lighthouse configuration programmatically, you need to pa
 }
 ```
 
-You can extend base configuration from [lighthouse:default](https://github.com/GoogleChrome/lighthouse/blob/master/core/config/default-config.js), or you can build up your own configuration from scratch to have complete control.
+You can extend base configuration from [lighthouse:default](https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js), or you can build up your own configuration from scratch to have complete control.
 
-For more information on the types of config you can provide, see [Lighthouse Configuration](https://github.com/GoogleChrome/lighthouse/blob/master/docs/configuration.md).
+For more information on the types of config you can provide, see [Lighthouse Configuration](https://github.com/GoogleChrome/lighthouse/blob/main/docs/configuration.md).
 
 ## Testing on a site with authentication
 

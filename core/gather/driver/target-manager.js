@@ -117,6 +117,7 @@ class TargetManager extends ProtocolEventEmitter {
       // @ts-expect-error - pptr currently typed only for single arg emits.
       const protocolListener = trueProtocolListener;
       cdpSession.on('*', protocolListener);
+      cdpSession.on('sessionattached', this._onSessionAttached);
 
       const targetWithSession = {
         target: target.targetInfo,
@@ -176,12 +177,6 @@ class TargetManager extends ProtocolEventEmitter {
 
     this._rootCdpSession.on('Page.frameNavigated', this._onFrameNavigated);
 
-    const rootConnection = this._rootCdpSession.connection();
-    if (!rootConnection) {
-      throw new Error('Connection has been closed.');
-    }
-    rootConnection.on('sessionattached', this._onSessionAttached);
-
     await this._rootCdpSession.send('Page.enable');
 
     // Start with the already attached root session.
@@ -193,11 +188,10 @@ class TargetManager extends ProtocolEventEmitter {
    */
   async disable() {
     this._rootCdpSession.off('Page.frameNavigated', this._onFrameNavigated);
-    // No need to remove listener if connection is already closed.
-    this._rootCdpSession.connection()?.off('sessionattached', this._onSessionAttached);
 
     for (const {cdpSession, protocolListener} of this._targetIdToTargets.values()) {
       cdpSession.off('*', protocolListener);
+      cdpSession.off('sessionattached', this._onSessionAttached);
     }
 
     this._enabled = false;

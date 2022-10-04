@@ -82,9 +82,9 @@ export class ReportRenderer {
   _renderReportTopbar(report) {
     const el = this._dom.createComponent('topbar');
     const metadataUrl = this._dom.find('a.lh-topbar__url', el);
-    metadataUrl.textContent = report.finalUrl;
-    metadataUrl.title = report.finalUrl;
-    this._dom.safelySetHref(metadataUrl, report.finalUrl);
+    metadataUrl.textContent = report.finalDisplayedUrl;
+    metadataUrl.title = report.finalDisplayedUrl;
+    this._dom.safelySetHref(metadataUrl, report.finalDisplayedUrl);
     return el;
   }
 

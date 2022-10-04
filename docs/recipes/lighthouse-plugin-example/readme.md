@@ -11,9 +11,9 @@ Run the following to start of with the recipe as a template:
 
 ```sh
 mkdir lighthouse-plugin-example && cd lighthouse-plugin-example
-curl -L https://github.com/GoogleChrome/lighthouse/archive/master.zip | tar -xzv
-mv lighthouse-master/docs/recipes/lighthouse-plugin-example/* ./
-rm -rf lighthouse-master
+curl -L https://github.com/GoogleChrome/lighthouse/archive/main.zip | tar -xzv
+mv lighthouse-main/docs/recipes/lighthouse-plugin-example/* ./
+rm -rf lighthouse-main
 ```
 
 Install and run just your plugin:
@@ -40,7 +40,7 @@ Finally, publish to NPM.
 
 ## To run as a plugin user
 
-1. Install `lighthouse` (v5+) and the plugin `lighthouse-plugin-example`, likely as `devDependencies`. 
+1. Install `lighthouse` (v5+) and the plugin `lighthouse-plugin-example`, likely as `devDependencies`.
    * `npm install -D lighthouse lighthouse-plugin-example`
 1. To run your private lighthouse binary, you have three options
    1. `npx --no-install lighthouse https://example.com --plugins=lighthouse-plugin-example --view`

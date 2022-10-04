@@ -31,7 +31,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/tricky-tti-late-fcp.html',
-    finalUrl: 'http://localhost:10200/tricky-tti-late-fcp.html',
+    finalDisplayedUrl: 'http://localhost:10200/tricky-tti-late-fcp.html',
     audits: {
       'interactive': {
         // FCP at least ~5 seconds out

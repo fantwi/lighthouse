@@ -158,7 +158,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'http://localhost:10200/byte-efficiency/tester.html',
-    finalUrl: 'http://localhost:10200/byte-efficiency/tester.html',
+    finalDisplayedUrl: 'http://localhost:10200/byte-efficiency/tester.html',
     audits: {
       'uses-http2': {
         score: 1,

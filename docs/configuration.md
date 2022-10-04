@@ -83,9 +83,9 @@ For full list see [our config settings typedef](https://github.com/GoogleChrome/
 
 The passes property controls how to load the requested URL and what information to gather about the page while loading. Each entry in the passes array represents one load of the page (e.g. 4 entries in `passes` will load the page 4 times), so be judicious about adding multiple entries here to avoid extending run times.
 
-Each `passes` entry defines basic settings such as how long to wait for the page to load and whether to record a trace file. Additionally a list of **gatherers** to use is defined per pass. Gatherers can read information from the page to generate artifacts which are later used by audits to provide you with a Lighthouse report. For more information on implementing a custom gatherer and the role they play in building a Lighthouse report, refer to the [recipes](https://github.com/GoogleChrome/lighthouse/blob/master/docs/recipes/custom-audit). Also note that `artifacts.devtoolsLogs` will be automatically populated for every pass. Gatherers also have access to this data within the `afterPass` as `traceData.devtoolsLog` (However, most will find the higher-level `traceData.networkRecords` more useful).
+Each `passes` entry defines basic settings such as how long to wait for the page to load and whether to record a trace file. Additionally a list of **gatherers** to use is defined per pass. Gatherers can read information from the page to generate artifacts which are later used by audits to provide you with a Lighthouse report. For more information on implementing a custom gatherer and the role they play in building a Lighthouse report, refer to the [recipes](https://github.com/GoogleChrome/lighthouse/blob/main/docs/recipes/custom-audit). Also note that `artifacts.devtoolsLogs` will be automatically populated for every pass. Gatherers also have access to this data within the `afterPass` as `traceData.devtoolsLog` (However, most will find the higher-level `traceData.networkRecords` more useful).
 
-For list of default pass values, see [our config constants](https://github.com/GoogleChrome/lighthouse/blob/master/core/config/constants.js).
+For list of default pass values, see [our config constants](https://github.com/GoogleChrome/lighthouse/blob/main/core/config/constants.js).
 
 #### Example
 ```js
@@ -110,7 +110,7 @@ For list of default pass values, see [our config constants](https://github.com/G
 | Name | Type | Description |
 | -- | -- | -- |
 | passName | `string` | A unique identifier for the pass used in audits and during config extension. |
-| recordTrace | `boolean` | Records a [trace](https://github.com/GoogleChrome/lighthouse/blob/master/docs/architecture.md#understanding-a-trace) of the pass when enabled. Available to gatherers during `afterPass` as `traceData.trace` and to audits in `artifacts.traces`. |
+| recordTrace | `boolean` | Records a [trace](https://github.com/GoogleChrome/lighthouse/blob/main/docs/architecture.md#understanding-a-trace) of the pass when enabled. Available to gatherers during `afterPass` as `traceData.trace` and to audits in `artifacts.traces`. |
 | useThrottling | `boolean` | Enables throttling of the pass when enabled. |
 | pauseAfterLoadMs | `number` | The number of milliseconds to wait after the load event before the pass can continue. Used to ensure the page has had time for post-load JavaScript to execute before ending a trace. (Default: 0) |
 | networkQuietThresholdMs | `number` | The number of milliseconds since the last network request to wait before the page should be considered to have reached 'network quiet'. Used to ensure the page has had time for the full waterfall of network requests to complete before ending a trace. (Default: 5000) |
@@ -195,7 +195,7 @@ The groups property controls how to visually group audits within a category. For
 
 The stock Lighthouse configurations can be extended if you only need to make small tweaks, such as adding an audit or skipping an audit, but wish to still run most of what Lighthouse offers. When adding the `extends: 'lighthouse:default'` property to your config, the default passes, audits, groups, and categories will be automatically included, allowing you modify settings or add additional audits to a pass.
 
-Please note that the `extends` property only supports extension of `lighthouse:default`. Other internal configs found in the [core/config](https://github.com/GoogleChrome/lighthouse/tree/master/core/config) directory can be used by importing the config object from file reference, or by using the [`--preset`](https://github.com/GoogleChrome/lighthouse#cli-options) CLI flag.
+Please note that the `extends` property only supports extension of `lighthouse:default`. Other internal configs found in the [core/config](https://github.com/GoogleChrome/lighthouse/tree/main/core/config) directory can be used by importing the config object from file reference, or by using the [`--preset`](https://github.com/GoogleChrome/lighthouse#cli-options) CLI flag.
 
 See [more examples below](#more-examples) to view different types of extensions in action.
 
@@ -205,9 +205,9 @@ See [more examples below](#more-examples) to view different types of extensions 
 
 The best examples are the ones Lighthouse uses itself! There are several reference configuration files that are maintained as part of Lighthouse.
 
-* [core/config/default-config.js](https://github.com/GoogleChrome/lighthouse/blob/master/core/config/default-config.js)
-* [core/config/lr-desktop-config.js](https://github.com/GoogleChrome/lighthouse/blob/master/core/config/lr-desktop-config.js)
-* [core/config/lr-mobile-config.js](https://github.com/GoogleChrome/lighthouse/blob/master/core/config/lr-mobile-config.js)
-* [core/config/perf-config.js](https://github.com/GoogleChrome/lighthouse/blob/master/core/config/perf-config.js)
-* [docs/recipes/custom-audit/custom-config.js](https://github.com/GoogleChrome/lighthouse/blob/master/docs/recipes/custom-audit/custom-config.js)
+* [core/config/default-config.js](https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js)
+* [core/config/lr-desktop-config.js](https://github.com/GoogleChrome/lighthouse/blob/main/core/config/lr-desktop-config.js)
+* [core/config/lr-mobile-config.js](https://github.com/GoogleChrome/lighthouse/blob/main/core/config/lr-mobile-config.js)
+* [core/config/perf-config.js](https://github.com/GoogleChrome/lighthouse/blob/main/core/config/perf-config.js)
+* [docs/recipes/custom-audit/custom-config.js](https://github.com/GoogleChrome/lighthouse/blob/main/docs/recipes/custom-audit/custom-config.js)
 * [pwmetrics](https://github.com/paulirish/pwmetrics/blob/v4.1.1/lib/perf-config.ts)

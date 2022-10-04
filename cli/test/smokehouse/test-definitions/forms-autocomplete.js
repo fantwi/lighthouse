@@ -461,7 +461,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'http://localhost:10200/form.html',
-    finalUrl: 'http://localhost:10200/form.html',
+    finalDisplayedUrl: 'http://localhost:10200/form.html',
     audits: {
     // Requires `--enable-features=AutofillShowTypePredictions`.
     //   autocomplete: {

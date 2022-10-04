@@ -27,10 +27,9 @@ function buildArtifacts(networkRecords) {
   return {
     LinkElements: [],
     URL: {
-      initialUrl: 'about:blank',
       requestedUrl: mainResource.url,
       mainDocumentUrl: mainResource.url,
-      finalUrl: mainResource.url,
+      finalDisplayedUrl: mainResource.url,
     },
     devtoolsLogs: {defaultPass: devtoolsLog},
     traces: {defaultPass: trace},

@@ -41,7 +41,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'http://localhost:10200/csp.html?' + blockAllExceptInlineScriptCsp,
-    finalUrl: 'http://localhost:10200/csp.html?' + blockAllExceptInlineScriptCsp,
+    finalDisplayedUrl: 'http://localhost:10200/csp.html?' + blockAllExceptInlineScriptCsp,
     audits: {},
   },
 };

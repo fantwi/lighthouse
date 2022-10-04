@@ -39,7 +39,7 @@ const config = {
 const expectations = {
   lhr: {
     requestedUrl: 'http://localhost:10200/online-only.html',
-    finalUrl: 'http://localhost:10200/online-only.html',
+    finalDisplayedUrl: 'http://localhost:10200/online-only.html',
     audits: {
       'is-on-https': {
         score: 1,

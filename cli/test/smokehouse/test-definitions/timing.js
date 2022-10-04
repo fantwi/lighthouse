@@ -27,7 +27,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'http://localhost:10200/simple-page.html',
-    finalUrl: 'http://localhost:10200/simple-page.html',
+    finalDisplayedUrl: 'http://localhost:10200/simple-page.html',
     audits: {},
     timing: {
       entries: {

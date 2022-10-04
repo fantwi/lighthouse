@@ -62,7 +62,7 @@ const expectations = {
   },
   lhr: {
     requestedUrl: 'http://localhost:10200/preload.html',
-    finalUrl: 'http://localhost:10200/preload.html',
+    finalDisplayedUrl: 'http://localhost:10200/preload.html',
     audits: {
       'speed-index': {
         score: '>=0.80', // primarily just making sure it didn't fail/go crazy, specific value isn't that important

@@ -37,7 +37,7 @@ function generateArtifacts(images) {
   }
 
   return {
-    URL: {finalUrl: 'http://google.com/'},
+    URL: {finalDisplayedUrl: 'http://google.com/'},
     ImageElements: imageElements,
     OptimizedImages: optimizedImages,
   };

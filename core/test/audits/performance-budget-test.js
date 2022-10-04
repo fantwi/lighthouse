@@ -21,7 +21,7 @@ describe('Performance: Resource budgets audit', () => {
           {url: 'http://third-party.com/file.jpg', resourceType: 'Image', transferSize: 70},
         ]),
       },
-      URL: {requestedUrl: 'http://example.com', mainDocumentUrl: 'http://example.com', finalUrl: 'http://example.com'},
+      URL: {requestedUrl: 'http://example.com', mainDocumentUrl: 'http://example.com', finalDisplayedUrl: 'http://example.com'},
     };
     context = {computedCache: new Map(), settings: {}};
   });
@@ -186,7 +186,7 @@ describe('Performance: Resource budgets audit', () => {
               {url: 'http://third-party.com/script.js', resourceType: 'Script', transferSize: 50},
             ]),
           },
-          URL: {requestedUrl: 'http://example.com/file.html', mainDocumentUrl: 'http://example.com/file.html', finalUrl: 'http://example.com/file.html'},
+          URL: {requestedUrl: 'http://example.com/file.html', mainDocumentUrl: 'http://example.com/file.html', finalDisplayedUrl: 'http://example.com/file.html'},
         };
         context.settings.budgets = [{
           path: '/',

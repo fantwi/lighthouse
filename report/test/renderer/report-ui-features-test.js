@@ -107,7 +107,7 @@ describe('ReportUIFeatures', () => {
 
       before(() => {
         const lhr = JSON.parse(JSON.stringify(sampleResults));
-        lhr.requestedUrl = lhr.finalUrl = 'http://www.example.com';
+        lhr.requestedUrl = lhr.finalDisplayedUrl = 'http://www.example.com';
         const webpAuditItemTemplate = {
           ...sampleResults.audits['modern-image-formats'].details.items[0],
           wastedBytes: 8.8 * 1024,

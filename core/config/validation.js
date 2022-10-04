@@ -212,7 +212,7 @@ function assertValidCategories(categories, audits, groups) {
  */
 function assertValidSettings(settings) {
   if (!settings.formFactor) {
-    throw new Error(`\`settings.formFactor\` must be defined as 'mobile' or 'desktop'. See https://github.com/GoogleChrome/lighthouse/blob/master/docs/emulation.md`);
+    throw new Error(`\`settings.formFactor\` must be defined as 'mobile' or 'desktop'. See https://github.com/GoogleChrome/lighthouse/blob/main/docs/emulation.md`);
   }
 
   if (!settings.screenEmulation.disabled) {
@@ -220,7 +220,7 @@ function assertValidSettings(settings) {
     //   Bad mismatch A: user wants mobile emulation but scoring is configured for desktop
     //   Bad mismtach B: user wants everything desktop and set formFactor, but accidentally not screenEmulation
     if (settings.screenEmulation.mobile !== (settings.formFactor === 'mobile')) {
-      throw new Error(`Screen emulation mobile setting (${settings.screenEmulation.mobile}) does not match formFactor setting (${settings.formFactor}). See https://github.com/GoogleChrome/lighthouse/blob/master/docs/emulation.md`);
+      throw new Error(`Screen emulation mobile setting (${settings.screenEmulation.mobile}) does not match formFactor setting (${settings.formFactor}). See https://github.com/GoogleChrome/lighthouse/blob/main/docs/emulation.md`);
     }
   }
 }

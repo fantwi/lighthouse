@@ -23,7 +23,7 @@ describe('Performance: Resource summary audit', () => {
           {url: 'http://third-party.com/file.jpg', resourceType: 'Image', transferSize: 70},
         ]),
       },
-      URL: {requestedUrl: 'http://example.com', mainDocumentUrl: 'http://example.com', finalUrl: 'http://example.com'},
+      URL: {requestedUrl: 'http://example.com', mainDocumentUrl: 'http://example.com', finalDisplayedUrl: 'http://example.com'},
     };
   });
   it('has three table columns', async () => {

@@ -6,7 +6,7 @@
 
 import {EventEmitter} from 'events';
 
-import {CDPSession} from 'puppeteer-core/lib/cjs/puppeteer/common/Connection.js';
+import {CDPSessionImpl} from 'puppeteer-core/lib/cjs/puppeteer/common/Connection.js';
 
 import {TargetManager} from '../../../gather/driver/target-manager.js';
 import {createMockCdpSession} from '../mock-driver.js';
@@ -77,8 +77,8 @@ describe('TargetManager', () => {
         .mockResponse('Runtime.runIfWaitingForDebugger');
       await targetManager.enable();
 
-      expect(sessionMock.connection().on).toHaveBeenCalled();
-      const sessionListener = sessionMock.connection().on.mock.calls[0][1];
+      expect(sessionMock.on).toHaveBeenCalled();
+      const sessionListener = sessionMock.on.mock.calls[3][1];
 
       // Original, attach.
       expect(sendMock.findAllInvocations('Target.getTargetInfo')).toHaveLength(1);
@@ -230,7 +230,6 @@ describe('TargetManager', () => {
       await targetManager.disable();
 
       expect(sessionMock.off).toHaveBeenCalled();
-      expect(sessionMock.connection().off).toHaveBeenCalled();
     });
   });
 
@@ -248,7 +247,7 @@ describe('TargetManager', () => {
       const mockCdpConnection = new MockCdpConnection();
       /** @type {LH.Puppeteer.CDPSession} */
       // @ts-expect-error - close enough to the real thing.
-      const cdpSession = new CDPSession(mockCdpConnection, '', sessionId);
+      const cdpSession = new CDPSessionImpl(mockCdpConnection, '', sessionId);
       return cdpSession;
     }
 
@@ -277,9 +276,7 @@ describe('TargetManager', () => {
         .mockResponse('Target.setAutoAttach')
         .mockResponse('Runtime.runIfWaitingForDebugger');
 
-      const rootConnection = rootSession.connection();
-      if (!rootConnection) throw new Error('no connection');
-      rootConnection.emit('sessionattached', iframeSession);
+      rootSession.emit('sessionattached', iframeSession);
 
       // Wait for iframe session to be attached.
       await new Promise(resolve => setTimeout(resolve, 0));
