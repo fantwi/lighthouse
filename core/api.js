@@ -20,29 +20,33 @@ async function startFlow(page, options) {
 }
 
 /**
- * @param  {Parameters<navigationGather>} params
+ * @param {LH.Puppeteer.Page|undefined} page
+ * @param {LH.NavigationRequestor|undefined} requestor
+ * @param {{config?: LH.Config.Json, flags?: LH.Flags}} [options]
  * @return {Promise<LH.RunnerResult|undefined>}
  */
-async function navigation(...params) {
-  const gatherResult = await navigationGather(...params);
+async function navigation(page, requestor, options) {
+  const gatherResult = await navigationGather(page, requestor, options);
   return Runner.audit(gatherResult.artifacts, gatherResult.runnerOptions);
 }
 
 /**
- * @param  {Parameters<snapshotGather>} params
+ * @param {LH.Puppeteer.Page} page
+ * @param {{config?: LH.Config.Json, flags?: LH.Flags}} [options]
  * @return {Promise<LH.RunnerResult|undefined>}
  */
-async function snapshot(...params) {
-  const gatherResult = await snapshotGather(...params);
+async function snapshot(page, options) {
+  const gatherResult = await snapshotGather(page, options);
   return Runner.audit(gatherResult.artifacts, gatherResult.runnerOptions);
 }
 
 /**
- * @param  {Parameters<startTimespanGather>} params
+ * @param {LH.Puppeteer.Page} page
+ * @param {{config?: LH.Config.Json, flags?: LH.Flags}} [options]
  * @return {Promise<{endTimespan: () => Promise<LH.RunnerResult|undefined>}>}
  */
-async function startTimespan(...params) {
-  const {endTimespanGather} = await startTimespanGather(...params);
+async function startTimespan(page, options) {
+  const {endTimespanGather} = await startTimespanGather(page, options);
   const endTimespan = async () => {
     const gatherResult = await endTimespanGather();
     return Runner.audit(gatherResult.artifacts, gatherResult.runnerOptions);
