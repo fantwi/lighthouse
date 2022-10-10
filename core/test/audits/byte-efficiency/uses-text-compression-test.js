@@ -5,7 +5,7 @@
  */
 
 const KB = 1024;
-import {strict as assert} from 'assert';
+import assert from 'assert/strict';
 
 import ResponsesAreCompressedAudit from '../../../audits/byte-efficiency/uses-text-compression.js';
 

@@ -5,7 +5,7 @@
  */
 
 import fs from 'fs';
-import assert from 'assert';
+import assert from 'assert/strict';
 
 import puppeteer from 'puppeteer';
 

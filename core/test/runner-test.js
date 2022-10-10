@@ -5,7 +5,7 @@
  */
 
 import fs from 'fs';
-import {strict as assert} from 'assert';
+import assert from 'assert/strict';
 import path from 'path';
 
 import jestMock from 'jest-mock';

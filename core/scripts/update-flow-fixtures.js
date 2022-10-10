@@ -7,7 +7,7 @@
 /* global document */
 
 import fs from 'fs';
-import assert from 'assert';
+import assert from 'assert/strict';
 
 import open from 'open';
 import waitForExpect from 'wait-for-expect';
@@ -41,7 +41,7 @@ const args = yargs(process.argv.slice(2))
   })
   .parseSync();
 
-/** @param {LH.Puppeteer.Page} page */
+/** @param {puppeteer.Page} page */
 async function waitForImagesToLoad(page) {
   const TIMEOUT = 30_000;
   const QUIET_WINDOW = 3_000;

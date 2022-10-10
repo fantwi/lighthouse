@@ -5,7 +5,7 @@
  */
 
 import fs from 'fs';
-import {strict as assert} from 'assert';
+import assert from 'assert/strict';
 import {createRequire} from 'module';
 
 import {computeCSSTokenLength, computeJSTokenLength} from '../../lib/minification-estimator.js'; // eslint-disable-line max-len

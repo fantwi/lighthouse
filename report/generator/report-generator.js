@@ -65,10 +65,13 @@ class ReportGenerator {
    */
   static generateFlowReportHtml(flow) {
     const sanitizedJson = ReportGenerator.sanitizeJson(flow);
+    // terser does its own sanitization, but keep this basic replace for when
+    // we want to generate a report without minification.
+    const sanitizedJavascript = reportAssets.FLOW_REPORT_JAVASCRIPT.replace(/<\//g, '\\u003c/');
     return ReportGenerator.replaceStrings(reportAssets.FLOW_REPORT_TEMPLATE, [
       /* eslint-disable max-len */
       {search: '%%LIGHTHOUSE_FLOW_JSON%%', replacement: sanitizedJson},
-      {search: '%%LIGHTHOUSE_FLOW_JAVASCRIPT%%', replacement: reportAssets.FLOW_REPORT_JAVASCRIPT},
+      {search: '%%LIGHTHOUSE_FLOW_JAVASCRIPT%%', replacement: sanitizedJavascript},
       {search: '/*%%LIGHTHOUSE_FLOW_CSS%%*/', replacement: reportAssets.FLOW_REPORT_CSS},
       /* eslint-enable max-len */
     ]);

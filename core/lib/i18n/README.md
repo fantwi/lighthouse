@@ -12,11 +12,11 @@ The collection and translation pipeline:
 ```
  Source files:                                         Locale files:
 +---------------------------+                         +----------------------------------------------
-|                           ++                        | shared/localization/locales/en-US.json |
-| const UIStrings = { ... };|-+                 +---> | shared/localization/locales/en-XL.json |
+|                           ++                        | shared/localization/locales/en-US.json      |
+| const UIStrings = { ... };|-+                 +---> | shared/localization/locales/en-XL.json      |
 |                           |-|                 |     +----------------------------------------------+
 +-----------------------------|                 |     |                                             ||
- +----------------------------|                 |     | shared/localization/locales/*.json     |-<+
+ +----------------------------|                 |     | shared/localization/locales/*.json          |-<+
   +---------------------------+                 |     |                                             || |
                            |                    |     +----------------------------------------------| |
   $ yarn                   |                    |      +---------------------------------------------+ |
@@ -198,11 +198,11 @@ CTC is a name that is distinct and identifies this as the Chrome translation for
 ```json
 {
   "name": {
-    "message": "Message text, with optional placeholders.",
+    "message": "Message text, with optional placeholders, which can be $PLACEHOLDER_TEXT$",
     "description": "Translator-aimed description of the message.",
     "meaning": "Description given when a message is duplicated, in order to give context to the message. Lighthouse uses a copy of the description for this.",
     "placeholders": {
-      "placeholder_name": {
+      "PLACEHOLDER_TEXT": {
         "content": "A string to be placed within the message.",
         "example": "Translator-aimed example of the placeholder string."
       },
@@ -210,6 +210,23 @@ CTC is a name that is distinct and identifies this as the Chrome translation for
   }
 }
 ```
+
+### Collisions
+Collisions happen when two CTC messages have the same `message`. For Lighthouse, there are two relevant collision types in TC:
+  - Allowed: the CTC `message`, `description`, and `placeholders` are exactly the same. These collisions are deduped on the TC side and the translation cost is the same as for a single string.
+  - Disallowed: `message` is the same but one or more of the other properties differ.
+
+When the `message` needs to be the same as another string but another property must differ, that disallowed collision can be fixed by adding a unique `meaning` property to each colliding CTC message. TC will then consider those as separate strings and not a collision.
+
+In Lighthouse, this is done by having a different `description` for the strings, which is then copied to `meaning` in `resolveMessageCollisions()`. `meaning` cannot be manually set.
+
+For instance, the string "Potential Savings" currently refers to both saved KiB and saved milliseconds in different audits. The string is defined twice, each with a different `description` describing the units being saved, in case some locales' translations will use a different word choice depending on the unit.
+
+Internally, TC uses a message ID that's a hash of `message` and `meaning` to check for collisions. Somewhat confusingly, if two messages do have colliding IDs, then `message`, `meaning`, `description`, and `placeholders` are all required to match or an error is thrown. This is why all message properties could cause a collision but `meaning` is the only way to dedupe them.
+
+We treat it as an error if `placeholders` differ between messages in a collision: if there is a need for placeholders to differ, then the strings aren't really the same, and at least the `description` should be changed to explain that context. Placeholders must match in user-controlled data (e.g. if a placeholder has an `@example`, it must be the same example in all instances) and in Lighthouse-controlled data (e.g. the token used to replace it in the CTC `message`, like `$PLACEHOLDER_TEXT$` in the example above).
+
+Finally, identical messages made to not collide by Lighthouse with a `meaning` cost real money and shouldn't be confused with allowed collisions which cost nothing for each additional collision. Fixed collisions are checked against a known list to add a little friction and motivate keeping them few in number. An error is thrown if a collision is fixed that hasn't yet been added to that list.
 
 # Appendix
 

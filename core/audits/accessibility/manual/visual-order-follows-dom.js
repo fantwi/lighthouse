@@ -18,7 +18,7 @@ class VisualOrderFollowsDOM extends ManualAudit {
   static get meta() {
     return Object.assign({
       id: 'visual-order-follows-dom',
-      description: 'DOM order matches the visual order, improving navigation for assistive technology. [Learn more about DOM and visual ordering](https://web.dev/visual-order-follows-dom/).',
+      description: 'DOM order matches the visual order, improving navigation for assistive technology. [Learn more about DOM and visual ordering](https://developer.chrome.com/docs/lighthouse/accessibility/visual-order-follows-dom/).',
       title: 'Visual order on the page follows DOM order',
     }, super.partialMeta);
   }

@@ -102,7 +102,6 @@
     "core/test/runner-test.js",
     "core/test/scoring-test.js",
     "core/test/scripts/i18n/bake-ctc-to-lhl-test.js",
-    "core/test/scripts/i18n/collect-strings-test.js",
   ],
   "files": [
     // Opt-in to typechecking for some core tests and test-support files.

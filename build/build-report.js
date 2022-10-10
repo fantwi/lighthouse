@@ -14,9 +14,9 @@ import {locales} from '../shared/localization/locales.js';
 import {UIStrings as FlowUIStrings} from '../flow-report/src/i18n/ui-strings.js';
 
 /**
- * Extract only the strings needed for the flow report into
- * a script that sets a global variable `strings`, whose keys
- * are locale codes (en-US, es, etc.) and values are localized UIStrings.
+ * Extract only the strings needed for the flow report. Code generated is
+ * an object whose keys are locale codes (en-US, es, etc.) and values are localized UIStrings.
+ * For flow-report/src/i18n/localized-strings.js
  */
 function buildFlowStrings() {
   const strings = /** @type {Record<LH.Locale, string>} */ ({});

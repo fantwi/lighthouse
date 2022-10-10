@@ -54,7 +54,7 @@
     "message": "ARIA input fields have accessible names"
   },
   "core/audits/accessibility/aria-meter-name.js | description": {
-    "message": "When an element doesn't have an accessible name, screen readers announce it with a generic name, making it unusable for users who rely on screen readers. [Learn how to name `meter` elements](https://dequeuniversity.com/rules/axe/4.4/aria-meter-name)."
+    "message": "When a meter element doesn't have an accessible name, screen readers announce it with a generic name, making it unusable for users who rely on screen readers. [Learn how to name `meter` elements](https://dequeuniversity.com/rules/axe/4.4/aria-meter-name)."
   },
   "core/audits/accessibility/aria-meter-name.js | failureTitle": {
     "message": "ARIA `meter` elements do not have accessible names."
@@ -117,7 +117,7 @@
     "message": "ARIA toggle fields have accessible names"
   },
   "core/audits/accessibility/aria-tooltip-name.js | description": {
-    "message": "When an element doesn't have an accessible name, screen readers announce it with a generic name, making it unusable for users who rely on screen readers. [Learn how to name `tooltip` elements](https://dequeuniversity.com/rules/axe/4.4/aria-tooltip-name)."
+    "message": "When a tooltip element doesn't have an accessible name, screen readers announce it with a generic name, making it unusable for users who rely on screen readers. [Learn how to name `tooltip` elements](https://dequeuniversity.com/rules/axe/4.4/aria-tooltip-name)."
   },
   "core/audits/accessibility/aria-tooltip-name.js | failureTitle": {
     "message": "ARIA `tooltip` elements do not have accessible names."
@@ -1536,7 +1536,7 @@
     "message": "Best practices"
   },
   "core/config/default-config.js | a11yCategoryDescription": {
-    "message": "These checks highlight opportunities to [improve the accessibility of your web app](https://web.dev/lighthouse-accessibility/). Only a subset of accessibility issues can be automatically detected so manual testing is also encouraged."
+    "message": "These checks highlight opportunities to [improve the accessibility of your web app](https://developer.chrome.com/docs/lighthouse/accessibility/). Only a subset of accessibility issues can be automatically detected so manual testing is also encouraged."
   },
   "core/config/default-config.js | a11yCategoryManualDescription": {
     "message": "These items address areas which an automated testing tool cannot cover. Learn more in our guide on [conducting an accessibility review](https://web.dev/how-to-review/)."

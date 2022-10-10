@@ -4,7 +4,7 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {strict as assert} from 'assert';
+import assert from 'assert/strict';
 import path from 'path';
 import {createRequire} from 'module';
 
@@ -132,7 +132,7 @@ describe('Config', () => {
     );
   });
 
-  it('throws when an audit requires an artifact with no gatherer supplying it', () => {
+  it('throws when an audit requires an artifact with no gatherer supplying it', async () => {
     class NeedsWhatYouCantGive extends Audit {
       static get meta() {
         return {
@@ -153,7 +153,7 @@ describe('Config', () => {
       static audit() {}
     }
 
-    expect(Config.fromJson({
+    await expect(Config.fromJson({
       extends: 'lighthouse:default',
       audits: [NeedsWhatYouCantGive],
     // eslint-disable-next-line max-len
@@ -805,12 +805,12 @@ describe('Config', () => {
     assert.equal(config.passes[0].networkQuietThresholdMs, 10003);
   });
 
-  it('only supports `lighthouse:default` extension', () => {
+  it('only supports `lighthouse:default` extension', async () => {
     const createConfig = extendsValue => Config.fromJson({extends: extendsValue});
 
-    expect(createConfig(true)).rejects.toThrow(/default` is the only valid extension/);
-    expect(createConfig('lighthouse')).rejects.toThrow(/default` is the only valid/);
-    expect(createConfig('lighthouse:full')).rejects.toThrow(/default` is the only valid/);
+    await expect(createConfig(true)).rejects.toThrow(/default` is the only valid extension/);
+    await expect(createConfig('lighthouse')).rejects.toThrow(/default` is the only valid/);
+    await expect(createConfig('lighthouse:full')).rejects.toThrow(/default` is the only valid/);
   });
 
   it('merges settings with correct priority', async () => {

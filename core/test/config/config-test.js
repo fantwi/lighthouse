@@ -25,7 +25,7 @@ describe('Fraggle Rock Config', () => {
   });
 
   it('should throw if the config path is not absolute', async () => {
-    expect(initializeConfig(gatherMode, undefined, {configPath: '../relative/path'}))
+    await expect(initializeConfig(gatherMode, undefined, {configPath: '../relative/path'}))
       .rejects.toThrow(/must be an absolute path/);
   });
 
@@ -85,11 +85,11 @@ describe('Fraggle Rock Config', () => {
     });
   });
 
-  it('should throw on invalid artifact definitions', () => {
+  it('should throw on invalid artifact definitions', async () => {
     const nonFRGatherer = new BaseGatherer();
     nonFRGatherer.getArtifact = jestMock.fn();
     const configJson = {artifacts: [{id: 'LegacyGather', gatherer: {instance: nonFRGatherer}}]};
-    expect(initializeConfig(gatherMode, configJson)).rejects.toThrow(/FRGatherer gatherer/);
+    await expect(initializeConfig(gatherMode, configJson)).rejects.toThrow(/FRGatherer gatherer/);
   });
 
   it('should filter configuration by gatherMode', async () => {
@@ -206,24 +206,24 @@ describe('Fraggle Rock Config', () => {
       });
     });
 
-    it('should throw when dependencies are out of order in artifacts', () => {
+    it('should throw when dependencies are out of order in artifacts', async () => {
       if (!configJson.artifacts) throw new Error('Failed to run beforeEach');
       configJson.artifacts = [configJson.artifacts[1], configJson.artifacts[0]];
-      expect(initializeConfig('snapshot', configJson))
+      await expect(initializeConfig('snapshot', configJson))
         .rejects.toThrow(/Failed to find dependency/);
     });
 
-    it('should throw when timespan needs snapshot', () => {
+    it('should throw when timespan needs snapshot', async () => {
       dependentGatherer.meta.supportedModes = ['timespan'];
       dependencyGatherer.meta.supportedModes = ['snapshot'];
-      expect(initializeConfig('navigation', configJson))
+      await expect(initializeConfig('navigation', configJson))
         .rejects.toThrow(/Dependency.*is invalid/);
     });
 
-    it('should throw when timespan needs navigation', () => {
+    it('should throw when timespan needs navigation', async () => {
       dependentGatherer.meta.supportedModes = ['timespan'];
       dependencyGatherer.meta.supportedModes = ['navigation'];
-      expect(initializeConfig('navigation', configJson))
+      await expect(initializeConfig('navigation', configJson))
         .rejects.toThrow(/Dependency.*is invalid/);
     });
   });
@@ -431,15 +431,8 @@ describe('Fraggle Rock Config', () => {
       artifacts: [{id: 'artifact', gatherer: {instance: new BaseGatherer()}}],
     };
 
-    // https://github.com/facebook/jest/issues/11438
-    // expect(initializeConfig(extensionConfig, {gatherMode: 'navigation'}))
-    //   .rejects.toThrow(/did not support any gather modes/);
-    try {
-      await initializeConfig('navigation', extensionConfig);
-      throw new Error('did not throw');
-    } catch (err) {
-      expect(err.message).toMatch(/did not support any gather modes/);
-    }
+    await expect(initializeConfig('navigation', extensionConfig)).rejects
+      .toThrow(/did not support any gather modes/);
   });
 });
 

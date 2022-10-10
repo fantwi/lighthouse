@@ -146,7 +146,7 @@ export class DOM {
       // Otherwise, append any links found.
       const url = new URL(segment.linkHref);
 
-      const DOCS_ORIGINS = ['https://developers.google.com', 'https://web.dev'];
+      const DOCS_ORIGINS = ['https://developers.google.com', 'https://web.dev', 'https://developer.chrome.com'];
       if (DOCS_ORIGINS.includes(url.origin)) {
         url.searchParams.set('utm_source', 'lighthouse');
         url.searchParams.set('utm_medium', this._lighthouseChannel);

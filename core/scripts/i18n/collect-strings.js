@@ -16,6 +16,7 @@ import {expect} from 'expect';
 import tsc from 'typescript';
 import MessageParser from 'intl-messageformat-parser';
 import esMain from 'es-main';
+import isDeepEqual from 'lodash/isEqual.js';
 
 import {Util} from '../../util.cjs';
 import {collectAndBakeCtcStrings} from './bake-ctc-to-lhl.js';
@@ -613,43 +614,90 @@ function writeStringsToCtcFiles(locale, strings) {
 }
 
 /**
- * This function does two things:
+ * TODO: replace by Array.prototype.groupToMap when available.
+ * @template {unknown} T
+ * @template {string} U
+ * @param {Array<T>} elements
+ * @param {(element: T) => U} callback
+ * @return {Map<U, Array<T>>}
+ */
+function arrayGroupToMap(elements, callback) {
+  /** @type {Map<U, Array<T>>} */
+  const elementsByValue = new Map();
+
+  for (const element of elements) {
+    const key = callback(element);
+    const group = elementsByValue.get(key) || [];
+    group.push(element);
+    elementsByValue.set(key, group);
+  }
+
+  return elementsByValue;
+}
+
+/**
+ * Returns whether all the placeholders in the given CtcMessages match.
+ * @param {Array<{ctc: CtcMessage}>} strings
+ * @return {boolean}
+ */
+function doPlaceholdersMatch(strings) {
+  // Technically placeholder `content` is not required to match by TC, but since
+  // `example` must match and any auto-generated `example` is copied from `content`,
+  // it would be confusing to let it differ when `example` is explicit.
+  return strings.every(val => isDeepEqual(val.ctc.placeholders, strings[0].ctc.placeholders));
+}
+
+/**
+ * If two or more messages have the same `message`:
+ * - if `description`, and `placeholders` are also the same, TC treats them as a
+ *   single message, the collision is allowed, and no change is made.
+ * - if `description` is unique for the collision members, the `description` is
+ *   copied to `meaning` to differentiate them for TC. They must be added to the
+ *   `collidingMessages` list for this case as a nudge to not be wasteful.
+ * - if `description` is the same but `placeholders` differ, an error is thrown.
+ *   Either `placeholders` should be the same, or `message` or `description`
+ *   should be changed to explain the need for different `placeholders`.
  *
- *    - Add `meaning` property to ctc messages that have the same message but different descriptions so TC can disambiguate.
- *    - Throw if the known collisions has changed at all.
- *
+ * Modifies `strings` in place to fix collisions.
+ * @see https://github.com/GoogleChrome/lighthouse/blob/main/core/lib/i18n/README.md#collisions
  * @param {Record<string, CtcMessage>} strings
  */
 function resolveMessageCollisions(strings) {
-  /** @type {Map<string, Array<CtcMessage>>} */
-  const stringsByMessage = new Map();
+  const entries = Object.entries(strings).map(([key, ctc]) => ({key, ctc}));
 
-  // Group all the strings by their message.
-  for (const ctc of Object.values(strings)) {
-    const collisions = stringsByMessage.get(ctc.message) || [];
-    collisions.push(ctc);
-    stringsByMessage.set(ctc.message, collisions);
-  }
-
-  /** @type {Array<CtcMessage>} */
-  const allCollisions = [];
+  const stringsByMessage = arrayGroupToMap(entries, (entry) => entry.ctc.message);
   for (const messageGroup of stringsByMessage.values()) {
     // If this message didn't collide with anything else, skip it.
     if (messageGroup.length <= 1) continue;
 
-    // If group shares both message and description, they can be translated as if a single string.
-    const descriptions = new Set(messageGroup.map(ctc => ctc.description));
-    if (descriptions.size <= 1) continue;
+    // For each group of matching message+description, placeholders must also match.
+    const stringsByDescription = arrayGroupToMap(messageGroup, (entry) => entry.ctc.description);
+    for (const descriptionGroup of stringsByDescription.values()) {
+      if (!doPlaceholdersMatch(descriptionGroup)) {
+        throw new Error('string collision: `message` and `description` are the same but differ in `placeholders`:\n' +
+          descriptionGroup.map(entry => `key: ${entry.key}\n`).join('') +
+          'make `placeholders` match or update `message` or `description`s to explain why they don\'t match');
+      }
+    }
+
+    // If the entire message group has the same description and placeholders,
+    // they can be translated as if a single message, no meaning needed.
+    if (stringsByDescription.size <= 1) continue;
 
     // We have duplicate messages with different descriptions. Disambiguate using `meaning` for TC.
-    for (const ctc of messageGroup) {
+    for (const {ctc} of messageGroup) {
       ctc.meaning = ctc.description;
     }
-    allCollisions.push(...messageGroup);
   }
+}
 
-  // Check that the known collisions match our known list.
-  const collidingMessages = allCollisions.map(collision => collision.message).sort();
+/**
+ * Check that fixed collisions match our known list.
+ * @param {Record<string, CtcMessage>} strings
+ */
+function checkKnownFixedCollisions(strings) {
+  const fixedCollisions = Object.values(strings).filter(string => string.meaning);
+  const collidingMessages = fixedCollisions.map(collision => collision.message).sort();
 
   try {
     expect(collidingMessages).toEqual([
@@ -696,6 +744,7 @@ async function main() {
   }
 
   resolveMessageCollisions(strings);
+  checkKnownFixedCollisions(strings);
 
   writeStringsToCtcFiles('en-US', strings);
   console.log('Written to disk!', 'en-US.ctc.json');
@@ -734,4 +783,5 @@ export {
   parseUIStrings,
   createPsuedoLocaleStrings,
   convertMessageToCtc,
+  resolveMessageCollisions,
 };

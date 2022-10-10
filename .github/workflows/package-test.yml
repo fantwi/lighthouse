@@ -14,10 +14,10 @@ jobs:
     - name: git clone
       uses: actions/checkout@v2
 
-    - name: Use Node.js 14.x
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: 16.x
 
     - run: yarn install --frozen-lockfile --network-timeout 1000000
     - run: yarn build-report
@@ -36,10 +36,10 @@ jobs:
     - name: git clone
       uses: actions/checkout@v2
 
-    - name: Use Node.js 14.x
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: 16.x
 
     - run: yarn install --frozen-lockfile --network-timeout 1000000
     - run: yarn build-report

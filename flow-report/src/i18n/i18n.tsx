@@ -11,7 +11,7 @@ import {formatMessage} from '../../../shared/localization/format';
 import {I18n} from '../../../report/renderer/i18n';
 import {UIStrings} from './ui-strings';
 import {useFlowResult} from '../util';
-import strings from './localized-strings';
+import strings from './localized-strings.js';
 import {Util} from '../../../report/renderer/util';
 
 const I18nContext = createContext(new I18n('en-US', {...Util.UIStrings, ...UIStrings}));

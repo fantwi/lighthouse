@@ -23,10 +23,10 @@ jobs:
         GITHUB_CONTEXT_PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
         GITHUB_CONTEXT_BASE_SHA: ${{ github.event.before }}
 
-    - name: Use Node.js 14.x
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: 16.x
 
     - run: yarn install --frozen-lockfile --network-timeout 1000000
     - run: yarn build-all

@@ -6,7 +6,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import {strict as assert} from 'assert';
+import assert from 'assert/strict';
 
 import ScreenshotThumbnailsAudit from '../../audits/screenshot-thumbnails.js';
 import {LH_ROOT} from '../../../root.js';

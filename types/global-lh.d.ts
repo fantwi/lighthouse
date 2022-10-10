@@ -21,7 +21,7 @@ import Protocol_ from './protocol';
 import * as Settings from './lhr/settings';
 import Treemap_ from './lhr/treemap';
 import UserFlow_ from './user-flow';
-import puppeteer from 'puppeteer-core';
+import Puppeteer_ from './puppeteer';
 
 // Construct hierarchy of global types under the LH namespace.
 declare global {
@@ -29,7 +29,7 @@ declare global {
     export type ArbitraryEqualityMap = ArbitraryEqualityMap_;
     export type NavigationRequestor = string | (() => Promise<void> | void);
 
-    export import Puppeteer = puppeteer;
+    export import Puppeteer = Puppeteer_;
 
     // artifacts.d.ts
     export import Artifacts = Artifacts_.Artifacts;

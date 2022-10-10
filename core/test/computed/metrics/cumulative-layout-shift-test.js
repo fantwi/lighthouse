@@ -31,7 +31,7 @@ describe('Metrics: CLS', () => {
     });
 
     it('throws if layout shift events are found without weighted_score_delta', async () => {
-      expect(_ => CumulativeLayoutShift.request(oldMetricsTrace, context)).rejects
+      await expect(CumulativeLayoutShift.request(oldMetricsTrace, context)).rejects
           .toThrow('CLS missing weighted_score_delta');
     });
 

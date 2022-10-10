@@ -145,6 +145,10 @@ function addSniffer(receiver, methodName, override) {
 }
 
 async function waitForLighthouseReady() {
+  // Undocking later in the function can cause hiccups when Lighthouse enables device emulation.
+  // @ts-expect-error global
+  UI.dockController.setDockSide('undocked');
+
   // @ts-expect-error global
   const viewManager = UI.viewManager || (UI.ViewManager.ViewManager || UI.ViewManager).instance();
   const views = viewManager.views || viewManager._views;
@@ -155,9 +159,6 @@ async function waitForLighthouseReady() {
   const panel = UI.panels.lighthouse || UI.panels.audits;
   const button = panel.contentElement.querySelector('button');
   if (button.disabled) throw new Error('Start button disabled');
-
-  // @ts-expect-error global
-  UI.dockController.setDockSide('undocked');
 
   // Give the main target model a moment to be available.
   // Otherwise, 'SDK.TargetManager.TargetManager.instance().mainTarget()' is null.
@@ -182,6 +183,13 @@ async function waitForLighthouseReady() {
         await new Promise(resolve => setTimeout(resolve, 100));
       }
     }
+  }
+
+  // Ensure the emulation model is ready before Lighthouse starts by enabling device emulation.
+  // @ts-expect-error global
+  const {deviceModeView} = Emulation.AdvancedApp.instance();
+  if (!deviceModeView.isDeviceModeOn()) {
+    deviceModeView.toggleDeviceMode();
   }
 }
 

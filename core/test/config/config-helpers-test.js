@@ -232,22 +232,23 @@ describe('.mergePlugins', () => {
     expect(config.categories).toHaveProperty('lighthouse-plugin-no-groups');
   });
 
-  it('validate plugin name', () => {
+  it('validate plugin name', async () => {
     const configJson = {audits: ['installable-manifest', 'metrics']};
     const flags = {plugins: ['not-a-plugin']};
-    expect(mergePlugins(configJson, configDir, flags)).rejects.toThrow(/does not start/);
+    await expect(mergePlugins(configJson, configDir, flags)).rejects.toThrow(/does not start/);
   });
 
-  it('validate plugin existence', () => {
+  it('validate plugin existence', async () => {
     const configJson = {audits: ['installable-manifest', 'metrics']};
     const flags = {plugins: ['lighthouse-plugin-missing']};
-    expect(mergePlugins(configJson, configDir, flags)).rejects.toThrow(/Unable to locate plugin/);
+    await expect(mergePlugins(configJson, configDir, flags)).rejects
+      .toThrow(/Unable to locate plugin/);
   });
 
-  it('validate plugin structure', () => {
+  it('validate plugin structure', async () => {
     const configJson = {audits: ['installable-manifest', 'metrics']};
     const flags = {plugins: ['lighthouse-plugin-no-category']};
-    expect(mergePlugins(configJson, configDir, flags)).rejects.toThrow(/no valid category/);
+    await expect(mergePlugins(configJson, configDir, flags)).rejects.toThrow(/no valid category/);
   });
 });
 
@@ -367,8 +368,8 @@ describe('.resolveGathererToDefn', () => {
     });
   });
 
-  it('throws for invalid gathererDefn', () => {
-    expect(resolveGathererToDefn({})).rejects.toThrow(/Invalid Gatherer type/);
+  it('throws for invalid gathererDefn', async () => {
+    await expect(resolveGathererToDefn({})).rejects.toThrow(/Invalid Gatherer type/);
   });
 });
 
@@ -407,8 +408,8 @@ describe('.resolveAuditsToDefns', () => {
     ]);
   });
 
-  it('throws for invalid auditDefns', () => {
-    expect(resolveAuditsToDefns([new Gatherer()])).rejects.toThrow(/Invalid Audit type/);
+  it('throws for invalid auditDefns', async () => {
+    await expect(resolveAuditsToDefns([new Gatherer()])).rejects.toThrow(/Invalid Audit type/);
   });
 });
 
