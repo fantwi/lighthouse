@@ -14,6 +14,6 @@ declare module UserFlow {
   }
 }
 
-type UserFlow = typeof UserFlow_;
+type UserFlow = InstanceType<typeof UserFlow_>;
 
 export default UserFlow;
