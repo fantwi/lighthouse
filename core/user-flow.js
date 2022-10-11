@@ -227,6 +227,8 @@ function getDefaultStepName(artifacts) {
       return `Timespan report (${shortUrl})`;
     case 'snapshot':
       return `Snapshot report (${shortUrl})`;
+    default:
+      throw new Error('Unsupported gather mode');
   }
 }
 
