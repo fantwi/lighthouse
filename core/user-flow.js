@@ -30,11 +30,11 @@ class UserFlow {
   }
 
   /**
-   * @param {LH.UserFlow.StepFlags} [stepFlags]
+   * @param {LH.UserFlow.StepFlags} [flags]
    * @return {LH.UserFlow.StepFlags}
    */
-  _getNextNavigationFlags(stepFlags) {
-    const newStepFlags = {...stepFlags};
+  _getNextNavigationFlags(flags) {
+    const newStepFlags = {...flags};
 
     if (newStepFlags.skipAboutBlank === undefined) {
       newStepFlags.skipAboutBlank = true;
@@ -55,12 +55,12 @@ class UserFlow {
   /**
    *
    * @param {LH.Gatherer.FRGatherResult} gatherResult
-   * @param {LH.UserFlow.StepFlags} [stepFlags]
+   * @param {LH.UserFlow.StepFlags} [flags]
    */
-  _addGatherStep(gatherResult, stepFlags) {
+  _addGatherStep(gatherResult, flags) {
     const gatherStep = {
       artifacts: gatherResult.artifacts,
-      stepFlags,
+      flags,
     };
     this._gatherSteps.push(gatherStep);
     this._gatherStepRunnerOptions.set(gatherStep, gatherResult.runnerOptions);
@@ -68,13 +68,13 @@ class UserFlow {
 
   /**
    * @param {LH.NavigationRequestor} requestor
-   * @param {LH.UserFlow.StepFlags} [stepFlags]
+   * @param {LH.UserFlow.StepFlags} [flags]
    */
-  async navigate(requestor, stepFlags) {
+  async navigate(requestor, flags) {
     if (this.currentTimespan) throw new Error('Timespan already in progress');
     if (this.currentNavigation) throw new Error('Navigation already in progress');
 
-    const newStepFlags = this._getNextNavigationFlags(stepFlags);
+    const newStepFlags = this._getNextNavigationFlags(flags);
     const gatherResult = await navigationGather(this._page, requestor, {
       config: this._options?.config,
       flags: newStepFlags,
@@ -136,43 +136,43 @@ class UserFlow {
   }
 
   /**
-   * @param {LH.UserFlow.StepFlags} [stepFlags]
+   * @param {LH.UserFlow.StepFlags} [flags]
    */
-  async startTimespan(stepFlags) {
+  async startTimespan(flags) {
     if (this.currentTimespan) throw new Error('Timespan already in progress');
     if (this.currentNavigation) throw new Error('Navigation already in progress');
 
     const timespan = await startTimespanGather(this._page, {
       config: this._options?.config,
-      flags: stepFlags,
+      flags: flags,
     });
-    this.currentTimespan = {timespan, stepFlags};
+    this.currentTimespan = {timespan, flags};
   }
 
   async endTimespan() {
     if (!this.currentTimespan) throw new Error('No timespan in progress');
     if (this.currentNavigation) throw new Error('Navigation already in progress');
 
-    const {timespan, stepFlags} = this.currentTimespan;
+    const {timespan, flags} = this.currentTimespan;
     const gatherResult = await timespan.endTimespanGather();
     this.currentTimespan = undefined;
 
-    this._addGatherStep(gatherResult, stepFlags);
+    this._addGatherStep(gatherResult, flags);
   }
 
   /**
-   * @param {LH.UserFlow.StepFlags} [stepFlags]
+   * @param {LH.UserFlow.StepFlags} [flags]
    */
-  async snapshot(stepFlags) {
+  async snapshot(flags) {
     if (this.currentTimespan) throw new Error('Timespan already in progress');
     if (this.currentNavigation) throw new Error('Navigation already in progress');
 
     const gatherResult = await snapshotGather(this._page, {
       config: this._options?.config,
-      flags: stepFlags,
+      flags: flags,
     });
 
-    this._addGatherStep(gatherResult, stepFlags);
+    this._addGatherStep(gatherResult, flags);
   }
 
   /**
@@ -244,8 +244,8 @@ async function auditGatherSteps(gatherSteps, options) {
   /** @type {LH.FlowResult['steps']} */
   const steps = [];
   for (const gatherStep of gatherSteps) {
-    const {artifacts, stepFlags} = gatherStep;
-    const name = stepFlags?.name || getDefaultStepName(artifacts);
+    const {artifacts, flags} = gatherStep;
+    const name = flags?.name || getDefaultStepName(artifacts);
 
     let runnerOptions = options.gatherStepRunnerOptions?.get(gatherStep);
 
@@ -254,7 +254,7 @@ async function auditGatherSteps(gatherSteps, options) {
       // Step specific configs take precedence over a config for the entire flow.
       const configJson = options.config;
       const {gatherMode} = artifacts.GatherContext;
-      const {config} = await initializeConfig(gatherMode, configJson, stepFlags);
+      const {config} = await initializeConfig(gatherMode, configJson, flags);
       runnerOptions = {
         config,
         computedCache: new Map(),

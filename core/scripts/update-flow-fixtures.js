@@ -121,7 +121,7 @@ async function rebaselineArtifacts(artifactKeys) {
       const gatherStep = flowArtifacts.gatherSteps[i];
       const newGatherStep = newFlowArtifacts.gatherSteps[i];
 
-      gatherStep.stepFlags = newGatherStep.stepFlags;
+      gatherStep.flags = newGatherStep.flags;
       for (const key of Object.keys(gatherStep)) {
         if (key in newGatherStep) continue;
         // @ts-expect-error

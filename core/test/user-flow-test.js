@@ -98,9 +98,9 @@ describe('UserFlow', () => {
 
       expect(navigationModule.navigationGather).toHaveBeenCalledTimes(3);
       expect(flow._gatherSteps).toMatchObject([
-        {stepFlags: {name: 'My Step'}},
-        {stepFlags: {maxWaitForLoad: 1000, skipAboutBlank: true, disableStorageReset: true}},
-        {stepFlags: {skipAboutBlank: true, disableStorageReset: true}},
+        {flags: {name: 'My Step'}},
+        {flags: {maxWaitForLoad: 1000, skipAboutBlank: true, disableStorageReset: true}},
+        {flags: {skipAboutBlank: true, disableStorageReset: true}},
       ]);
     });
 
@@ -236,8 +236,8 @@ describe('UserFlow', () => {
 
       expect(timespanModule.startTimespanGather).toHaveBeenCalledTimes(2);
       expect(flow._gatherSteps).toMatchObject([
-        {stepFlags: {name: 'My Timespan'}},
-        {stepFlags: undefined},
+        {flags: {name: 'My Timespan'}},
+        {flags: undefined},
       ]);
     });
   });
@@ -264,8 +264,8 @@ describe('UserFlow', () => {
 
       expect(snapshotModule.snapshotGather).toHaveBeenCalledTimes(2);
       expect(flow._gatherSteps).toMatchObject([
-        {stepFlags: {name: 'My Snapshot'}},
-        {stepFlags: undefined},
+        {flags: {name: 'My Snapshot'}},
+        {flags: undefined},
       ]);
     });
   });
@@ -334,7 +334,7 @@ describe('UserFlow', () => {
       /** @type {LH.UserFlow.GatherStep[]} */
       const gatherSteps = [
         {
-          stepFlags: {name: 'Navigation'},
+          flags: {name: 'Navigation'},
           // @ts-expect-error Only these artifacts are used by the test.
           artifacts: {
             URL: {
@@ -346,7 +346,7 @@ describe('UserFlow', () => {
           },
         },
         {
-          stepFlags: {name: 'Timespan', onlyCategories: ['performance']},
+          flags: {name: 'Timespan', onlyCategories: ['performance']},
           // @ts-expect-error Only these artifacts are used by the test.
           artifacts: {
             URL: {
@@ -356,7 +356,7 @@ describe('UserFlow', () => {
           },
         },
         {
-          stepFlags: {name: 'Snapshot', onlyCategories: ['accessibility']},
+          flags: {name: 'Snapshot', onlyCategories: ['accessibility']},
           // @ts-expect-error Only these artifacts are used by the test.
           artifacts: {
             URL: {

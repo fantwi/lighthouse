@@ -17,7 +17,7 @@ declare module UserFlow {
 
   export interface GatherStep {
     artifacts: LH.Artifacts;
-    stepFlags?: StepFlags;
+    flags?: StepFlags;
   }
 }
 
