@@ -119,9 +119,15 @@ if (typeof self !== 'undefined') {
   // @ts-expect-error
   self.runLighthouseNavigation = runLighthouseNavigation;
   // @ts-expect-error
+  self.runLighthouseNavigation2 = navigation;
+  // @ts-expect-error
   self.startLighthouseTimespan = startLighthouseTimespan;
   // @ts-expect-error
+  self.startLighthouseTimespan2 = startTimespan;
+  // @ts-expect-error
   self.runLighthouseSnapshot = runLighthouseSnapshot;
+  // @ts-expect-error
+  self.runLighthouseSnapshot2 = snapshot;
   // @ts-expect-error
   self.createConfig = createConfig;
   // @ts-expect-error
