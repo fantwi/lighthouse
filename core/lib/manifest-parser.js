@@ -4,8 +4,6 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
-import cssParsers from 'cssstyle/lib/parsers.js';
-
 const ALLOWED_DISPLAY_VALUES = [
   'fullscreen',
   'standalone',
@@ -28,14 +26,6 @@ const ALLOWED_ORIENTATION_VALUES = [
   'landscape-primary',
   'landscape-secondary',
 ];
-
-/**
- * @param {string} color
- * @return {boolean}
- */
-function isValidColor(color) {
-  return cssParsers.valueType(color) === cssParsers.TYPES.COLOR;
-}
 
 /**
  * @param {*} raw
@@ -70,12 +60,6 @@ function parseColor(raw) {
   // Finished if color missing or not a string.
   if (color.value === undefined) {
     return color;
-  }
-
-  // Use color parser to check CSS3 Color parsing.
-  if (!isValidColor(color.raw)) {
-    color.value = undefined;
-    color.warning = 'ERROR: color parsing failed.';
   }
 
   return color;

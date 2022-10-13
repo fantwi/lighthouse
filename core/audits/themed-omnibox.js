@@ -4,8 +4,6 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 
-import cssParsers from 'cssstyle/lib/parsers.js';
-
 import MultiCheckAudit from './multi-check-audit.js';
 import {ManifestValues} from '../computed/manifest-values.js';
 import * as i18n from '../lib/i18n/i18n.js';
@@ -28,8 +26,10 @@ const str_ = i18n.createIcuMessageFn(import.meta.url, UIStrings);
  *
  * Requirements:
  *   * manifest is not empty
- *   * manifest has a valid theme_color
- *   * HTML has a valid theme-color meta
+ *   * manifest has a theme_color
+ *   * HTML has a theme-color meta
+ *
+ * Color validity is explicitly not checked.
  */
 
 class ThemedOmnibox extends MultiCheckAudit {
@@ -48,14 +48,6 @@ class ThemedOmnibox extends MultiCheckAudit {
   }
 
   /**
-   * @param {string} color
-   * @return {boolean}
-   */
-  static isValidColor(color) {
-    return cssParsers.valueType(color) === cssParsers.TYPES.COLOR;
-  }
-
-  /**
    * @param {LH.Artifacts.MetaElement|undefined} themeColorMeta
    * @param {Array<string>} failures
    */
@@ -63,8 +55,8 @@ class ThemedOmnibox extends MultiCheckAudit {
     if (!themeColorMeta) {
       // TODO(#7238): i18n
       failures.push('No `<meta name="theme-color">` tag found');
-    } else if (!ThemedOmnibox.isValidColor(themeColorMeta.content || '')) {
-      failures.push('The theme-color meta tag did not contain a valid CSS color');
+    } else if (!themeColorMeta.content) {
+      failures.push('The theme-color meta tag did not contain a content value');
     }
   }
 

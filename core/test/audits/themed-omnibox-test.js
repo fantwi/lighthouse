@@ -91,16 +91,6 @@ describe('PWA: themed omnibox audit', () => {
     });
   });
 
-  it('fails and warns when theme-color has an invalid CSS color', () => {
-    const artifacts = generateMockArtifacts();
-    artifacts.MetaElements = [{name: 'theme-color', content: '#1234567'}];
-    const context = generateMockAuditContext();
-    return ThemedOmniboxAudit.audit(artifacts, context).then(result => {
-      assert.equal(result.score, 0);
-      assert.ok(result.explanation.includes('valid CSS color'));
-    });
-  });
-
   it('succeeds when theme-color present in the html', () => {
     const artifacts = generateMockArtifacts();
     artifacts.MetaElements = [{name: 'theme-color', content: '#fafa33'}];

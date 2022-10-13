@@ -547,23 +547,6 @@ describe('Manifest Parser', function() {
       assert.strictEqual(parsedManifest.theme_color.warning, undefined);
     });
 
-    it('warns on invalid colors', () => {
-      const bgColor = 'notarealcolor';
-      const themeColor = '#0123456789';
-      const parsedManifest = getParsedManifest(bgColor, themeColor).value;
-
-      assert.deepStrictEqual(parsedManifest.background_color, {
-        raw: bgColor,
-        value: undefined,
-        warning: 'ERROR: color parsing failed.',
-      });
-      assert.deepStrictEqual(parsedManifest.theme_color, {
-        raw: themeColor,
-        value: undefined,
-        warning: 'ERROR: color parsing failed.',
-      });
-    });
-
     it('warns when colors are not strings', () => {
       const bgColor = 15;
       const themeColor = false;
