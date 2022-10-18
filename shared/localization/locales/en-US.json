@@ -1679,6 +1679,345 @@
   "core/gather/driver/storage.js | warningData": {
     "message": "{locationCount, plural,\n    =1 {There may be stored data affecting loading performance in this location: {locations}. Audit this page in an incognito window to prevent those resources from affecting your scores.}\n    other {There may be stored data affecting loading performance in these locations: {locations}. Audit this page in an incognito window to prevent those resources from affecting your scores.}\n  }"
   },
+  "core/lib/bfcache-strings.js | appBanner": {
+    "message": "Pages that requested an AppBanner are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | backForwardCacheDisabled": {
+    "message": "Back/forward cache is disabled by flags. Visit chrome://flags/#back-forward-cache to enable it locally on this device."
+  },
+  "core/lib/bfcache-strings.js | backForwardCacheDisabledByCommandLine": {
+    "message": "Back/forward cache is disabled by the command line."
+  },
+  "core/lib/bfcache-strings.js | backForwardCacheDisabledByLowMemory": {
+    "message": "Back/forward cache is disabled due to insufficient memory."
+  },
+  "core/lib/bfcache-strings.js | backForwardCacheDisabledForDelegate": {
+    "message": "Back/forward cache is not supported by delegate."
+  },
+  "core/lib/bfcache-strings.js | backForwardCacheDisabledForPrerender": {
+    "message": "Back/forward cache is disabled for prerenderer."
+  },
+  "core/lib/bfcache-strings.js | broadcastChannel": {
+    "message": "The page cannot be cached because it has a BroadcastChannel instance with registered listeners."
+  },
+  "core/lib/bfcache-strings.js | cacheControlNoStore": {
+    "message": "Pages with cache-control:no-store header cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | cacheFlushed": {
+    "message": "The cache was intentionally cleared."
+  },
+  "core/lib/bfcache-strings.js | cacheLimit": {
+    "message": "The page was evicted from the cache to allow another page to be cached."
+  },
+  "core/lib/bfcache-strings.js | containsPlugins": {
+    "message": "Pages containing plugins are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentFileChooser": {
+    "message": "Pages that use FileChooser API are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentFileSystemAccess": {
+    "message": "Pages that use File System Access API are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentMediaDevicesDispatcherHost": {
+    "message": "Pages that use Media Device Dispatcher are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentMediaPlay": {
+    "message": "A media player was playing upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | contentMediaSession": {
+    "message": "Pages that use MediaSession API and set a playback state are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentMediaSessionService": {
+    "message": "Pages that use MediaSession API and set action handlers are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentScreenReader": {
+    "message": "Back/forward cache is disabled due to screen reader."
+  },
+  "core/lib/bfcache-strings.js | contentSecurityHandler": {
+    "message": "Pages that use SecurityHandler are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentSerial": {
+    "message": "Pages that use Serial API are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentWebAuthenticationAPI": {
+    "message": "Pages that use WebAuthetication API are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentWebBluetooth": {
+    "message": "Pages that use WebBluetooth API are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | contentWebUSB": {
+    "message": "Pages that use WebUSB API are not eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | dedicatedWorkerOrWorklet": {
+    "message": "Pages that use a dedicated worker or worklet are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | documentLoaded": {
+    "message": "The document did not finish loading before navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderAppBannerManager": {
+    "message": "App Banner was present upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderChromePasswordManagerClientBindCredentialManager": {
+    "message": "Chrome Password Manager was present upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderDomDistillerSelfDeletingRequestDelegate": {
+    "message": "DOM distillation was in progress upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderDomDistillerViewerSource": {
+    "message": "DOM Distiller Viewer was present upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderExtensionMessaging": {
+    "message": "Back/forward cache is disabled due to extensions using messaging API."
+  },
+  "core/lib/bfcache-strings.js | embedderExtensionMessagingForOpenPort": {
+    "message": "Extensions with long-lived connection should close the connection before entering back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | embedderExtensions": {
+    "message": "Back/forward cache is disabled due to extensions."
+  },
+  "core/lib/bfcache-strings.js | embedderExtensionSentMessageToCachedFrame": {
+    "message": "Extensions with long-lived connection attempted to send messages to frames in back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | embedderModalDialog": {
+    "message": "Modal dialog such as form resubmission or http password dialog was shown for the page upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderOfflinePage": {
+    "message": "The offline page was shown upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderOomInterventionTabHelper": {
+    "message": "Out-Of-Memory Intervention bar was present upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderPermissionRequestManager": {
+    "message": "There were permission requests upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderPopupBlockerTabHelper": {
+    "message": "Popup blocker was present upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderSafeBrowsingThreatDetails": {
+    "message": "Safe Browsing details were shown upon navigating away."
+  },
+  "core/lib/bfcache-strings.js | embedderSafeBrowsingTriggeredPopupBlocker": {
+    "message": "Safe Browsing considered this page to be abusive and blocked popup."
+  },
+  "core/lib/bfcache-strings.js | enteredBackForwardCacheBeforeServiceWorkerHostAdded": {
+    "message": "A service worker was activated while the page was in back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | errorDocument": {
+    "message": "Back/forward cache is disabled due to a document error."
+  },
+  "core/lib/bfcache-strings.js | fencedFramesEmbedder": {
+    "message": "Pages using FencedFrames cannot be stored in bfcache."
+  },
+  "core/lib/bfcache-strings.js | foregroundCacheLimit": {
+    "message": "The page was evicted from the cache to allow another page to be cached."
+  },
+  "core/lib/bfcache-strings.js | grantedMediaStreamAccess": {
+    "message": "Pages that have granted media stream access are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | haveInnerContents": {
+    "message": "Pages that use portals are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | HTTPMethodNotGET": {
+    "message": "Only pages loaded via a GET request are eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | HTTPStatusNotOK": {
+    "message": "Only pages with a status code of 2XX can be cached."
+  },
+  "core/lib/bfcache-strings.js | idleManager": {
+    "message": "Pages that use IdleManager are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | indexedDBConnection": {
+    "message": "Pages that have an open IndexedDB connection are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | ineligibleAPI": {
+    "message": "Ineligible APIs were used."
+  },
+  "core/lib/bfcache-strings.js | injectedJavascript": {
+    "message": "IPages that JavaScript is injected into by extensions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | injectedStyleSheet": {
+    "message": "Pages that StyleSheet is injected into by extensions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | internalError": {
+    "message": "Internal error."
+  },
+  "core/lib/bfcache-strings.js | JavaScriptExecution": {
+    "message": "Chrome detected an attempt to execute JavaScript while in the cache."
+  },
+  "core/lib/bfcache-strings.js | keyboardLock": {
+    "message": "Pages that use Keyboard lock are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | loading": {
+    "message": "The page did not finish loading before navigating away."
+  },
+  "core/lib/bfcache-strings.js | mainResourceHasCacheControlNoCache": {
+    "message": "Pages whose main resource has cache-control:no-cache cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | mainResourceHasCacheControlNoStore": {
+    "message": "Pages whose main resource has cache-control:no-store cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | navigationCancelledWhileRestoring": {
+    "message": "Navigation was cancelled before the page could be restored from back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | networkExceedsBufferLimit": {
+    "message": "The page was evicted from the cache because an active network connection received too much data. Chrome limits the amount of data that a page may receive while cached."
+  },
+  "core/lib/bfcache-strings.js | networkRequestDatapipeDrainedAsBytesConsumer": {
+    "message": "Pages that have inflight fetch() or XHR are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | networkRequestRedirected": {
+    "message": "The page was evicted from back/forward cache because an active network request involved a redirect."
+  },
+  "core/lib/bfcache-strings.js | networkRequestTimeout": {
+    "message": "The page was evicted from the cache because a network connection was open too long. Chrome limits the amount of time that a page may receive data while cached."
+  },
+  "core/lib/bfcache-strings.js | noResponseHead": {
+    "message": "Pages that do not have a valid response head cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | notMainFrame": {
+    "message": "Navigation happened in a frame other than the main frame."
+  },
+  "core/lib/bfcache-strings.js | outstandingIndexedDBTransaction": {
+    "message": "Page with ongoing indexed DB transactions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | outstandingNetworkRequestDirectSocket": {
+    "message": "Pages with an in-flight network request are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | outstandingNetworkRequestFetch": {
+    "message": "Pages with an in-flight fetch network request are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | outstandingNetworkRequestOthers": {
+    "message": "Pages with an in-flight network request are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | outstandingNetworkRequestXHR": {
+    "message": "Pages with an in-flight XHR network request are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | paymentManager": {
+    "message": "Pages that use PaymentManager are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | pictureInPicture": {
+    "message": "Pages that use Picture-in-Picture are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | portal": {
+    "message": "Pages that use portals are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | printing": {
+    "message": "Pages that show Printing UI are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | relatedActiveContentsExist": {
+    "message": "The page was opened using '`window.open()`' and another tab has a reference to it, or the page opened a window."
+  },
+  "core/lib/bfcache-strings.js | rendererProcessCrashed": {
+    "message": "The renderer process for the page in back/forward cache crashed."
+  },
+  "core/lib/bfcache-strings.js | rendererProcessKilled": {
+    "message": "The renderer process for the page in back/forward cache was killed."
+  },
+  "core/lib/bfcache-strings.js | requestedAudioCapturePermission": {
+    "message": "Pages that have requested audio capture permissions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | requestedBackForwardCacheBlockedSensors": {
+    "message": "Pages that have requested sensor permissions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | requestedBackgroundWorkPermission": {
+    "message": "Pages that have requested background sync or fetch permissions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | requestedMIDIPermission": {
+    "message": "Pages that have requested MIDI permissions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | requestedNotificationsPermission": {
+    "message": "Pages that have requested notifications permissions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | requestedStorageAccessGrant": {
+    "message": "Pages that have requested storage access are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | requestedVideoCapturePermission": {
+    "message": "Pages that have requested video capture permissions are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | schemeNotHTTPOrHTTPS": {
+    "message": "Only pages whose URL scheme is HTTP / HTTPS can be cached."
+  },
+  "core/lib/bfcache-strings.js | serviceWorkerClaim": {
+    "message": "The page was claimed by a service worker while it is in back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | serviceWorkerPostMessage": {
+    "message": "A service worker attempted to send the page in back/forward cache a `MessageEvent`."
+  },
+  "core/lib/bfcache-strings.js | serviceWorkerUnregistration": {
+    "message": "ServiceWorker was unregistered while a page was in back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | serviceWorkerVersionActivation": {
+    "message": "The page was evicted from back/forward cache due to a service worker activation."
+  },
+  "core/lib/bfcache-strings.js | sessionRestored": {
+    "message": "Chrome restarted and cleared the back/forward cache entries."
+  },
+  "core/lib/bfcache-strings.js | sharedWorker": {
+    "message": "Pages that use SharedWorker are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | speechRecognizer": {
+    "message": "Pages that use SpeechRecognizer are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | speechSynthesis": {
+    "message": "Pages that use SpeechSynthesis are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | subframeIsNavigating": {
+    "message": "An iframe on the page started a navigation that did not complete."
+  },
+  "core/lib/bfcache-strings.js | subresourceHasCacheControlNoCache": {
+    "message": "Pages whose subresource has cache-control:no-cache cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | subresourceHasCacheControlNoStore": {
+    "message": "Pages whose subresource has cache-control:no-store cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | timeout": {
+    "message": "The page exceeded the maximum time in back/forward cache and was expired."
+  },
+  "core/lib/bfcache-strings.js | timeoutPuttingInCache": {
+    "message": "The page timed out entering back/forward cache (likely due to long-running pagehide handlers)."
+  },
+  "core/lib/bfcache-strings.js | unloadHandlerExistsInMainFrame": {
+    "message": "The page has an unload handler in the main frame."
+  },
+  "core/lib/bfcache-strings.js | unloadHandlerExistsInSubFrame": {
+    "message": "The page has an unload handler in a sub frame."
+  },
+  "core/lib/bfcache-strings.js | userAgentOverrideDiffers": {
+    "message": "Browser has changed the user agent override header."
+  },
+  "core/lib/bfcache-strings.js | wasGrantedMediaAccess": {
+    "message": "Pages that have granted access to record video or audio are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | webDatabase": {
+    "message": "Pages that use WebDatabase are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | webHID": {
+    "message": "Pages that use WebHID are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | webLocks": {
+    "message": "Pages that use WebLocks are not currently eligible for back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | webNfc": {
+    "message": "Pages that use WebNfc are not currently eligible for back/forwad cache."
+  },
+  "core/lib/bfcache-strings.js | webOTPService": {
+    "message": "Pages that use WebOTPService are not currently eligible for bfcache."
+  },
+  "core/lib/bfcache-strings.js | webRTC": {
+    "message": "Pages with WebRTC cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | webShare": {
+    "message": "Pages that use WebShare are not currently eligible for back/forwad cache."
+  },
+  "core/lib/bfcache-strings.js | webSocket": {
+    "message": "Pages with WebSocket cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | webTransport": {
+    "message": "Pages with WebTransport cannot enter back/forward cache."
+  },
+  "core/lib/bfcache-strings.js | webXR": {
+    "message": "Pages that use WebXR are not currently eligible for back/forward cache."
+  },
   "core/lib/csp-evaluator.js | allowlistFallback": {
     "message": "Consider adding https: and http: URL schemes (ignored by browsers supporting 'strict-dynamic') to be backward compatible with older browsers."
   },

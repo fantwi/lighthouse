@@ -307,6 +307,7 @@ const UIStrings = {
 
 const str_ = i18n.createIcuMessageFn(import.meta.url, UIStrings);
 
+
 /**
  * @param {LH.Crdp.Audits.DeprecationIssueDetails} issueDetails
  */
